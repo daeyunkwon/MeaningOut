@@ -13,6 +13,11 @@
 		4411F1B32C1B003300878AFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4411F1B22C1B003300878AFE /* Assets.xcassets */; };
 		4411F1B62C1B003300878AFE /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 4411F1B52C1B003300878AFE /* Base */; };
 		4411F1BE2C1B00CF00878AFE /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 4411F1BD2C1B00CF00878AFE /* .gitignore */; };
+		4411F1C42C1B028A00878AFE /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 4411F1C32C1B028A00878AFE /* Alamofire */; };
+		4411F1C72C1B029B00878AFE /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 4411F1C62C1B029B00878AFE /* Kingfisher */; };
+		4411F1CA2C1B02AC00878AFE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4411F1C92C1B02AC00878AFE /* SnapKit */; };
+		443A3D962C1B1CEF00C426FD /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3D952C1B1CEF00C426FD /* Onboarding.swift */; };
+		443A3D9D2C1B225600C426FD /* AlfaSlabOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 443A3D9A2C1B219400C426FD /* AlfaSlabOne-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +29,8 @@
 		4411F1B52C1B003300878AFE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4411F1B72C1B003300878AFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4411F1BD2C1B00CF00878AFE /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		443A3D952C1B1CEF00C426FD /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
+		443A3D9A2C1B219400C426FD /* AlfaSlabOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AlfaSlabOne-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +38,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4411F1CA2C1B02AC00878AFE /* SnapKit in Frameworks */,
+				4411F1C72C1B029B00878AFE /* Kingfisher in Frameworks */,
+				4411F1C42C1B028A00878AFE /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,13 +67,13 @@
 		4411F1A82C1B003200878AFE /* MeaningOut */ = {
 			isa = PBXGroup;
 			children = (
+				443A3D9A2C1B219400C426FD /* AlfaSlabOne-Regular.ttf */,
+				443A3D942C1B1CE100C426FD /* Onboarding */,
 				4411F1BF2C1B016500878AFE /* Application */,
 				4411F1C12C1B018200878AFE /* Utils */,
 				4411F1C02C1B017400878AFE /* Model */,
 				4411F1AD2C1B003200878AFE /* ViewController.swift */,
-				4411F1B22C1B003300878AFE /* Assets.xcassets */,
-				4411F1B42C1B003300878AFE /* LaunchScreen.storyboard */,
-				4411F1B72C1B003300878AFE /* Info.plist */,
+				443A3D932C1B190600C426FD /* Resources */,
 			);
 			path = MeaningOut;
 			sourceTree = "<group>";
@@ -91,6 +101,24 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		443A3D932C1B190600C426FD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4411F1B22C1B003300878AFE /* Assets.xcassets */,
+				4411F1B42C1B003300878AFE /* LaunchScreen.storyboard */,
+				4411F1B72C1B003300878AFE /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		443A3D942C1B1CE100C426FD /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				443A3D952C1B1CEF00C426FD /* Onboarding.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -107,6 +135,11 @@
 			dependencies = (
 			);
 			name = MeaningOut;
+			packageProductDependencies = (
+				4411F1C32C1B028A00878AFE /* Alamofire */,
+				4411F1C62C1B029B00878AFE /* Kingfisher */,
+				4411F1C92C1B02AC00878AFE /* SnapKit */,
+			);
 			productName = MeaningOut;
 			productReference = 4411F1A62C1B003200878AFE /* MeaningOut.app */;
 			productType = "com.apple.product-type.application";
@@ -135,6 +168,11 @@
 				Base,
 			);
 			mainGroup = 4411F19D2C1B003200878AFE;
+			packageReferences = (
+				4411F1C22C1B028A00878AFE /* XCRemoteSwiftPackageReference "Alamofire" */,
+				4411F1C52C1B029B00878AFE /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				4411F1C82C1B02AC00878AFE /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 4411F1A72C1B003200878AFE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -149,6 +187,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				443A3D9D2C1B225600C426FD /* AlfaSlabOne-Regular.ttf in Resources */,
 				4411F1B32C1B003300878AFE /* Assets.xcassets in Resources */,
 				4411F1BE2C1B00CF00878AFE /* .gitignore in Resources */,
 				4411F1B62C1B003300878AFE /* Base in Resources */,
@@ -164,6 +203,7 @@
 			files = (
 				4411F1AE2C1B003200878AFE /* ViewController.swift in Sources */,
 				4411F1AA2C1B003200878AFE /* AppDelegate.swift in Sources */,
+				443A3D962C1B1CEF00C426FD /* Onboarding.swift in Sources */,
 				4411F1AC2C1B003200878AFE /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -310,7 +350,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9M37U587ZT;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MeaningOut/Info.plist;
+				INFOPLIST_FILE = MeaningOut/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MeaningOut;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -343,7 +383,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9M37U587ZT;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MeaningOut/Info.plist;
+				INFOPLIST_FILE = MeaningOut/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MeaningOut;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -389,6 +429,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4411F1C22C1B028A00878AFE /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
+		4411F1C52C1B029B00878AFE /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.12.0;
+			};
+		};
+		4411F1C82C1B02AC00878AFE /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4411F1C32C1B028A00878AFE /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4411F1C22C1B028A00878AFE /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		4411F1C62C1B029B00878AFE /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4411F1C52C1B029B00878AFE /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		4411F1C92C1B02AC00878AFE /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4411F1C82C1B02AC00878AFE /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4411F19E2C1B003200878AFE /* Project object */;
 }
