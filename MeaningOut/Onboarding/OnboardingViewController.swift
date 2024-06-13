@@ -87,7 +87,7 @@ final class OnboardingViewController: UIViewController {
         view.addSubview(startButton)
         startButton.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(16)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
             make.height.equalTo(50)
         }
     }

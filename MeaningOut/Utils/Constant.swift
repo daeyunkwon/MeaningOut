@@ -23,4 +23,12 @@ enum Constant {
         static let system14 = UIFont.systemFont(ofSize: 14)
         static let system13 = UIFont.systemFont(ofSize: 13)
     }
+    
+    enum SymbolSize {
+        static func smallSize(systemName: String) -> UIImage? {
+            let config = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular, scale: .small)
+            let image = UIImage(systemName: systemName, withConfiguration: config)
+            return image
+        }
+    }
 }
