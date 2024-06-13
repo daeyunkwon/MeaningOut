@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-class ViewController: UIViewController {
+class ProfileSettingViewController: UIViewController {
     
     let label = UILabel()
 
