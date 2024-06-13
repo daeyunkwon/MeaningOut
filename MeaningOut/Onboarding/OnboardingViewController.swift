@@ -42,6 +42,16 @@ final class OnboardingViewController: UIViewController {
     
     //MARK: - Life Cycle
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavi()
@@ -52,6 +62,11 @@ final class OnboardingViewController: UIViewController {
     private func setupNavi() {
         navigationItem.title = ""
         navigationController?.navigationBar.tintColor = Constant.Color.primaryBlack
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = Constant.Color.primaryWhite
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
     
     private func configureLayout() {
@@ -60,7 +75,6 @@ final class OnboardingViewController: UIViewController {
             make.top.equalTo(view.safeAreaLayoutGuide).offset(100)
             make.horizontalEdges.equalToSuperview().inset(16)
             make.height.equalTo(72)
-            make.width.equalTo(361)
         }
         
         view.addSubview(mainImageView)
