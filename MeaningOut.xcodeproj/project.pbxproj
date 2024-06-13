@@ -57,14 +57,38 @@
 		4411F1A82C1B003200878AFE /* MeaningOut */ = {
 			isa = PBXGroup;
 			children = (
-				4411F1A92C1B003200878AFE /* AppDelegate.swift */,
-				4411F1AB2C1B003200878AFE /* SceneDelegate.swift */,
+				4411F1BF2C1B016500878AFE /* Application */,
+				4411F1C12C1B018200878AFE /* Utils */,
+				4411F1C02C1B017400878AFE /* Model */,
 				4411F1AD2C1B003200878AFE /* ViewController.swift */,
 				4411F1B22C1B003300878AFE /* Assets.xcassets */,
 				4411F1B42C1B003300878AFE /* LaunchScreen.storyboard */,
 				4411F1B72C1B003300878AFE /* Info.plist */,
 			);
 			path = MeaningOut;
+			sourceTree = "<group>";
+		};
+		4411F1BF2C1B016500878AFE /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				4411F1A92C1B003200878AFE /* AppDelegate.swift */,
+				4411F1AB2C1B003200878AFE /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		4411F1C02C1B017400878AFE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4411F1C12C1B018200878AFE /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
