@@ -134,6 +134,7 @@ final class ProfileSettingViewController: UIViewController {
     
     private func configureUI() {
         view.backgroundColor = Constant.Color.primaryWhite
+        profileImageView.image = UIImage(named: Constant.ProfileImage.allCases.randomElement()?.rawValue ?? "profile_0")
     }
     
     
