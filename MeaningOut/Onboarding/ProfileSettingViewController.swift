@@ -17,29 +17,12 @@ final class ProfileSettingViewController: UIViewController {
     
     //MARK: - UI Components
     
-    private lazy var profileImageView: UIImageView = {
-        let iv = UIImageView()
-        iv.backgroundColor = Constant.Color.primaryWhite
-        iv.contentMode = .scaleAspectFill
-        iv.layer.borderWidth = 5
-        iv.alpha = 1
-        iv.layer.borderColor = Constant.Color.primaryOrange.cgColor
-        iv.layer.cornerRadius = 60
-        iv.clipsToBounds = true
+    private lazy var profileCircleWithCameraIconView: ProfileCircleWithCameraIcon = {
+        let view = ProfileCircleWithCameraIcon()
         let tap = UITapGestureRecognizer(target: self, action: #selector(profileImageViewTapped))
-        iv.addGestureRecognizer(tap)
-        iv.isUserInteractionEnabled = true
-        return iv
-    }()
-    
-    private let cameraIconButton: UIButton = {
-        let btn = UIButton(type: .system)
-        btn.setImage(Constant.SymbolSize.smallSize(systemName: "camera.fill"), for: .normal)
-        btn.setTitle("", for: .normal)
-        btn.tintColor = Constant.Color.primaryWhite
-        btn.backgroundColor = Constant.Color.primaryOrange
-        btn.layer.cornerRadius = 20
-        return btn
+        view.profileImageView.addGestureRecognizer(tap)
+        view.profileImageView.isUserInteractionEnabled = true
+        return view
     }()
     
     private lazy var nicknameTextField: UITextField = {
@@ -98,26 +81,18 @@ final class ProfileSettingViewController: UIViewController {
     }
     
     private func configureLayout() {
-        view.addSubview(profileImageView)
-        profileImageView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+        view.addSubview(profileCircleWithCameraIconView)
+        profileCircleWithCameraIconView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(5)
             make.centerX.equalToSuperview()
             make.width.height.equalTo(120)
-        }
-        profileImageView.image = UIImage(named: "profile_0")
-        
-        view.addSubview(cameraIconButton)
-        cameraIconButton.snp.makeConstraints { make in
-            make.width.height.equalTo(40)
-            make.trailing.equalTo(profileImageView.snp.trailing)
-            make.bottom.equalTo(profileImageView.snp.bottom)
         }
         
         view.addSubview(nicknameTextField)
         nicknameTextField.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(30)
             make.height.equalTo(30)
-            make.top.equalTo(profileImageView.snp.bottom).offset(40)
+            make.top.equalTo(profileCircleWithCameraIconView.snp.bottom).offset(40)
         }
         
         view.addSubview(separatorView)
@@ -144,13 +119,15 @@ final class ProfileSettingViewController: UIViewController {
     
     private func configureUI() {
         view.backgroundColor = Constant.Color.primaryWhite
-        profileImageView.image = UIImage(named: Constant.ProfileImage.allCases.randomElement()?.rawValue ?? "profile_0")
+        profileCircleWithCameraIconView.profileImageView.image = UIImage(named: Constant.ProfileImage.allCases.randomElement()?.rawValue ?? "profile_0")
     }
     
     //MARK: - Functions
     
     @objc func profileImageViewTapped() {
-        navigationController?.pushViewController(ProfileImageSettingViewController(), animated: true)
+        let vc = ProfileImageSettingViewController()
+        vc.selectedProfileImage = self.profileCircleWithCameraIconView.profileImageView.image
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func completeButtonTapped() {
