@@ -17,15 +17,20 @@ final class MainTabBarController: UITabBarController {
     }
 
     private func setupTabBar() {
-        let searchVC = MainViewController()
-        let settingVC = MainViewController()
+        let mainVC = UINavigationController(rootViewController: MainViewController())
+        let settingVC = UINavigationController(rootViewController: MainViewController())
         
-        searchVC.tabBarItem = UITabBarItem(title: "검색", image: UIImage(systemName: "magnifyingglass"), tag: 0)
+        mainVC.tabBarItem = UITabBarItem(title: "검색", image: UIImage(systemName: "magnifyingglass"), tag: 0)
         settingVC.tabBarItem = UITabBarItem(title: "설정", image: UIImage(systemName: "person"), tag: 1)
         
         self.tabBar.unselectedItemTintColor = Constant.Color.primaryGray
         self.tabBar.tintColor = Constant.Color.primaryOrange
         
-        self.setViewControllers([searchVC, settingVC], animated: true)
+        let appearance = UITabBarAppearance()
+        appearance.backgroundColor = Constant.Color.primaryWhite
+        self.tabBar.standardAppearance = appearance
+        self.tabBar.scrollEdgeAppearance = appearance
+        
+        self.setViewControllers([mainVC, settingVC], animated: true)
     }
 }
