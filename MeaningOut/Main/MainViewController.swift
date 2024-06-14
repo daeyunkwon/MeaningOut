@@ -178,6 +178,10 @@ final class MainViewController: UIViewController {
 //MARK: - UITableViewDataSource, UITableViewDelegate
 
 extension MainViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 40
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return list.count
     }
@@ -195,8 +199,7 @@ extension MainViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text, !text.trimmingCharacters(in: .whitespaces).isEmpty else {return}
         
-        self.list.append(text)
-        UserDefaultsManager.shared.recentSearch = list
-        tableView.reloadData()
+        UserDefaultsManager.shared.recentSearch?.append(text)
+        fetchRecentSearchData()
     }
 }
