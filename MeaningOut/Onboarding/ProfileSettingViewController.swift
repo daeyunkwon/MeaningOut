@@ -135,6 +135,27 @@ final class ProfileSettingViewController: UIViewController {
     }
     
     @objc func completeButtonTapped() {
+        self.createUserData()
+        self.changeWindowRootViewController()
+    }
+    
+    private func createUserData() {
+        guard let nickname = self.nicknameTextField.text else {return}
+        
+        var profileImageName: String?
+        for item in Constant.ProfileImage.allCases {
+            if UIImage(named: item.rawValue) == self.profileImage {
+                profileImageName = item.rawValue
+            }
+        }
+       
+        UserDefaultsManager.shared.nickname = nickname
+        UserDefaultsManager.shared.profile = profileImageName
+        let now = Date.todayDate
+        UserDefaultsManager.shared.joinDate = now
+    }
+    
+    private func changeWindowRootViewController() {
         let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         let sceneDelegate = scene?.delegate as? SceneDelegate
         sceneDelegate?.window?.rootViewController = MainTabBarController()
