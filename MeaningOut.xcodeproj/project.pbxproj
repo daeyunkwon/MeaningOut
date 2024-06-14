@@ -25,6 +25,7 @@
 		443A3DAE2C1BF07E00C426FD /* ProfileCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DAD2C1BF07E00C426FD /* ProfileCircle.swift */; };
 		443A3DB02C1C044900C426FD /* ProfileImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DAF2C1C044900C426FD /* ProfileImageCollectionViewCell.swift */; };
 		443A3DB22C1C06AE00C426FD /* Reuseable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DB12C1C06AE00C426FD /* Reuseable.swift */; };
+		443A3DB42C1C108600C426FD /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DB32C1C108600C426FD /* MainTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		443A3DAD2C1BF07E00C426FD /* ProfileCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCircle.swift; sourceTree = "<group>"; };
 		443A3DAF2C1C044900C426FD /* ProfileImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		443A3DB12C1C06AE00C426FD /* Reuseable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reuseable.swift; sourceTree = "<group>"; };
+		443A3DB32C1C108600C426FD /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,13 +83,16 @@
 		4411F1A82C1B003200878AFE /* MeaningOut */ = {
 			isa = PBXGroup;
 			children = (
-				443A3D9A2C1B219400C426FD /* AlfaSlabOne-Regular.ttf */,
 				4411F1BF2C1B016500878AFE /* Application */,
 				4411F1C12C1B018200878AFE /* Utils */,
 				4411F1C02C1B017400878AFE /* Model */,
 				443A3D942C1B1CE100C426FD /* Onboarding */,
 				443A3DA72C1BE08000C426FD /* Main */,
-				443A3D932C1B190600C426FD /* Resources */,
+				443A3DB32C1C108600C426FD /* MainTabBarController.swift */,
+				4411F1B22C1B003300878AFE /* Assets.xcassets */,
+				4411F1B42C1B003300878AFE /* LaunchScreen.storyboard */,
+				4411F1B72C1B003300878AFE /* Info.plist */,
+				443A3D9A2C1B219400C426FD /* AlfaSlabOne-Regular.ttf */,
 			);
 			path = MeaningOut;
 			sourceTree = "<group>";
@@ -116,16 +121,6 @@
 				443A3DAA2C1BE3D000C426FD /* CustomView */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		443A3D932C1B190600C426FD /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				4411F1B22C1B003300878AFE /* Assets.xcassets */,
-				4411F1B42C1B003300878AFE /* LaunchScreen.storyboard */,
-				4411F1B72C1B003300878AFE /* Info.plist */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		443A3D942C1B1CE100C426FD /* Onboarding */ = {
@@ -247,6 +242,7 @@
 				443A3D9F2C1B3C7D00C426FD /* Constant.swift in Sources */,
 				443A3DB22C1C06AE00C426FD /* Reuseable.swift in Sources */,
 				443A3DA62C1BE07C00C426FD /* MainViewController.swift in Sources */,
+				443A3DB42C1C108600C426FD /* MainTabBarController.swift in Sources */,
 				443A3D962C1B1CEF00C426FD /* OnboardingViewController.swift in Sources */,
 				4411F1AC2C1B003200878AFE /* SceneDelegate.swift in Sources */,
 			);
@@ -394,7 +390,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9M37U587ZT;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MeaningOut/Resources/Info.plist;
+				INFOPLIST_FILE = MeaningOut/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MeaningOut;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -427,7 +423,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9M37U587ZT;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MeaningOut/Resources/Info.plist;
+				INFOPLIST_FILE = MeaningOut/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = MeaningOut;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
