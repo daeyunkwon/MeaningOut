@@ -31,7 +31,6 @@ final class MainViewController: UIViewController {
         }
     }
     
-    
     //MARK: - UI Components
     
     private let searchController = UISearchController()
@@ -80,12 +79,12 @@ final class MainViewController: UIViewController {
         configureLayout()
         configureUI()
         fetchRecentSearchData()
-        updateDisplayWithRecentSearch()
     }
     
     private func fetchRecentSearchData() {
         guard let datas = UserDefaultsManager.shared.recentSearch else {
             self.viewDisplayType = .empty
+            self.list = []
             return
         }
         self.viewDisplayType = .nonEmpty
@@ -163,17 +162,22 @@ final class MainViewController: UIViewController {
         case .empty:
             emptyRecentSearchImageView.isHidden = false
             emptyRecentSearchLabel.isHidden = false
+            titleLabel.isHidden = true
+            resetButton.isHidden = true
+            tableView.isHidden = true
         case .nonEmpty:
             emptyRecentSearchImageView.isHidden = true
             emptyRecentSearchLabel.isHidden = true
+            titleLabel.isHidden = false
+            resetButton.isHidden = false
+            tableView.isHidden = false
         }
     }
     
     @objc func resetButtonTapped() {
-        print(#function)
+        UserDefaultsManager.shared.removeRecentSearchData()
+        fetchRecentSearchData()
     }
-    
-
 }
 
 //MARK: - UITableViewDataSource, UITableViewDelegate
@@ -200,7 +204,12 @@ extension MainViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text, !text.trimmingCharacters(in: .whitespaces).isEmpty else {return}
         
-        UserDefaultsManager.shared.recentSearch?.append(text)
+        if UserDefaultsManager.shared.recentSearch != nil {
+            UserDefaultsManager.shared.recentSearch?.append(text)
+        } else {
+            UserDefaultsManager.shared.recentSearch = [text]
+        }
+        
         fetchRecentSearchData()
     }
 }

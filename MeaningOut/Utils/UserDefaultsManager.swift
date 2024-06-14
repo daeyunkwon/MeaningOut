@@ -66,4 +66,8 @@ final class UserDefaultsManager {
             userDefaults.setValue(newValue, forKey: Key.like.rawValue)
         }
     }
+    
+    func removeRecentSearchData() {
+        userDefaults.removeObject(forKey: Key.recentSearch.rawValue)
+    }
 }
