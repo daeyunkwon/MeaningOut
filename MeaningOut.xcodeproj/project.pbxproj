@@ -19,6 +19,12 @@
 		443A3D962C1B1CEF00C426FD /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3D952C1B1CEF00C426FD /* OnboardingViewController.swift */; };
 		443A3D9D2C1B225600C426FD /* AlfaSlabOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 443A3D9A2C1B219400C426FD /* AlfaSlabOne-Regular.ttf */; };
 		443A3D9F2C1B3C7D00C426FD /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3D9E2C1B3C7D00C426FD /* Constant.swift */; };
+		443A3DA62C1BE07C00C426FD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DA52C1BE07C00C426FD /* MainViewController.swift */; };
+		443A3DA92C1BE1B600C426FD /* ProfileImageSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DA82C1BE1B600C426FD /* ProfileImageSettingViewController.swift */; };
+		443A3DAC2C1BE41D00C426FD /* ProfileCircleWithCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DAB2C1BE41D00C426FD /* ProfileCircleWithCamera.swift */; };
+		443A3DAE2C1BF07E00C426FD /* ProfileCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DAD2C1BF07E00C426FD /* ProfileCircle.swift */; };
+		443A3DB02C1C044900C426FD /* ProfileImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DAF2C1C044900C426FD /* ProfileImageCollectionViewCell.swift */; };
+		443A3DB22C1C06AE00C426FD /* Reuseable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DB12C1C06AE00C426FD /* Reuseable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +39,12 @@
 		443A3D952C1B1CEF00C426FD /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		443A3D9A2C1B219400C426FD /* AlfaSlabOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AlfaSlabOne-Regular.ttf"; sourceTree = "<group>"; };
 		443A3D9E2C1B3C7D00C426FD /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		443A3DA52C1BE07C00C426FD /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		443A3DA82C1BE1B600C426FD /* ProfileImageSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageSettingViewController.swift; sourceTree = "<group>"; };
+		443A3DAB2C1BE41D00C426FD /* ProfileCircleWithCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCircleWithCamera.swift; sourceTree = "<group>"; };
+		443A3DAD2C1BF07E00C426FD /* ProfileCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCircle.swift; sourceTree = "<group>"; };
+		443A3DAF2C1C044900C426FD /* ProfileImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		443A3DB12C1C06AE00C426FD /* Reuseable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reuseable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +86,7 @@
 				4411F1C12C1B018200878AFE /* Utils */,
 				4411F1C02C1B017400878AFE /* Model */,
 				443A3D942C1B1CE100C426FD /* Onboarding */,
+				443A3DA72C1BE08000C426FD /* Main */,
 				443A3D932C1B190600C426FD /* Resources */,
 			);
 			path = MeaningOut;
@@ -99,6 +112,8 @@
 			isa = PBXGroup;
 			children = (
 				443A3D9E2C1B3C7D00C426FD /* Constant.swift */,
+				443A3DB12C1C06AE00C426FD /* Reuseable.swift */,
+				443A3DAA2C1BE3D000C426FD /* CustomView */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -118,8 +133,27 @@
 			children = (
 				443A3D952C1B1CEF00C426FD /* OnboardingViewController.swift */,
 				4411F1AD2C1B003200878AFE /* ProfileSettingViewController.swift */,
+				443A3DA82C1BE1B600C426FD /* ProfileImageSettingViewController.swift */,
+				443A3DAF2C1C044900C426FD /* ProfileImageCollectionViewCell.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		443A3DA72C1BE08000C426FD /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				443A3DA52C1BE07C00C426FD /* MainViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		443A3DAA2C1BE3D000C426FD /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				443A3DAB2C1BE41D00C426FD /* ProfileCircleWithCamera.swift */,
+				443A3DAD2C1BF07E00C426FD /* ProfileCircle.swift */,
+			);
+			path = CustomView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,9 +238,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				443A3DAC2C1BE41D00C426FD /* ProfileCircleWithCamera.swift in Sources */,
 				4411F1AE2C1B003200878AFE /* ProfileSettingViewController.swift in Sources */,
+				443A3DB02C1C044900C426FD /* ProfileImageCollectionViewCell.swift in Sources */,
+				443A3DA92C1BE1B600C426FD /* ProfileImageSettingViewController.swift in Sources */,
+				443A3DAE2C1BF07E00C426FD /* ProfileCircle.swift in Sources */,
 				4411F1AA2C1B003200878AFE /* AppDelegate.swift in Sources */,
 				443A3D9F2C1B3C7D00C426FD /* Constant.swift in Sources */,
+				443A3DB22C1C06AE00C426FD /* Reuseable.swift in Sources */,
+				443A3DA62C1BE07C00C426FD /* MainViewController.swift in Sources */,
 				443A3D962C1B1CEF00C426FD /* OnboardingViewController.swift in Sources */,
 				4411F1AC2C1B003200878AFE /* SceneDelegate.swift in Sources */,
 			);
