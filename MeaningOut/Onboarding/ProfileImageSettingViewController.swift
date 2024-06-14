@@ -23,6 +23,15 @@ final class ProfileImageSettingViewController: UIViewController {
         return view
     }()
     
+    private let circle: UIImageView = {
+        let iv = UIImageView()
+        iv.contentMode = .scaleAspectFill
+        iv.layer.borderColor = Constant.Color.primaryGray.cgColor
+        iv.layer.borderWidth = 1
+        iv.alpha = 0.5
+        return iv
+    }()
+    
     //MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -39,7 +48,15 @@ final class ProfileImageSettingViewController: UIViewController {
     private func configureLayout() {
         view.addSubview(mainProfileImageView)
         mainProfileImageView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(5)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(30)
+            make.centerX.equalToSuperview()
+            make.width.height.equalTo(120)
+        }
+        mainProfileImageView.backgroundColor = .red
+        
+        view.addSubview(circle)
+        circle.snp.makeConstraints { make in
+            make.top.equalTo(mainProfileImageView.snp.bottom).offset(30)
             make.centerX.equalToSuperview()
             make.width.height.equalTo(120)
         }

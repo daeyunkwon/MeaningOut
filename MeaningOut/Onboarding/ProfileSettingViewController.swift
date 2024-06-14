@@ -83,7 +83,7 @@ final class ProfileSettingViewController: UIViewController {
     private func configureLayout() {
         view.addSubview(profileCircleWithCameraIconView)
         profileCircleWithCameraIconView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(5)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(30)
             make.centerX.equalToSuperview()
             make.width.height.equalTo(120)
         }

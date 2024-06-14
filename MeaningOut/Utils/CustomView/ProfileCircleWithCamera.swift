@@ -45,7 +45,7 @@ final class ProfileCircleWithCameraIcon: UIView {
     private func configureUI() {
         addSubview(profileImageView)
         profileImageView.snp.makeConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide).offset(20)
+            make.top.equalToSuperview()
             make.centerX.equalToSuperview()
             make.width.height.equalTo(120)
         }
