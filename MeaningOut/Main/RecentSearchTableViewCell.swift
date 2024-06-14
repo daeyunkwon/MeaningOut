@@ -15,7 +15,7 @@ final class RecentSearchTableViewCell: UITableViewCell {
     
     var recentSearch: String? {
         didSet {
-            
+            self.searchTitleLabel.text = recentSearch
         }
     }
     
@@ -50,9 +50,7 @@ final class RecentSearchTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        clockIconButton.setImage(nil, for: .normal)
         searchTitleLabel.text = nil
-        removeButton.setImage(nil, for: .normal)
     }
     
     //MARK: - Init
@@ -90,11 +88,9 @@ final class RecentSearchTableViewCell: UITableViewCell {
         }
     }
     
-    
     //MARK: - Functions
     
     @objc func removeButtonTapped() {
         print(#function)
     }
-    
 }

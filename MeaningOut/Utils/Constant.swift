@@ -30,6 +30,12 @@ enum Constant {
             let image = UIImage(systemName: systemName, withConfiguration: config)
             return image
         }
+        
+        static func smallBoldSize(systemName: String) -> UIImage? {
+            let config = UIImage.SymbolConfiguration(pointSize: 20, weight: .bold, scale: .small)
+            let image = UIImage(systemName: systemName, withConfiguration: config)
+            return image
+        }
     }
     
     enum ProfileImage: String, CaseIterable {

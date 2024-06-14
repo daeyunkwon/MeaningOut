@@ -28,6 +28,7 @@
 		443A3DB42C1C108600C426FD /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DB32C1C108600C426FD /* MainTabBarController.swift */; };
 		443A3DB62C1C159E00C426FD /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DB52C1C159E00C426FD /* UserDefaultsManager.swift */; };
 		443A3DB82C1C1F1300C426FD /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DB72C1C1F1300C426FD /* Date+Extension.swift */; };
+		443A3DBB2C1C36C300C426FD /* RecentSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DBA2C1C36C300C426FD /* RecentSearchTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		443A3DB32C1C108600C426FD /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		443A3DB52C1C159E00C426FD /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		443A3DB72C1C1F1300C426FD /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		443A3DBA2C1C36C300C426FD /* RecentSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				443A3DA52C1BE07C00C426FD /* MainViewController.swift */,
+				443A3DBA2C1C36C300C426FD /* RecentSearchTableViewCell.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 				443A3DB22C1C06AE00C426FD /* Reuseable.swift in Sources */,
 				443A3DA62C1BE07C00C426FD /* MainViewController.swift in Sources */,
 				443A3DB42C1C108600C426FD /* MainTabBarController.swift in Sources */,
+				443A3DBB2C1C36C300C426FD /* RecentSearchTableViewCell.swift in Sources */,
 				443A3DB82C1C1F1300C426FD /* Date+Extension.swift in Sources */,
 				443A3D962C1B1CEF00C426FD /* OnboardingViewController.swift in Sources */,
 				4411F1AC2C1B003200878AFE /* SceneDelegate.swift in Sources */,
