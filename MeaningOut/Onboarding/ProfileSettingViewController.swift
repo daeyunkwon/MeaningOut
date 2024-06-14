@@ -135,7 +135,10 @@ final class ProfileSettingViewController: UIViewController {
     }
     
     @objc func completeButtonTapped() {
-        print(#function)
+        let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let sceneDelegate = scene?.delegate as? SceneDelegate
+        sceneDelegate?.window?.rootViewController = MainTabBarController()
+        sceneDelegate?.window?.makeKeyAndVisible()
     }
     
     private func updateStatusCompleteButton() {
