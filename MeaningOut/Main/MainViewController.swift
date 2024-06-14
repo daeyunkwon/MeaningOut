@@ -98,6 +98,7 @@ final class MainViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(RecentSearchTableViewCell.self, forCellReuseIdentifier: RecentSearchTableViewCell.identifier)
         tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
     }
     
     private func setupNavi() {
