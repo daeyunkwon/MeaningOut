@@ -15,6 +15,7 @@ final class ProfileImageSettingViewController: UIViewController {
     
     var selectedProfileImage: UIImage?
     
+    var selectedProfileImageSend: ((UIImage?) -> Void) = {sender in}
     
     //MARK: - UI Components
     
@@ -23,26 +24,26 @@ final class ProfileImageSettingViewController: UIViewController {
         return view
     }()
     
-    private let circle: UIImageView = {
-        let iv = UIImageView()
-        iv.contentMode = .scaleAspectFill
-        iv.layer.borderColor = Constant.Color.primaryGray.cgColor
-        iv.layer.borderWidth = 1
-        iv.alpha = 0.5
-        return iv
-    }()
+    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout())
     
     //MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavi()
+        setupCollectionView()
         configureLayout()
         configureUI()
     }
     
     private func setupNavi() {
         navigationItem.title = "PROFILE SETTING"
+    }
+    
+    private func setupCollectionView() {
+        self.collectionView.dataSource = self
+        self.collectionView.delegate = self
+        self.collectionView.register(ProfileImageCollectionViewCell.self, forCellWithReuseIdentifier: ProfileImageCollectionViewCell.identifier)
     }
     
     private func configureLayout() {
@@ -52,16 +53,12 @@ final class ProfileImageSettingViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.width.height.equalTo(120)
         }
-        mainProfileImageView.backgroundColor = .red
         
-        view.addSubview(circle)
-        circle.snp.makeConstraints { make in
-            make.top.equalTo(mainProfileImageView.snp.bottom).offset(30)
-            make.centerX.equalToSuperview()
-            make.width.height.equalTo(120)
+        view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo(mainProfileImageView.snp.bottom).offset(50)
+            make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
         }
-        
-        
     }
     
     private func configureUI() {
@@ -69,8 +66,52 @@ final class ProfileImageSettingViewController: UIViewController {
         mainProfileImageView.profileImageView.image = self.selectedProfileImage
     }
     
-    
-    //MARK: - Functions
-    
-
+    private static func layout() -> UICollectionViewLayout {
+        let layout = UICollectionViewFlowLayout()
+        let sectionSpacing: CGFloat = 20 //컬렉션뷰와 셀의 간격
+        let cellSpacing: CGFloat = 10 //셀과 셀 사이 간격
+        let cellCount: CGFloat = 4 //한 행에 셀 걋수
+        let width = UIScreen.main.bounds.width - ((cellSpacing * (cellCount - 1)) + (sectionSpacing * 2))
+        layout.itemSize = CGSize(width: width / cellCount, height: width / cellCount)
+        layout.scrollDirection = .vertical
+        layout.minimumInteritemSpacing = cellSpacing
+        layout.minimumLineSpacing = cellSpacing
+        layout.sectionInset = UIEdgeInsets(top: sectionSpacing, left: sectionSpacing, bottom: sectionSpacing, right: sectionSpacing)
+        return layout
+    }
 }
+
+//MARK: - UICollectionViewDataSource, UICollectionViewDelegate
+
+extension ProfileImageSettingViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return Constant.ProfileImage.allCases.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileImageCollectionViewCell.identifier, for: indexPath) as! ProfileImageCollectionViewCell
+        
+        let image = UIImage(named: Constant.ProfileImage.allCases[indexPath.row].rawValue)
+        
+        
+        if self.selectedProfileImage == image {
+            cell.type = .selected
+        } else {
+            cell.type = .unselected
+        }
+        
+        cell.profile = image
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.selectedProfileImage = UIImage(named: Constant.ProfileImage.allCases[indexPath.row].rawValue)
+        mainProfileImageView.profileImageView.image = selectedProfileImage
+        collectionView.reloadData()
+        
+        self.selectedProfileImageSend(selectedProfileImage) //이전 화면에 선택된 이미지 데이터 전달
+    }
+}
+
+

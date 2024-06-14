@@ -13,7 +13,7 @@ final class ProfileSettingViewController: UIViewController {
     
     //MARK: - Properties
     
-    
+    var profileImage = UIImage(named: Constant.ProfileImage.allCases.randomElement()?.rawValue ?? "profile_0")
     
     //MARK: - UI Components
     
@@ -119,7 +119,7 @@ final class ProfileSettingViewController: UIViewController {
     
     private func configureUI() {
         view.backgroundColor = Constant.Color.primaryWhite
-        profileCircleWithCameraIconView.profileImageView.image = UIImage(named: Constant.ProfileImage.allCases.randomElement()?.rawValue ?? "profile_0")
+        profileCircleWithCameraIconView.profileImageView.image = self.profileImage
     }
     
     //MARK: - Functions
@@ -127,6 +127,10 @@ final class ProfileSettingViewController: UIViewController {
     @objc func profileImageViewTapped() {
         let vc = ProfileImageSettingViewController()
         vc.selectedProfileImage = self.profileCircleWithCameraIconView.profileImageView.image
+        vc.selectedProfileImageSend = {[weak self] sender in
+            guard let self = self else {return}
+            self.profileCircleWithCameraIconView.profileImageView.image = sender
+        }
         navigationController?.pushViewController(vc, animated: true)
     }
     

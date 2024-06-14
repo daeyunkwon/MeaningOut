@@ -11,10 +11,16 @@ import SnapKit
 
 final class ProfileCircle: UIImageView {
     
-    init(radius: CGFloat) {
+    init() {
+        super.init(frame: .zero)
+        configureUI()
+    }
+    
+    init(radius: CGFloat, imageName: String) {
         super.init(frame: .zero)
         configureUI()
         layer.cornerRadius = radius
+        self.image = UIImage(named: imageName)
     }
     
     required init?(coder: NSCoder) {
@@ -25,7 +31,6 @@ final class ProfileCircle: UIImageView {
         contentMode = .scaleAspectFill
         layer.borderWidth = 1
         layer.borderColor = Constant.Color.primaryGray.cgColor
-        image = UIImage(named: Constant.ProfileImage.profile_0.rawValue)
         alpha = 0.5
         clipsToBounds = true
     }
