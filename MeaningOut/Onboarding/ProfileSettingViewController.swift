@@ -17,7 +17,7 @@ final class ProfileSettingViewController: UIViewController {
     
     //MARK: - UI Components
     
-    private let profileImageView: UIImageView = {
+    private lazy var profileImageView: UIImageView = {
         let iv = UIImageView()
         iv.backgroundColor = Constant.Color.primaryWhite
         iv.contentMode = .scaleAspectFill
@@ -26,6 +26,9 @@ final class ProfileSettingViewController: UIViewController {
         iv.layer.borderColor = Constant.Color.primaryOrange.cgColor
         iv.layer.cornerRadius = 60
         iv.clipsToBounds = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(profileImageViewTapped))
+        iv.addGestureRecognizer(tap)
+        iv.isUserInteractionEnabled = true
         return iv
     }()
     
@@ -78,15 +81,20 @@ final class ProfileSettingViewController: UIViewController {
     
     //MARK: - Life Cycle
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupNavi()
-        configureLayout()
-        configureUI()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.title = "PROFILE SETTING"
     }
     
-    private func setupNavi() {
-        navigationItem.title = "PROFILE SETTING"
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationItem.title = ""
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureLayout()
+        configureUI()
     }
     
     private func configureLayout() {
@@ -140,6 +148,10 @@ final class ProfileSettingViewController: UIViewController {
     }
     
     //MARK: - Functions
+    
+    @objc func profileImageViewTapped() {
+        navigationController?.pushViewController(ProfileImageSettingViewController(), animated: true)
+    }
     
     @objc func completeButtonTapped() {
         print(#function)
