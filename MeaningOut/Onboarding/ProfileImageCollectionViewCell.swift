@@ -17,7 +17,7 @@ final class ProfileImageCollectionViewCell: UICollectionViewCell {
         case selected
         case unselected
     }
-    var type = ProfileType.unselected
+    var type: ProfileType = ProfileType.unselected
     
     var profile: UIImage? {
         didSet {

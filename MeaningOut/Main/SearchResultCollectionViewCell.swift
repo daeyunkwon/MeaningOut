@@ -7,12 +7,23 @@
 
 import UIKit
 
+import Kingfisher
 import SnapKit
 
 final class SearchResultCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Properties
     
+    var shoppingItem: ShoppingItem? {
+        didSet {
+            guard let data = shoppingItem else {return}
+            
+            productImage.kf.setImage(with: URL(string: data.imageURL))
+            mallName.text = data.mallName
+            productTitle.text = data.titleString
+            price.text = data.priceString + "원"
+        }
+    }
     
     //MARK: - UI Components
     
@@ -21,6 +32,7 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
         iv.contentMode = .scaleAspectFill
         iv.layer.cornerRadius = 10
         iv.backgroundColor = Constant.Color.primaryLightGray
+        iv.clipsToBounds = true
         return iv
     }()
     
@@ -41,7 +53,7 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
     
     private let mallName: UILabel = {
         let label = UILabel()
-        label.textColor = Constant.Color.primaryLightGray
+        label.textColor = Constant.Color.primaryGray
         label.font = Constant.Font.system13
         return label
     }()
@@ -49,7 +61,7 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
     private let productTitle: UILabel = {
         let label = UILabel()
         label.textColor = Constant.Color.primaryBlack
-        label.font = Constant.Font.system15
+        label.font = Constant.Font.system14
         label.textAlignment = .left
         label.numberOfLines = 2
         return label
@@ -79,7 +91,6 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureLayout()
-        contentView.backgroundColor = .red
     }
     
     required init?(coder: NSCoder) {
@@ -100,14 +111,14 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
             make.width.height.equalTo(30)
         }
         
-        backView.addSubview(likeButton)
+        contentView.addSubview(likeButton)
         likeButton.snp.makeConstraints { make in
-            make.verticalEdges.horizontalEdges.equalToSuperview().inset(5)
+            make.edges.equalTo(backView.snp.edges)
         }
         
         contentView.addSubview(mallName)
         mallName.snp.makeConstraints { make in
-            make.top.equalTo(productImage.snp.bottom).offset(5)
+            make.top.equalTo(productImage.snp.bottom).offset(10)
             make.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide)
             make.height.equalTo(10)
         }

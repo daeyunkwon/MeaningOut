@@ -13,17 +13,17 @@ final class MainViewController: UIViewController {
     
     //MARK: - Properties
     
-    enum ViewDisplayType {
+    private enum ViewDisplayType {
         case empty
         case nonEmpty
     }
-    var viewDisplayType: ViewDisplayType = .nonEmpty {
+    private var viewDisplayType: ViewDisplayType = .nonEmpty {
         didSet {
             self.updateDisplayWithRecentSearch()
         }
     }
     
-    var list: [String] = [] {
+    private var list: [String] = [] {
         didSet {
             if list.isEmpty {
                 self.viewDisplayType = .empty

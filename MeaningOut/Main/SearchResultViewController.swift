@@ -16,7 +16,24 @@ final class SearchResultViewController: UIViewController {
     
     var searchKeyword: String?
     
-    var list: [ShoppingItem] = []
+    private var list: [ShoppingItem] = []
+    
+    private var totalCount = 0
+    private var page = 1
+    
+    private var start: Int {
+        get {
+            return 1 + (page * 30) - 30
+        }
+    }
+    
+    private enum SortType: String {
+        case sim
+        case date
+        case asc
+        case dsc
+    }
+    private var sortType: SortType = .sim
     
     //MARK: - UI Components
     
@@ -24,7 +41,6 @@ final class SearchResultViewController: UIViewController {
         let label = UILabel()
         label.font = .systemFont(ofSize: 15, weight: .heavy)
         label.textColor = Constant.Color.primaryOrange
-        label.text = "888,888개의 검색 결과"
         return label
     }()
     
@@ -43,12 +59,14 @@ final class SearchResultViewController: UIViewController {
         setupNavi()
         configureLayout()
         configureUI()
+        callRequest(query: searchKeyword ?? "", sort: self.sortType.rawValue)
     }
     
     private func setupCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: SearchResultCollectionViewCell.identifier)
+        collectionView.prefetchDataSource = self
     }
     
     private func setupNavi() {
@@ -95,7 +113,7 @@ final class SearchResultViewController: UIViewController {
                                 
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(capsuleAccuracyButton.snp.bottom)
+            make.top.equalTo(capsuleAccuracyButton.snp.bottom).offset(10)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
@@ -125,22 +143,65 @@ final class SearchResultViewController: UIViewController {
     
     //MARK: - Functions
     
+    private func callRequest(query: String, sort: String) {
+        let param: Parameters = [
+            "query": query,
+            "display": 30,
+            "sort": sort,
+            "start": self.start
+        ]
+        
+        let header: HTTPHeaders = [
+            "X-Naver-Client-Id": APIKey.clientId,
+            "X-Naver-Client-Secret": APIKey.clientSecret
+        ]
+        
+        AF.request(APIURL.naverShoppingURL, parameters: param, encoding: URLEncoding.queryString, headers: header).responseDecodable(of: Shopping.self) { response in
+            switch response.result {
+            case .success(let data):
+                self.totalCount = data.total ?? 0
+                self.resultCountLabel.text = "\(self.totalCount.formatted())개의 검색 결과"
+                if self.page == 1 {
+                    self.list = data.items
+                } else {
+                    self.list.append(contentsOf: data.items)
+                }
+                self.collectionView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     @objc func capsuleOptionButtonTapped(sender: UIButton) {
         print(#function, sender.tag)
     }
-
 }
 
 //MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 
 extension SearchResultViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return list.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.identifier, for: indexPath) as! SearchResultCollectionViewCell
-        
+        cell.shoppingItem = list[indexPath.item]
         return cell
+    }
+}
+
+//MARK: - UICollectionViewDataSourcePrefetching
+
+extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        print(indexPaths[1].row)
+        if indexPaths[0].row == self.list.count - 4 || indexPaths[1].row == self.list.count - 4 {
+            if indexPaths[1].row < self.totalCount {
+                self.page += 1
+                self.callRequest(query: self.searchKeyword ?? "", sort: self.sortType.rawValue)
+            }
+        }
     }
 }

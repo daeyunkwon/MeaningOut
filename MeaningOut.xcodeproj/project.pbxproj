@@ -34,6 +34,7 @@
 		443A3DC12C1D5E5100C426FD /* CapsuleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DC02C1D5E5100C426FD /* CapsuleButton.swift */; };
 		443A3DC32C1D70A700C426FD /* SearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DC22C1D70A700C426FD /* SearchResultCollectionViewCell.swift */; };
 		443A3DC52C1D847300C426FD /* Shopping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DC42C1D847300C426FD /* Shopping.swift */; };
+		443A3DC72C1D8AAF00C426FD /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DC62C1D8AAF00C426FD /* APIKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 		443A3DC02C1D5E5100C426FD /* CapsuleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleButton.swift; sourceTree = "<group>"; };
 		443A3DC22C1D70A700C426FD /* SearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
 		443A3DC42C1D847300C426FD /* Shopping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shopping.swift; sourceTree = "<group>"; };
+		443A3DC62C1D8AAF00C426FD /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 				443A3DBC2C1D587B00C426FD /* Protocols.swift */,
 				443A3DAA2C1BE3D000C426FD /* CustomView */,
 				443A3DB92C1C20CC00C426FD /* Extension */,
+				443A3DC62C1D8AAF00C426FD /* APIKey.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				443A3DAC2C1BE41D00C426FD /* ProfileCircleWithCamera.swift in Sources */,
+				443A3DC72C1D8AAF00C426FD /* APIKey.swift in Sources */,
 				443A3DC32C1D70A700C426FD /* SearchResultCollectionViewCell.swift in Sources */,
 				443A3DC12C1D5E5100C426FD /* CapsuleButton.swift in Sources */,
 				4411F1AE2C1B003200878AFE /* ProfileSettingViewController.swift in Sources */,

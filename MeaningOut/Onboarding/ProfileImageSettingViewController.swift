@@ -24,7 +24,7 @@ final class ProfileImageSettingViewController: UIViewController {
         return view
     }()
     
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout())
+    private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout())
     
     //MARK: - Life Cycle
     

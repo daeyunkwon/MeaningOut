@@ -9,7 +9,7 @@ import Foundation
 
 struct Shopping: Codable {
     let total: Int?
-    let items: [ShoppingItem]?
+    let items: [ShoppingItem]
 }
 
 struct ShoppingItem: Codable {
@@ -40,5 +40,10 @@ struct ShoppingItem: Codable {
         }
         
         return price.formatted()
+    }
+    
+    var titleString: String {
+        guard let title = self.title else {return ""}
+        return title.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
     }
 }
