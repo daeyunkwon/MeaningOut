@@ -46,8 +46,8 @@ final class SearchResultViewController: UIViewController {
     
     private let capsuleAccuracyButton = CapsuleButton(title: "정확도", tag: 0)
     private let capsuleDateButton = CapsuleButton(title: "날짜순", tag: 1)
-    private let capsuleHighPriceButton = CapsuleButton(title: "가격높은순", tag: 2)
-    private let capsuleRowPriceButton = CapsuleButton(title: "가격낮은순", tag: 3)
+    private let capsuleRowPriceButton = CapsuleButton(title: "가격낮은순", tag: 2)
+    private let capsuleHighPriceButton = CapsuleButton(title: "가격높은순", tag: 3)
     
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout())
     
@@ -125,6 +125,7 @@ final class SearchResultViewController: UIViewController {
             $0.layoutIfNeeded()
             $0.addTarget(self, action: #selector(capsuleOptionButtonTapped), for: .touchUpInside)
         }
+        self.checkStatusCapsuleOptionButton()
     }
     
     static func layout() -> UICollectionViewLayout {
@@ -173,8 +174,42 @@ final class SearchResultViewController: UIViewController {
         }
     }
     
+    private func checkStatusCapsuleOptionButton() {
+        switch sortType {
+        case .sim:
+            updateUICapsuleOptionButton(selected: capsuleAccuracyButton)
+        case .date:
+            updateUICapsuleOptionButton(selected: capsuleDateButton)
+        case .asc:
+            updateUICapsuleOptionButton(selected: capsuleRowPriceButton)
+        case .dsc:
+            updateUICapsuleOptionButton(selected: capsuleHighPriceButton)
+        }
+    }
+    
+    private func updateUICapsuleOptionButton(selected button: UIButton) {
+        [capsuleAccuracyButton, capsuleDateButton, capsuleHighPriceButton, capsuleRowPriceButton].forEach {
+            if $0 == button {
+                $0.backgroundColor = Constant.Color.primaryDarkGray
+                $0.setTitleColor(Constant.Color.primaryWhite, for: .normal)
+                $0.layer.borderColor = Constant.Color.primaryDarkGray.cgColor
+            } else {
+                $0.backgroundColor = Constant.Color.primaryWhite
+                $0.setTitleColor(Constant.Color.primaryBlack, for: .normal)
+                $0.layer.borderColor = Constant.Color.primaryLightGray.cgColor
+            }
+        }
+    }
+    
     @objc func capsuleOptionButtonTapped(sender: UIButton) {
-        print(#function, sender.tag)
+        switch sender.tag {
+        case 0: self.sortType = .sim
+        case 1: self.sortType = .date
+        case 2: self.sortType = .asc
+        case 3: self.sortType = .dsc
+        default: break
+        }
+        self.checkStatusCapsuleOptionButton()
     }
 }
 
