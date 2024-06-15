@@ -30,8 +30,13 @@ final class SettingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
         tableView.reloadData()
+        navigationItem.title = "SETTING"
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationItem.title = ""
     }
     
     override func viewDidLoad() {
@@ -51,8 +56,6 @@ final class SettingViewController: UIViewController {
     }
     
     private func setupNavi() {
-        navigationItem.title = "SETTING"
-        
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = Constant.Color.primaryWhite
         navigationController?.navigationBar.standardAppearance = appearance
@@ -133,7 +136,9 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            
+            let vc = ProfileSettingViewController()
+            vc.viewType = .editProfile
+            navigationController?.pushViewController(vc, animated: true)
         } else if indexPath.row == 5 {
             self.showWithdrawalAlert()
         }
