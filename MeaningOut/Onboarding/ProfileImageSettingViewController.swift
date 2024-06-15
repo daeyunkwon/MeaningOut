@@ -17,6 +17,12 @@ final class ProfileImageSettingViewController: UIViewController {
     
     var selectedProfileImageSend: ((UIImage?) -> Void) = {sender in}
     
+    enum ViewType {
+        case profileSetting
+        case editProfile
+    }
+    var viewType: ViewType = .profileSetting
+    
     //MARK: - UI Components
     
     private let mainProfileImageView: ProfileCircleWithCameraIcon = {
@@ -37,7 +43,12 @@ final class ProfileImageSettingViewController: UIViewController {
     }
     
     private func setupNavi() {
-        navigationItem.title = "PROFILE SETTING"
+        switch viewType {
+        case .profileSetting:
+            navigationItem.title = "PROFILE SETTING"
+        case .editProfile:
+            navigationItem.title = "EDIT PROFILE"
+        }
     }
     
     private func setupCollectionView() {
