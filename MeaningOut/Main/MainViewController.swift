@@ -232,6 +232,8 @@ extension MainViewController: UISearchBarDelegate {
         let vc = SearchResultViewController()
         vc.searchKeyword = text
         navigationController?.pushViewController(vc, animated: true)
+        searchBar.text = nil
+        searchController.isActive = false
     }
 }
 
