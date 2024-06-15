@@ -15,6 +15,12 @@ final class ProfileSettingViewController: UIViewController {
     
     var profileImage = UIImage(named: Constant.ProfileImage.allCases.randomElement()?.rawValue ?? "profile_0")
     
+    enum ViewType {
+        case profileSetting
+        case editProfile
+    }
+    var viewType: ViewType = .profileSetting
+    
     //MARK: - UI Components
     
     private lazy var profileCircleWithCameraIconView: ProfileCircleWithCameraIcon = {
@@ -66,7 +72,12 @@ final class ProfileSettingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationItem.title = "PROFILE SETTING"
+        switch viewType {
+        case .profileSetting:
+            navigationItem.title = "PROFILE SETTING"
+        case .editProfile:
+            navigationItem.title = "EDIT PROFILE"
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -76,8 +87,21 @@ final class ProfileSettingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavi()
         configureLayout()
         configureUI()
+    }
+    
+    private func setupNavi() {
+        navigationController?.navigationBar.tintColor = Constant.Color.primaryBlack
+        switch viewType {
+        case .profileSetting:
+            navigationItem.title = "PROFILE SETTING"
+        case .editProfile:
+            navigationItem.title = "EDIT PROFILE"
+            let save = UIBarButtonItem(title: "저장", style: .done, target: self, action: #selector(completeButtonTapped))
+            navigationItem.rightBarButtonItem = save
+        }
     }
     
     private func configureLayout() {
@@ -98,7 +122,12 @@ final class ProfileSettingViewController: UIViewController {
         view.addSubview(separatorView)
         separatorView.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
-            make.height.equalTo(0.2)
+            switch viewType {
+            case .profileSetting:
+                make.height.equalTo(0.2)
+            case .editProfile:
+                make.height.equalTo(1)
+            }
             make.top.equalTo(nicknameTextField.snp.bottom).offset(10)
         }
         
@@ -119,13 +148,38 @@ final class ProfileSettingViewController: UIViewController {
     
     private func configureUI() {
         view.backgroundColor = Constant.Color.primaryWhite
-        profileCircleWithCameraIconView.profileImageView.image = self.profileImage
+        
+        switch viewType {
+        case .profileSetting:
+            completeButton.isHidden = false
+            separatorView.backgroundColor = Constant.Color.primaryLightGray
+            nicknameConditionLabel.textColor = Constant.Color.primaryOrange
+            profileCircleWithCameraIconView.profileImageView.image = self.profileImage
+        case .editProfile:
+            completeButton.isHidden = true
+            nicknameTextField.text = UserDefaultsManager.shared.nickname
+            separatorView.backgroundColor = Constant.Color.primaryDarkGray
+            nicknameConditionLabel.textColor = Constant.Color.primaryDarkGray
+            profileCircleWithCameraIconView.profileImageView.image = UIImage(named: UserDefaultsManager.shared.profile ?? "")
+        }
     }
     
     //MARK: - Functions
     
+    @objc func rightBarButtonTapped() {
+        print(#function)
+    }
+    
     @objc func profileImageViewTapped() {
         let vc = ProfileImageSettingViewController()
+        
+        switch self.viewType {
+        case .profileSetting:
+            vc.viewType = .profileSetting
+        case .editProfile:
+            vc.viewType = .editProfile
+        }
+        
         vc.selectedProfileImage = self.profileCircleWithCameraIconView.profileImageView.image
         vc.selectedProfileImageSend = {[weak self] sender in
             guard let self = self else {return}
@@ -195,7 +249,7 @@ final class ProfileSettingViewController: UIViewController {
                 self.nicknameConditionLabel.text = "닉네임에 숫자는 포함할 수 없어요."
                 return
             } else {
-                self.nicknameConditionLabel.text = "사용 가능한 닉네임입니다."
+                self.nicknameConditionLabel.text = "사용 가능한 닉네임입니다 :D"
             }
         }
     }
