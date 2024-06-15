@@ -210,8 +210,13 @@ final class ProfileSettingViewController: UIViewController {
        
         UserDefaultsManager.shared.nickname = nickname
         
-        let now = Date.todayDate
-        UserDefaultsManager.shared.joinDate = now
+        switch viewType {
+        case .profileSetting:
+            let now = Date.todayDate
+            UserDefaultsManager.shared.joinDate = now
+        default:
+            break
+        }
     }
     
     private func changeWindowRootViewController() {
