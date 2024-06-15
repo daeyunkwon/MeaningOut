@@ -70,6 +70,22 @@ final class SettingViewController: UIViewController {
     private func configureUI() {
         view.backgroundColor = Constant.Color.primaryWhite
     }
+    
+    //MARK: - Functions
+    
+    private func showWithdrawalAlert() {
+        let alert = UIAlertController(title: "탈퇴하기", message: "탈퇴를 하면 데이터가 모두 초기화됩니다. 탈퇴 하시겠습니까?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel))
+        alert.addAction(UIAlertAction(title: "확인", style: .destructive, handler: { okAction in
+            UserDefaultsManager.shared.removeUserData {
+                let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+                let sceneDelegate = windowScene?.delegate as? SceneDelegate
+                sceneDelegate?.window?.rootViewController = UINavigationController(rootViewController: OnboardingViewController())
+                sceneDelegate?.window?.makeKeyAndVisible()
+            }
+        }))
+        present(alert, animated: true)
+    }   
 }
 
 //MARK: - UITableViewDataSource, UITableViewDelegate
@@ -116,6 +132,11 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
+        if indexPath.row == 0 {
+            
+        } else if indexPath.row == 5 {
+            self.showWithdrawalAlert()
+        }
+        tableView.reloadRows(at: [IndexPath(row: indexPath.row, section: 0)], with: .automatic)
     }
 }

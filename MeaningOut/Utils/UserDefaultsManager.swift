@@ -14,7 +14,7 @@ final class UserDefaultsManager {
     
     private let userDefaults = UserDefaults.standard
     
-    enum Key: String {
+    enum Key: String, CaseIterable {
         case nickname
         case profile
         case recentSearch
@@ -69,5 +69,12 @@ final class UserDefaultsManager {
     
     func removeRecentSearchData() {
         userDefaults.removeObject(forKey: Key.recentSearch.rawValue)
+    }
+    
+    func removeUserData(completion: @escaping () -> Void) {
+        for element in Key.allCases {
+            userDefaults.removeObject(forKey: element.rawValue)
+        }
+        completion()
     }
 }
