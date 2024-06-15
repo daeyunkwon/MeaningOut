@@ -120,7 +120,7 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
         mallName.snp.makeConstraints { make in
             make.top.equalTo(productImage.snp.bottom).offset(10)
             make.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide)
-            make.height.equalTo(10)
+            make.height.equalTo(13)
         }
         
         contentView.addSubview(productTitle)

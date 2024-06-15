@@ -134,7 +134,7 @@ final class SearchResultViewController: UIViewController {
         let sectionSpacing: CGFloat = 20
         let cellSpacing: CGFloat = 20
         let width = UIScreen.main.bounds.width - ((cellSpacing * (cellCount - 1)) + (sectionSpacing * 2))
-        layout.itemSize = CGSize(width: width / cellCount, height: width / cellCount * 1.7)
+        layout.itemSize = CGSize(width: width / cellCount, height: width / cellCount * 1.8)
         layout.minimumInteritemSpacing = cellSpacing
         layout.minimumLineSpacing = 10
         layout.sectionInset = UIEdgeInsets(top: sectionSpacing, left: sectionSpacing, bottom: sectionSpacing, right: sectionSpacing)
@@ -210,6 +210,10 @@ final class SearchResultViewController: UIViewController {
         default: break
         }
         self.checkStatusCapsuleOptionButton()
+        
+        self.page = 1
+        callRequest(query: self.searchKeyword ?? "", sort: self.sortType.rawValue)
+        collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }
 }
 
