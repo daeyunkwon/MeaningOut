@@ -53,10 +53,20 @@ final class SearchResultViewController: UIViewController {
     
     //MARK: - Life Cycle
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.title = self.searchKeyword
+        self.collectionView.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationItem.title = ""
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
-        setupNavi()
         configureLayout()
         configureUI()
         callRequest(query: searchKeyword ?? "", sort: self.sortType.rawValue)
@@ -67,10 +77,6 @@ final class SearchResultViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.register(SearchResultCollectionViewCell.self, forCellWithReuseIdentifier: SearchResultCollectionViewCell.identifier)
         collectionView.prefetchDataSource = self
-    }
-    
-    private func setupNavi() {
-        navigationItem.title = self.searchKeyword
     }
     
     private func configureLayout() {
@@ -229,6 +235,12 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         cell.delegate = self
         cell.shoppingItem = list[indexPath.item]
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = ProductDetailViewController()
+        vc.shoppingItem = self.list[indexPath.row]
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
