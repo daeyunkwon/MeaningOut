@@ -18,7 +18,7 @@ final class MainTabBarController: UITabBarController {
 
     private func setupTabBar() {
         let mainVC = UINavigationController(rootViewController: MainViewController())
-        let settingVC = UINavigationController(rootViewController: MainViewController())
+        let settingVC = UINavigationController(rootViewController: SettingViewController())
         
         mainVC.tabBarItem = UITabBarItem(title: "검색", image: UIImage(systemName: "magnifyingglass"), tag: 0)
         settingVC.tabBarItem = UITabBarItem(title: "설정", image: UIImage(systemName: "person"), tag: 1)

@@ -36,6 +36,9 @@
 		443A3DC52C1D847300C426FD /* Shopping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DC42C1D847300C426FD /* Shopping.swift */; };
 		443A3DC72C1D8AAF00C426FD /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DC62C1D8AAF00C426FD /* APIKey.swift */; };
 		443A3DC92C1DE18700C426FD /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DC82C1DE18700C426FD /* ProductDetailViewController.swift */; };
+		443A3DCC2C1DF05B00C426FD /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DCB2C1DF05B00C426FD /* SettingViewController.swift */; };
+		443A3DCE2C1DF46400C426FD /* SettingOptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DCD2C1DF46400C426FD /* SettingOptionTableViewCell.swift */; };
+		443A3DD02C1DFF7C00C426FD /* SettingProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DCF2C1DFF7C00C426FD /* SettingProfileTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +70,9 @@
 		443A3DC42C1D847300C426FD /* Shopping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shopping.swift; sourceTree = "<group>"; };
 		443A3DC62C1D8AAF00C426FD /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		443A3DC82C1DE18700C426FD /* ProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
+		443A3DCB2C1DF05B00C426FD /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		443A3DCD2C1DF46400C426FD /* SettingOptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingOptionTableViewCell.swift; sourceTree = "<group>"; };
+		443A3DCF2C1DFF7C00C426FD /* SettingProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfileTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +114,7 @@
 				4411F1C02C1B017400878AFE /* Model */,
 				443A3D942C1B1CE100C426FD /* Onboarding */,
 				443A3DA72C1BE08000C426FD /* Main */,
+				443A3DCA2C1DF04700C426FD /* Setting */,
 				443A3DB32C1C108600C426FD /* MainTabBarController.swift */,
 				4411F1B22C1B003300878AFE /* Assets.xcassets */,
 				4411F1B42C1B003300878AFE /* LaunchScreen.storyboard */,
@@ -187,6 +194,16 @@
 				443A3DB72C1C1F1300C426FD /* Date+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		443A3DCA2C1DF04700C426FD /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				443A3DCB2C1DF05B00C426FD /* SettingViewController.swift */,
+				443A3DCF2C1DFF7C00C426FD /* SettingProfileTableViewCell.swift */,
+				443A3DCD2C1DF46400C426FD /* SettingOptionTableViewCell.swift */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,12 +288,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				443A3DD02C1DFF7C00C426FD /* SettingProfileTableViewCell.swift in Sources */,
 				443A3DAC2C1BE41D00C426FD /* ProfileCircleWithCamera.swift in Sources */,
 				443A3DC72C1D8AAF00C426FD /* APIKey.swift in Sources */,
 				443A3DC32C1D70A700C426FD /* SearchResultCollectionViewCell.swift in Sources */,
 				443A3DC12C1D5E5100C426FD /* CapsuleButton.swift in Sources */,
 				4411F1AE2C1B003200878AFE /* ProfileSettingViewController.swift in Sources */,
 				443A3DB02C1C044900C426FD /* ProfileImageCollectionViewCell.swift in Sources */,
+				443A3DCE2C1DF46400C426FD /* SettingOptionTableViewCell.swift in Sources */,
 				443A3DB62C1C159E00C426FD /* UserDefaultsManager.swift in Sources */,
 				443A3DC92C1DE18700C426FD /* ProductDetailViewController.swift in Sources */,
 				443A3DA92C1BE1B600C426FD /* ProfileImageSettingViewController.swift in Sources */,
@@ -289,6 +308,7 @@
 				443A3DB42C1C108600C426FD /* MainTabBarController.swift in Sources */,
 				443A3DBB2C1C36C300C426FD /* RecentSearchTableViewCell.swift in Sources */,
 				443A3DB82C1C1F1300C426FD /* Date+Extension.swift in Sources */,
+				443A3DCC2C1DF05B00C426FD /* SettingViewController.swift in Sources */,
 				443A3DBF2C1D5CB500C426FD /* SearchResultViewController.swift in Sources */,
 				443A3D962C1B1CEF00C426FD /* OnboardingViewController.swift in Sources */,
 				4411F1AC2C1B003200878AFE /* SceneDelegate.swift in Sources */,
