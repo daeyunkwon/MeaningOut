@@ -22,8 +22,11 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
             mallName.text = data.mallName
             productTitle.text = data.titleString
             price.text = data.priceString + "원"
+            checkLikeButton()
         }
     }
+    
+    weak var delegate: SearchResultCollectionViewCellDelegate?
     
     //MARK: - UI Components
     
@@ -139,7 +142,20 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
     //MARK: - Fuctions
     
     @objc func likeButtonTapped() {
-        print(#function)
+        self.delegate?.likeButtonTapped(cell: self)
     }
     
+    func checkLikeButton() {
+        guard let dictionary = UserDefaultsManager.shared.like else {return}
+        guard let productId = shoppingItem?.productId else {return}
+        if dictionary[productId] != nil {
+            backView.backgroundColor = Constant.Color.primaryWhite
+            backView.alpha = 1
+            likeButton.setImage(UIImage(named: "like_selected")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        } else {
+            backView.backgroundColor = Constant.Color.primaryGray
+            backView.alpha = 0.5
+            likeButton.setImage(UIImage(named: "like_unselected")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        }
+    }
 }

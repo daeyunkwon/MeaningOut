@@ -10,3 +10,7 @@ import UIKit
 protocol RecentSearchTableViewCellDelegate: AnyObject {
     func removeButtonTapped(cell: RecentSearchTableViewCell)
 }
+
+protocol SearchResultCollectionViewCellDelegate: AnyObject {
+    func likeButtonTapped(cell: SearchResultCollectionViewCell)
+}

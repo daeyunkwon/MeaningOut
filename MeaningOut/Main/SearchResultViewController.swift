@@ -226,6 +226,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.identifier, for: indexPath) as! SearchResultCollectionViewCell
+        cell.delegate = self
         cell.shoppingItem = list[indexPath.item]
         return cell
     }
@@ -241,5 +242,26 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
                 self.callRequest(query: self.searchKeyword ?? "", sort: self.sortType.rawValue)
             }
         }
+    }
+}
+
+//MARK: - SearchResultCollectionViewCellDelegate
+
+extension SearchResultViewController: SearchResultCollectionViewCellDelegate {
+    func likeButtonTapped(cell: SearchResultCollectionViewCell) {
+        guard let productId = cell.shoppingItem?.productId else {return}
+        
+        if UserDefaultsManager.shared.like != nil {
+            if UserDefaultsManager.shared.like?[productId] != nil {
+                UserDefaultsManager.shared.like?.removeValue(forKey: productId)
+            } else {
+                UserDefaultsManager.shared.like?[productId] = true
+            }
+        } else {
+            let dict: [String: Any] = [productId: true]
+            UserDefaultsManager.shared.like = dict
+        }
+        
+        cell.checkLikeButton()
     }
 }

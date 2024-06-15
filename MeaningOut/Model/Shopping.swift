@@ -19,6 +19,7 @@ struct ShoppingItem: Codable {
     let lprice: String?
     let hprice: String?
     let mallName: String?
+    let productId: String?
     
     var linkURL: String {
         guard let link = self.link else {return ""}
