@@ -213,7 +213,7 @@ final class SearchResultViewController: UIViewController {
         
         self.page = 1
         callRequest(query: self.searchKeyword ?? "", sort: self.sortType.rawValue)
-        collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .bottom, animated: true)
     }
 }
 
@@ -235,7 +235,6 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
 
 extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        print(indexPaths[1].row)
         if indexPaths[0].row == self.list.count - 4 || indexPaths[1].row == self.list.count - 4 {
             if indexPaths[1].row < self.totalCount {
                 self.page += 1
