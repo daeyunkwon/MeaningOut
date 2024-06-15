@@ -13,7 +13,7 @@ final class ProfileSettingViewController: UIViewController {
     
     //MARK: - Properties
     
-    var profileImage = UIImage(named: Constant.ProfileImage.allCases.randomElement()?.rawValue ?? "profile_0")
+    var profileImage: UIImage?
     
     enum ViewType {
         case profileSetting
@@ -151,11 +151,14 @@ final class ProfileSettingViewController: UIViewController {
         
         switch viewType {
         case .profileSetting:
+            self.profileImage = UIImage(named: Constant.ProfileImage.allCases.randomElement()?.rawValue ?? "profile_0")
             completeButton.isHidden = false
             separatorView.backgroundColor = Constant.Color.primaryLightGray
             nicknameConditionLabel.textColor = Constant.Color.primaryOrange
             profileCircleWithCameraIconView.profileImageView.image = self.profileImage
+            
         case .editProfile:
+            self.profileImage = UIImage(named: UserDefaultsManager.shared.profile ?? "")
             completeButton.isHidden = true
             nicknameTextField.text = UserDefaultsManager.shared.nickname
             separatorView.backgroundColor = Constant.Color.primaryDarkGray
@@ -184,6 +187,7 @@ final class ProfileSettingViewController: UIViewController {
         vc.selectedProfileImageSend = {[weak self] sender in
             guard let self = self else {return}
             self.profileCircleWithCameraIconView.profileImageView.image = sender
+            self.profileImage = sender
         }
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -202,9 +206,10 @@ final class ProfileSettingViewController: UIViewController {
                 profileImageName = item.rawValue
             }
         }
+        UserDefaultsManager.shared.profile = profileImageName
        
         UserDefaultsManager.shared.nickname = nickname
-        UserDefaultsManager.shared.profile = profileImageName
+        
         let now = Date.todayDate
         UserDefaultsManager.shared.joinDate = now
     }
