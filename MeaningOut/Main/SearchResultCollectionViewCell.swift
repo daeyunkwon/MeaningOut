@@ -136,9 +136,6 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    
-    
-    
     //MARK: - Fuctions
     
     @objc func likeButtonTapped() {

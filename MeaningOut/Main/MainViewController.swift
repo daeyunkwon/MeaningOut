@@ -228,6 +228,10 @@ extension MainViewController: UISearchBarDelegate {
         }
         
         fetchRecentSearchData()
+        
+        let vc = SearchResultViewController()
+        vc.searchKeyword = text
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
