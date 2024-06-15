@@ -30,6 +30,10 @@
 		443A3DB82C1C1F1300C426FD /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DB72C1C1F1300C426FD /* Date+Extension.swift */; };
 		443A3DBB2C1C36C300C426FD /* RecentSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DBA2C1C36C300C426FD /* RecentSearchTableViewCell.swift */; };
 		443A3DBD2C1D587B00C426FD /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DBC2C1D587B00C426FD /* Protocols.swift */; };
+		443A3DBF2C1D5CB500C426FD /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DBE2C1D5CB500C426FD /* SearchResultViewController.swift */; };
+		443A3DC12C1D5E5100C426FD /* CapsuleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DC02C1D5E5100C426FD /* CapsuleButton.swift */; };
+		443A3DC32C1D70A700C426FD /* SearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DC22C1D70A700C426FD /* SearchResultCollectionViewCell.swift */; };
+		443A3DC52C1D847300C426FD /* Shopping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DC42C1D847300C426FD /* Shopping.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +59,10 @@
 		443A3DB72C1C1F1300C426FD /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		443A3DBA2C1C36C300C426FD /* RecentSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchTableViewCell.swift; sourceTree = "<group>"; };
 		443A3DBC2C1D587B00C426FD /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		443A3DBE2C1D5CB500C426FD /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
+		443A3DC02C1D5E5100C426FD /* CapsuleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleButton.swift; sourceTree = "<group>"; };
+		443A3DC22C1D70A700C426FD /* SearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
+		443A3DC42C1D847300C426FD /* Shopping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shopping.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +125,7 @@
 		4411F1C02C1B017400878AFE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				443A3DC42C1D847300C426FD /* Shopping.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -150,6 +159,8 @@
 			children = (
 				443A3DA52C1BE07C00C426FD /* MainViewController.swift */,
 				443A3DBA2C1C36C300C426FD /* RecentSearchTableViewCell.swift */,
+				443A3DBE2C1D5CB500C426FD /* SearchResultViewController.swift */,
+				443A3DC22C1D70A700C426FD /* SearchResultCollectionViewCell.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -159,6 +170,7 @@
 			children = (
 				443A3DAB2C1BE41D00C426FD /* ProfileCircleWithCamera.swift */,
 				443A3DAD2C1BF07E00C426FD /* ProfileCircle.swift */,
+				443A3DC02C1D5E5100C426FD /* CapsuleButton.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -254,18 +266,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				443A3DAC2C1BE41D00C426FD /* ProfileCircleWithCamera.swift in Sources */,
+				443A3DC32C1D70A700C426FD /* SearchResultCollectionViewCell.swift in Sources */,
+				443A3DC12C1D5E5100C426FD /* CapsuleButton.swift in Sources */,
 				4411F1AE2C1B003200878AFE /* ProfileSettingViewController.swift in Sources */,
 				443A3DB02C1C044900C426FD /* ProfileImageCollectionViewCell.swift in Sources */,
 				443A3DB62C1C159E00C426FD /* UserDefaultsManager.swift in Sources */,
 				443A3DA92C1BE1B600C426FD /* ProfileImageSettingViewController.swift in Sources */,
 				443A3DAE2C1BF07E00C426FD /* ProfileCircle.swift in Sources */,
 				4411F1AA2C1B003200878AFE /* AppDelegate.swift in Sources */,
+				443A3DC52C1D847300C426FD /* Shopping.swift in Sources */,
 				443A3D9F2C1B3C7D00C426FD /* Constant.swift in Sources */,
 				443A3DB22C1C06AE00C426FD /* Reuseable.swift in Sources */,
 				443A3DA62C1BE07C00C426FD /* MainViewController.swift in Sources */,
 				443A3DB42C1C108600C426FD /* MainTabBarController.swift in Sources */,
 				443A3DBB2C1C36C300C426FD /* RecentSearchTableViewCell.swift in Sources */,
 				443A3DB82C1C1F1300C426FD /* Date+Extension.swift in Sources */,
+				443A3DBF2C1D5CB500C426FD /* SearchResultViewController.swift in Sources */,
 				443A3D962C1B1CEF00C426FD /* OnboardingViewController.swift in Sources */,
 				4411F1AC2C1B003200878AFE /* SceneDelegate.swift in Sources */,
 				443A3DBD2C1D587B00C426FD /* Protocols.swift in Sources */,

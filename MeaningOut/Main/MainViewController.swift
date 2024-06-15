@@ -71,6 +71,16 @@ final class MainViewController: UIViewController {
     
     //MARK: - Life Cycle
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.title = "\(UserDefaultsManager.shared.nickname ?? "")′s MEANING OUT"
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationItem.title = ""
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
@@ -101,7 +111,6 @@ final class MainViewController: UIViewController {
     }
     
     private func setupNavi() {
-        navigationItem.title = "\(UserDefaultsManager.shared.nickname ?? "")′s MEANING OUT"
         navigationItem.searchController = searchController
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = Constant.Color.primaryWhite
@@ -196,6 +205,13 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         cell.delegate = self
         cell.recentSearch = list[indexPath.row]
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = SearchResultViewController()
+        vc.searchKeyword = list[indexPath.row]
+        tableView.reloadRows(at: [IndexPath(row: indexPath.row, section: 0)], with: .automatic)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
