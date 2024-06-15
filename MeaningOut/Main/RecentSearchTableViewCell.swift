@@ -19,6 +19,8 @@ final class RecentSearchTableViewCell: UITableViewCell {
         }
     }
     
+    weak var delegate: RecentSearchTableViewCellDelegate?
+    
     //MARK: - UI Components
     
     private let clockIconButton: UIButton = {
@@ -91,6 +93,6 @@ final class RecentSearchTableViewCell: UITableViewCell {
     //MARK: - Functions
     
     @objc func removeButtonTapped() {
-        print(#function)
+        self.delegate?.removeButtonTapped(cell: self)
     }
 }

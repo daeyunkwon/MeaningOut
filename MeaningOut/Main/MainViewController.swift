@@ -193,6 +193,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: RecentSearchTableViewCell.identifier, for: indexPath) as! RecentSearchTableViewCell
+        cell.delegate = self
         cell.recentSearch = list[indexPath.row]
         return cell
     }
@@ -211,5 +212,22 @@ extension MainViewController: UISearchBarDelegate {
         }
         
         fetchRecentSearchData()
+    }
+}
+
+//MARK: - RecentSearchTableViewCellDelegate
+
+extension MainViewController: RecentSearchTableViewCellDelegate {
+    func removeButtonTapped(cell: RecentSearchTableViewCell) {
+        guard var array = UserDefaultsManager.shared.recentSearch else {return}
+        
+        for i in 0...array.count - 1 {
+            if array[i] == cell.recentSearch ?? "" {
+                array.remove(at: i)
+                UserDefaultsManager.shared.recentSearch = array
+                fetchRecentSearchData()
+                return
+            }
+        }
     }
 }

@@ -29,6 +29,7 @@
 		443A3DB62C1C159E00C426FD /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DB52C1C159E00C426FD /* UserDefaultsManager.swift */; };
 		443A3DB82C1C1F1300C426FD /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DB72C1C1F1300C426FD /* Date+Extension.swift */; };
 		443A3DBB2C1C36C300C426FD /* RecentSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DBA2C1C36C300C426FD /* RecentSearchTableViewCell.swift */; };
+		443A3DBD2C1D587B00C426FD /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DBC2C1D587B00C426FD /* Protocols.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		443A3DB52C1C159E00C426FD /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		443A3DB72C1C1F1300C426FD /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		443A3DBA2C1C36C300C426FD /* RecentSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchTableViewCell.swift; sourceTree = "<group>"; };
+		443A3DBC2C1D587B00C426FD /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 				443A3D9E2C1B3C7D00C426FD /* Constant.swift */,
 				443A3DB12C1C06AE00C426FD /* Reuseable.swift */,
 				443A3DB52C1C159E00C426FD /* UserDefaultsManager.swift */,
+				443A3DBC2C1D587B00C426FD /* Protocols.swift */,
 				443A3DAA2C1BE3D000C426FD /* CustomView */,
 				443A3DB92C1C20CC00C426FD /* Extension */,
 			);
@@ -265,6 +268,7 @@
 				443A3DB82C1C1F1300C426FD /* Date+Extension.swift in Sources */,
 				443A3D962C1B1CEF00C426FD /* OnboardingViewController.swift in Sources */,
 				4411F1AC2C1B003200878AFE /* SceneDelegate.swift in Sources */,
+				443A3DBD2C1D587B00C426FD /* Protocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
