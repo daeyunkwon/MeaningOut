@@ -188,6 +188,19 @@ final class MainViewController: UIViewController {
         UserDefaultsManager.shared.removeRecentSearchData()
         fetchRecentSearchData()
     }
+    
+    private func findAndRemoveRecentSearchKeyword(target keyword: String) {
+        guard var array = UserDefaultsManager.shared.recentSearch else {return}
+        
+        for i in 0...array.count - 1 {
+            if array[i].trimmingCharacters(in: .whitespaces) == keyword.trimmingCharacters(in: .whitespaces) {
+                array.remove(at: i)
+                UserDefaultsManager.shared.recentSearch = array
+                fetchRecentSearchData()
+                return
+            }
+        }
+    }
 }
 
 //MARK: - UITableViewDataSource, UITableViewDelegate
@@ -223,6 +236,7 @@ extension MainViewController: UISearchBarDelegate {
         guard let text = searchBar.text, !text.trimmingCharacters(in: .whitespaces).isEmpty else {return}
         
         if UserDefaultsManager.shared.recentSearch != nil {
+            self.findAndRemoveRecentSearchKeyword(target: text)
             UserDefaultsManager.shared.recentSearch?.append(text)
         } else {
             UserDefaultsManager.shared.recentSearch = [text]
@@ -242,15 +256,6 @@ extension MainViewController: UISearchBarDelegate {
 
 extension MainViewController: RecentSearchTableViewCellDelegate {
     func removeButtonTapped(cell: RecentSearchTableViewCell) {
-        guard var array = UserDefaultsManager.shared.recentSearch else {return}
-        
-        for i in 0...array.count - 1 {
-            if array[i] == cell.recentSearch ?? "" {
-                array.remove(at: i)
-                UserDefaultsManager.shared.recentSearch = array
-                fetchRecentSearchData()
-                return
-            }
-        }
+        self.findAndRemoveRecentSearchKeyword(target: cell.recentSearch ?? "")
     }
 }
