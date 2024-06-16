@@ -14,14 +14,17 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Properties
     
+    var searchKeyword: String?
+    
     var shoppingItem: ShoppingItem? {
         didSet {
             guard let data = shoppingItem else {return}
             
             productImage.kf.setImage(with: URL(string: data.imageURL))
             mallName.text = data.mallName
-            productTitle.text = data.titleString
             price.text = data.priceString + "원"
+            highlightSearchKeyword(keyword: self.searchKeyword, title: data.titleString)
+            
             checkLikeButton()
         }
     }
@@ -157,5 +160,16 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
             backView.alpha = 0.5
             likeButton.setImage(UIImage(named: "like_unselected")?.withRenderingMode(.alwaysOriginal), for: .normal)
         }
+    }
+    
+    private func highlightSearchKeyword(keyword: String?, title: String?) {
+        guard let keyword = keyword else {return}
+        guard let title = title else {return}
+        
+        let attributed = NSMutableAttributedString(string: title, attributes: [.font: Constant.Font.system14, .foregroundColor: Constant.Color.primaryBlack])
+        var range = NSString(string: title).range(of: keyword)
+        attributed.addAttributes([.foregroundColor: Constant.Color.primaryOrange, .font: Constant.Font.system14], range: range)
+        
+        self.productTitle.attributedText = attributed
     }
 }

@@ -148,9 +148,9 @@
 				443A3DB12C1C06AE00C426FD /* Reuseable.swift */,
 				443A3DB52C1C159E00C426FD /* UserDefaultsManager.swift */,
 				443A3DBC2C1D587B00C426FD /* Protocols.swift */,
+				443A3DC62C1D8AAF00C426FD /* APIKey.swift */,
 				443A3DAA2C1BE3D000C426FD /* CustomView */,
 				443A3DB92C1C20CC00C426FD /* Extension */,
-				443A3DC62C1D8AAF00C426FD /* APIKey.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
