@@ -39,6 +39,7 @@
 		443A3DCC2C1DF05B00C426FD /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DCB2C1DF05B00C426FD /* SettingViewController.swift */; };
 		443A3DCE2C1DF46400C426FD /* SettingOptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DCD2C1DF46400C426FD /* SettingOptionTableViewCell.swift */; };
 		443A3DD02C1DFF7C00C426FD /* SettingProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DCF2C1DFF7C00C426FD /* SettingProfileTableViewCell.swift */; };
+		443A3DD32C1ECA4800C426FD /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 443A3DD22C1ECA4800C426FD /* SkeletonView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				443A3DD32C1ECA4800C426FD /* SkeletonView in Frameworks */,
 				4411F1CA2C1B02AC00878AFE /* SnapKit in Frameworks */,
 				4411F1C72C1B029B00878AFE /* Kingfisher in Frameworks */,
 				4411F1C42C1B028A00878AFE /* Alamofire in Frameworks */,
@@ -226,6 +228,7 @@
 				4411F1C32C1B028A00878AFE /* Alamofire */,
 				4411F1C62C1B029B00878AFE /* Kingfisher */,
 				4411F1C92C1B02AC00878AFE /* SnapKit */,
+				443A3DD22C1ECA4800C426FD /* SkeletonView */,
 			);
 			productName = MeaningOut;
 			productReference = 4411F1A62C1B003200878AFE /* MeaningOut.app */;
@@ -259,6 +262,7 @@
 				4411F1C22C1B028A00878AFE /* XCRemoteSwiftPackageReference "Alamofire" */,
 				4411F1C52C1B029B00878AFE /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				4411F1C82C1B02AC00878AFE /* XCRemoteSwiftPackageReference "SnapKit" */,
+				443A3DD12C1ECA4800C426FD /* XCRemoteSwiftPackageReference "SkeletonView" */,
 			);
 			productRefGroup = 4411F1A72C1B003200878AFE /* Products */;
 			projectDirPath = "";
@@ -563,6 +567,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		443A3DD12C1ECA4800C426FD /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Juanpe/SkeletonView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.31.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -580,6 +592,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4411F1C82C1B02AC00878AFE /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		443A3DD22C1ECA4800C426FD /* SkeletonView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 443A3DD12C1ECA4800C426FD /* XCRemoteSwiftPackageReference "SkeletonView" */;
+			productName = SkeletonView;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

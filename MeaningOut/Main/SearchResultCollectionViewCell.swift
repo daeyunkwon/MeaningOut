@@ -8,6 +8,7 @@
 import UIKit
 
 import Kingfisher
+import SkeletonView
 import SnapKit
 
 final class SearchResultCollectionViewCell: UICollectionViewCell {
@@ -19,8 +20,17 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
     var shoppingItem: ShoppingItem? {
         didSet {
             guard let data = shoppingItem else {return}
+            productImage.showAnimatedGradientSkeleton()
+            productImage.kf.setImage(with: URL(string: data.imageURL), completionHandler: { result in
+                switch result {
+                case .success(_):
+                    self.productImage.hideSkeleton()
+                case .failure(let error):
+                    //print(error)
+                    break
+                }
+            })
             
-            productImage.kf.setImage(with: URL(string: data.imageURL))
             mallName.text = data.mallName
             price.text = data.priceString + "원"
             highlightSearchKeyword(keyword: self.searchKeyword, title: data.titleString)
@@ -39,6 +49,7 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
         iv.layer.cornerRadius = 10
         iv.backgroundColor = Constant.Color.primaryLightGray
         iv.clipsToBounds = true
+        iv.isSkeletonable = true
         return iv
     }()
     
