@@ -122,6 +122,7 @@ final class MainViewController: UIViewController {
     private func setupSearchController() {
         searchController.searchBar.placeholder = "브랜드, 상품 등을 입력하세요."
         searchController.searchBar.delegate = self
+        searchController.searchBar.setValue("취소", forKey: "cancelButtonText")
     }
     
     private func configureLayout() {
