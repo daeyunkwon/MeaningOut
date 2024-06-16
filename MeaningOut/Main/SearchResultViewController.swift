@@ -249,7 +249,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
 
 extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        if indexPaths[0].row == self.list.count - 4 || indexPaths[1].row == self.list.count - 4 {
+        if indexPaths[0].row >= self.list.count - 4 || indexPaths[1].row >= self.list.count - 4 {
             if indexPaths[1].row < self.totalCount {
                 self.page += 1
                 self.callRequest(query: self.searchKeyword ?? "", sort: self.sortType.rawValue)
