@@ -40,6 +40,7 @@
 		443A3DCE2C1DF46400C426FD /* SettingOptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DCD2C1DF46400C426FD /* SettingOptionTableViewCell.swift */; };
 		443A3DD02C1DFF7C00C426FD /* SettingProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DCF2C1DFF7C00C426FD /* SettingProfileTableViewCell.swift */; };
 		443A3DD32C1ECA4800C426FD /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 443A3DD22C1ECA4800C426FD /* SkeletonView */; };
+		443A3DD52C1EE45F00C426FD /* NetworkCheckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3DD42C1EE45F00C426FD /* NetworkCheckManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		443A3DCB2C1DF05B00C426FD /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		443A3DCD2C1DF46400C426FD /* SettingOptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingOptionTableViewCell.swift; sourceTree = "<group>"; };
 		443A3DCF2C1DFF7C00C426FD /* SettingProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfileTableViewCell.swift; sourceTree = "<group>"; };
+		443A3DD42C1EE45F00C426FD /* NetworkCheckManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCheckManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,7 @@
 				443A3DB52C1C159E00C426FD /* UserDefaultsManager.swift */,
 				443A3DBC2C1D587B00C426FD /* Protocols.swift */,
 				443A3DC62C1D8AAF00C426FD /* APIKey.swift */,
+				443A3DD42C1EE45F00C426FD /* NetworkCheckManager.swift */,
 				443A3DAA2C1BE3D000C426FD /* CustomView */,
 				443A3DB92C1C20CC00C426FD /* Extension */,
 			);
@@ -308,6 +311,7 @@
 				443A3DC52C1D847300C426FD /* Shopping.swift in Sources */,
 				443A3D9F2C1B3C7D00C426FD /* Constant.swift in Sources */,
 				443A3DB22C1C06AE00C426FD /* Reuseable.swift in Sources */,
+				443A3DD52C1EE45F00C426FD /* NetworkCheckManager.swift in Sources */,
 				443A3DA62C1BE07C00C426FD /* MainViewController.swift in Sources */,
 				443A3DB42C1C108600C426FD /* MainTabBarController.swift in Sources */,
 				443A3DBB2C1C36C300C426FD /* RecentSearchTableViewCell.swift in Sources */,

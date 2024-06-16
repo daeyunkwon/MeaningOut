@@ -66,6 +66,13 @@ final class SearchResultViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if !NetworkCheckManager.shared.isConnected { //네트워크 미연결 상태일 경우
+            let alert = UIAlertController(title: "시스템 알림", message: "네트워크에 연결할 수 없습니다.\n네트워크 상태를 확인 후 다시 시도해 주세요.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: { okAction in
+                self.navigationController?.popViewController(animated: true)
+            }))
+            present(alert, animated: true)
+        }
         setupCollectionView()
         configureLayout()
         configureUI()
