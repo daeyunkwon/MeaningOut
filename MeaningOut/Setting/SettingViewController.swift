@@ -110,6 +110,8 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
         
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: SettingProfileTableViewCell.identifier, for: indexPath) as! SettingProfileTableViewCell
+            cell.profileImageView.image = UIImage(named: UserDefaultsManager.shared.profile ?? "")
+            cell.usernameLabel.text = UserDefaultsManager.shared.nickname
             cell.selectionStyle = .default
             return cell
         } else {

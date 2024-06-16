@@ -13,7 +13,7 @@ final class SettingProfileTableViewCell: UITableViewCell {
     
     //MARK: - UI Components
     
-    private let profileImageView: UIImageView = {
+    let profileImageView: UIImageView = {
         let iv = ProfileCircle(radius: 35, imageName: UserDefaultsManager.shared.profile ?? "")
         iv.layer.borderColor = Constant.Color.primaryOrange.cgColor
         iv.layer.borderWidth = 3
@@ -21,7 +21,7 @@ final class SettingProfileTableViewCell: UITableViewCell {
         return iv
     }()
     
-    private let usernameLabel: UILabel = {
+    let usernameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20, weight: .heavy)
         label.textColor = Constant.Color.primaryBlack
