@@ -194,7 +194,12 @@ final class ProfileSettingViewController: UIViewController {
     
     @objc func completeButtonTapped() {
         self.createUserData()
-        self.changeWindowRootViewController()
+        switch viewType {
+        case .profileSetting:
+            self.changeWindowRootViewController()
+        case .editProfile:
+            navigationController?.popViewController(animated: true)
+        }
     }
     
     private func createUserData() {
