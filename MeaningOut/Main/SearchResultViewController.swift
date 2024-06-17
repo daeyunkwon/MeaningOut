@@ -260,10 +260,14 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
 
 extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        if indexPaths[0].row >= self.list.count - 4 || indexPaths[1].row >= self.list.count - 4 {
-            if indexPaths[1].row < self.totalCount {
-                self.page += 1
-                self.callRequest(query: self.searchKeyword ?? "", sort: self.sortType.rawValue)
+        //print("실행전: \(indexPaths), 지금까지의 셀 개수: \(list.count), 토탈: \(totalCount) ")
+        
+        for item in indexPaths {
+            if item.row >= self.list.count - 1 {
+                if item.row < self.totalCount && list.count < totalCount {
+                    self.page += 1
+                    self.callRequest(query: self.searchKeyword ?? "", sort: self.sortType.rawValue)
+                }
             }
         }
     }
