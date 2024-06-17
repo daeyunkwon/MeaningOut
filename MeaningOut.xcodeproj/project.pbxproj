@@ -120,10 +120,7 @@
 				443A3DA72C1BE08000C426FD /* Main */,
 				443A3DCA2C1DF04700C426FD /* Setting */,
 				443A3DB32C1C108600C426FD /* MainTabBarController.swift */,
-				4411F1B22C1B003300878AFE /* Assets.xcassets */,
-				4411F1B42C1B003300878AFE /* LaunchScreen.storyboard */,
-				4411F1B72C1B003300878AFE /* Info.plist */,
-				443A3D9A2C1B219400C426FD /* AlfaSlabOne-Regular.ttf */,
+				443A3E012C200D6A00C426FD /* Resource */,
 			);
 			path = MeaningOut;
 			sourceTree = "<group>";
@@ -209,6 +206,25 @@
 				443A3DCD2C1DF46400C426FD /* SettingOptionTableViewCell.swift */,
 			);
 			path = Setting;
+			sourceTree = "<group>";
+		};
+		443A3E012C200D6A00C426FD /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				4411F1B22C1B003300878AFE /* Assets.xcassets */,
+				4411F1B42C1B003300878AFE /* LaunchScreen.storyboard */,
+				4411F1B72C1B003300878AFE /* Info.plist */,
+				443A3E022C200DD500C426FD /* Font */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		443A3E022C200DD500C426FD /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				443A3D9A2C1B219400C426FD /* AlfaSlabOne-Regular.ttf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -466,7 +482,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9M37U587ZT;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MeaningOut/Info.plist;
+				INFOPLIST_FILE = MeaningOut/Resource/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "권대윤";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -499,7 +515,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9M37U587ZT;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MeaningOut/Info.plist;
+				INFOPLIST_FILE = MeaningOut/Resource/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "권대윤";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
