@@ -234,12 +234,30 @@ final class ProfileSettingViewController: UIViewController {
     private func updateStatusCompleteButton() {
         guard let text = nicknameTextField.text else {return}
         
-        if text.count >= 2 && text.count < 10 && !text.contains("@") && !text.contains("#") && !text.contains("$") && !text.contains("%") && !text.contains("1") && !text.contains("2") && !text.contains("3") && !text.contains("4") && !text.contains("5") && !text.contains("6") && !text.contains("7") && !text.contains("8") && !text.contains("9") && !text.contains("0") {
-            completeButton.isEnabled = true
-            completeButton.backgroundColor = Constant.Color.primaryOrange
+        if checkNicknameCondition(target: text) {
+            switch viewType {
+            case .profileSetting:
+                completeButton.isEnabled = true
+                completeButton.backgroundColor = Constant.Color.primaryOrange
+            case .editProfile:
+                navigationItem.rightBarButtonItem?.isEnabled = true
+            }
         } else {
-            completeButton.isEnabled = false
-            completeButton.backgroundColor = Constant.Color.primaryGray
+            switch viewType {
+            case .profileSetting:
+                completeButton.isEnabled = false
+                completeButton.backgroundColor = Constant.Color.primaryGray
+            case .editProfile:
+                navigationItem.rightBarButtonItem?.isEnabled = false
+            }
+        }
+    }
+    
+    private func checkNicknameCondition(target text: String) -> Bool {
+        if text.count >= 2 && text.count < 10 && !text.contains("@") && !text.contains("#") && !text.contains("$") && !text.contains("%") && !text.contains("1") && !text.contains("2") && !text.contains("3") && !text.contains("4") && !text.contains("5") && !text.contains("6") && !text.contains("7") && !text.contains("8") && !text.contains("9") && !text.contains("0") {
+            return true
+        } else {
+            return false
         }
     }
     
