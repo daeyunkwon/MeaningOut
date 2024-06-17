@@ -190,7 +190,7 @@ final class MainViewController: UIViewController {
     }
     
     private func findAndRemoveRecentSearchKeyword(target keyword: String) {
-        guard var array = UserDefaultsManager.shared.recentSearch else {return}
+        guard var array = UserDefaultsManager.shared.recentSearch, !array.isEmpty else {return}
         
         for i in 0...array.count - 1 {
             if array[i].trimmingCharacters(in: .whitespaces) == keyword.trimmingCharacters(in: .whitespaces) {
