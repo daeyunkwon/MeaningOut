@@ -22,7 +22,7 @@ struct ShoppingItem: Codable {
     let productId: String?
     
     var linkURL: String {
-        guard let link = self.link else {return ""}
+        guard let link = self.link, !link.isEmpty else {return ""}
         return link.replacingOccurrences(of: #"\"#, with: "")
     }
     
