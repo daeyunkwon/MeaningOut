@@ -27,7 +27,7 @@ final class ProductDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if !NetworkCheckManager.shared.isConnected {
-            self.showNetworkConnectFailAlert()
+            self.showNetworkConnectFailAlert(type: .networkConnectFail)
         }
         
         setupNavi()
@@ -52,7 +52,10 @@ final class ProductDetailViewController: UIViewController {
     private func configureUI() {
         view.backgroundColor = Constant.Color.primaryWhite
         guard let productURL = self.shoppingItem?.linkURL else {return}
-        guard let url = URL(string: productURL) else {return}
+        guard let url = URL(string: productURL) else {
+            self.showNetworkConnectFailAlert(type: .urlInvalid)
+            return
+        }
         
         webView.load(URLRequest(url: url))
         self.checkLikeButton()

@@ -67,7 +67,7 @@ final class SearchResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if !NetworkCheckManager.shared.isConnected { //네트워크 미연결 상태일 경우
-            self.showNetworkConnectFailAlert()
+            self.showNetworkConnectFailAlert(type: .networkConnectFail)
         }
         setupCollectionView()
         configureLayout()
