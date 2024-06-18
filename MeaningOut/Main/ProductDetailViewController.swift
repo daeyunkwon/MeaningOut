@@ -24,15 +24,20 @@ final class ProductDetailViewController: UIViewController {
     
     //MARK: - Life Cycle
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewIsAppearing(_ animated: Bool) {
+        super.viewIsAppearing(animated)
         if !NetworkCheckManager.shared.isConnected {
             self.showNetworkConnectFailAlert(type: .networkConnectFail)
         }
         
+        configureUI()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         setupNavi()
         configureLayout()
-        configureUI()
+        view.backgroundColor = Constant.Color.primaryWhite
     }
     
     private func setupNavi() {
@@ -50,7 +55,6 @@ final class ProductDetailViewController: UIViewController {
     }
     
     private func configureUI() {
-        view.backgroundColor = Constant.Color.primaryWhite
         guard let productURL = self.shoppingItem?.linkURL else {return}
         guard let url = URL(string: productURL) else {
             self.showNetworkConnectFailAlert(type: .urlInvalid)
