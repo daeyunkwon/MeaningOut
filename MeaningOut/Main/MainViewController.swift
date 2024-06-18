@@ -170,12 +170,20 @@ final class MainViewController: UIViewController {
     private func updateDisplayWithRecentSearch() {
         switch viewDisplayType {
         case .empty:
+            displayEmptyView(isShow: true)
+        case .nonEmpty:
+            displayEmptyView(isShow: false)
+        }
+    }
+    
+    private func displayEmptyView(isShow: Bool) {
+        if isShow {
             emptyRecentSearchImageView.isHidden = false
             emptyRecentSearchLabel.isHidden = false
             titleLabel.isHidden = true
             resetButton.isHidden = true
             tableView.isHidden = true
-        case .nonEmpty:
+        } else {
             emptyRecentSearchImageView.isHidden = true
             emptyRecentSearchLabel.isHidden = true
             titleLabel.isHidden = false
