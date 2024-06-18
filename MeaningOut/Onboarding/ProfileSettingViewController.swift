@@ -169,10 +169,6 @@ final class ProfileSettingViewController: UIViewController {
     
     //MARK: - Functions
     
-    @objc func rightBarButtonTapped() {
-        print(#function)
-    }
-    
     @objc func profileImageViewTapped() {
         let vc = ProfileImageSettingViewController()
         

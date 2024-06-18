@@ -25,7 +25,6 @@ final class SettingViewController: UIViewController {
     
     private let tableView = UITableView()
     
-    
     //MARK: - Life Cycle
     
     override func viewWillAppear(_ animated: Bool) {
