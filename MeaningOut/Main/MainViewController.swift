@@ -68,7 +68,6 @@ final class MainViewController: UIViewController {
         return btn
     }()
     
-    
     //MARK: - Life Cycle
     
     override func viewWillAppear(_ animated: Bool) {

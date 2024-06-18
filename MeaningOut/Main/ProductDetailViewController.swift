@@ -26,6 +26,10 @@ final class ProductDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if !NetworkCheckManager.shared.isConnected {
+            self.showNetworkConnectFailAlert()
+        }
+        
         setupNavi()
         configureLayout()
         configureUI()
