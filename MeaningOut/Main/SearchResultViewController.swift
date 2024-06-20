@@ -7,7 +7,6 @@
 
 import UIKit
 
-import Alamofire
 import SnapKit
 
 final class SearchResultViewController: UIViewController {
@@ -72,7 +71,16 @@ final class SearchResultViewController: UIViewController {
         setupCollectionView()
         configureLayout()
         configureUI()
-        callRequest(query: searchKeyword ?? "", sort: self.sortType.rawValue)
+        NetworkManager.shared.fetchShopping(query: searchKeyword ?? "", sort: self.sortType.rawValue, start: self.start) { data in
+            self.totalCount = data.total ?? 0
+            self.resultCountLabel.text = "\(self.totalCount.formatted())개의 검색 결과"
+            if self.page == 1 {
+                self.list = data.items
+            } else {
+                self.list.append(contentsOf: data.items)
+            }
+            self.collectionView.reloadData()
+        }
     }
     
     private func setupCollectionView() {
@@ -153,36 +161,6 @@ final class SearchResultViewController: UIViewController {
     
     //MARK: - Functions
     
-    private func callRequest(query: String, sort: String) {
-        let param: Parameters = [
-            "query": query,
-            "display": 30,
-            "sort": sort,
-            "start": self.start
-        ]
-        
-        let header: HTTPHeaders = [
-            "X-Naver-Client-Id": APIKey.clientId,
-            "X-Naver-Client-Secret": APIKey.clientSecret
-        ]
-        
-        AF.request(APIURL.naverShoppingURL, parameters: param, encoding: URLEncoding.queryString, headers: header).responseDecodable(of: Shopping.self) { response in
-            switch response.result {
-            case .success(let data):
-                self.totalCount = data.total ?? 0
-                self.resultCountLabel.text = "\(self.totalCount.formatted())개의 검색 결과"
-                if self.page == 1 {
-                    self.list = data.items
-                } else {
-                    self.list.append(contentsOf: data.items)
-                }
-                self.collectionView.reloadData()
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
     private func checkStatusCapsuleOptionButton() {
         switch sortType {
         case .sim:
@@ -221,7 +199,17 @@ final class SearchResultViewController: UIViewController {
         self.checkStatusCapsuleOptionButton()
         
         self.page = 1
-        callRequest(query: self.searchKeyword ?? "", sort: self.sortType.rawValue)
+        
+        NetworkManager.shared.fetchShopping(query: searchKeyword ?? "", sort: self.sortType.rawValue, start: self.start) { data in
+            self.totalCount = data.total ?? 0
+            self.resultCountLabel.text = "\(self.totalCount.formatted())개의 검색 결과"
+            if self.page == 1 {
+                self.list = data.items
+            } else {
+                self.list.append(contentsOf: data.items)
+            }
+            self.collectionView.reloadData()
+        }
         collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .bottom, animated: true)
     }
 }
@@ -258,7 +246,16 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
             if item.row >= self.list.count - 1 {
                 if item.row < self.totalCount && list.count < totalCount {
                     self.page += 1
-                    self.callRequest(query: self.searchKeyword ?? "", sort: self.sortType.rawValue)
+                    NetworkManager.shared.fetchShopping(query: searchKeyword ?? "", sort: self.sortType.rawValue, start: self.start) { data in
+                        self.totalCount = data.total ?? 0
+                        self.resultCountLabel.text = "\(self.totalCount.formatted())개의 검색 결과"
+                        if self.page == 1 {
+                            self.list = data.items
+                        } else {
+                            self.list.append(contentsOf: data.items)
+                        }
+                        self.collectionView.reloadData()
+                    }
                 }
             }
         }
