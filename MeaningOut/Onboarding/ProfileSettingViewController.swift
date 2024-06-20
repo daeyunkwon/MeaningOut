@@ -233,6 +233,27 @@ final class ProfileSettingViewController: UIViewController {
         sceneDelegate?.window?.makeKeyAndVisible()
     }
     
+    private func changeDisplayCompleteButton(conditionsSatisfied: Bool) {
+        
+        if conditionsSatisfied {
+            switch self.viewType {
+            case .profileSetting:
+                completeButton.isEnabled = true
+                completeButton.backgroundColor = Constant.Color.primaryOrange
+            case .editProfile:
+                navigationItem.rightBarButtonItem?.isEnabled = true
+            }
+        } else {
+            switch self.viewType {
+            case .profileSetting:
+                completeButton.isEnabled = false
+                completeButton.backgroundColor = Constant.Color.primaryGray
+            case .editProfile:
+                navigationItem.rightBarButtonItem?.isEnabled = false
+            }
+        }
+    }
+    
     private func updateStatusCompleteButton() {
         guard let text = nicknameTextField.text else {return}
         
@@ -240,44 +261,20 @@ final class ProfileSettingViewController: UIViewController {
             let result = try checkNicknameCondition(target: text)
             if result {
                 self.nicknameConditionLabel.text = "사용 가능한 닉네임입니다 :D"
-                switch viewType {
-                case .profileSetting:
-                    completeButton.isEnabled = true
-                    completeButton.backgroundColor = Constant.Color.primaryOrange
-                case .editProfile:
-                    navigationItem.rightBarButtonItem?.isEnabled = true
-                }
+                changeDisplayCompleteButton(conditionsSatisfied: true)
             }
         } catch {
             switch error {
             case NicknameConditionError.dissatisfactionCount:
                 self.nicknameConditionLabel.text = "2글자 이상 10글자 미만으로 설정해주세요."
-                switch viewType {
-                case .profileSetting:
-                    completeButton.isEnabled = false
-                    completeButton.backgroundColor = Constant.Color.primaryGray
-                case .editProfile:
-                    navigationItem.rightBarButtonItem?.isEnabled = false
-                }
+                changeDisplayCompleteButton(conditionsSatisfied: false)
                 
             case NicknameConditionError.dissatisfactionNumber:
                 self.nicknameConditionLabel.text = "닉네임에 숫자는 포함할 수 없어요."
-                switch viewType {
-                case .profileSetting:
-                    completeButton.isEnabled = false
-                    completeButton.backgroundColor = Constant.Color.primaryGray
-                case .editProfile:
-                    navigationItem.rightBarButtonItem?.isEnabled = false
-                }
+                changeDisplayCompleteButton(conditionsSatisfied: false)
             case NicknameConditionError.dissatisfactionSpecialSymbol:
                 self.nicknameConditionLabel.text = "닉네임에 @, #, $, % 는 포함할 수 없어요."
-                switch viewType {
-                case .profileSetting:
-                    completeButton.isEnabled = false
-                    completeButton.backgroundColor = Constant.Color.primaryGray
-                case .editProfile:
-                    navigationItem.rightBarButtonItem?.isEnabled = false
-                }
+                changeDisplayCompleteButton(conditionsSatisfied: false)
             default:
                 print(error)
             }
