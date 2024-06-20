@@ -9,6 +9,12 @@ import UIKit
 
 import SnapKit
 
+enum NicknameConditionError: Error {
+    case dissatisfactionCount
+    case dissatisfactionNumber
+    case dissatisfactionSpecialSymbol
+}
+
 final class ProfileSettingViewController: UIViewController {
     
     //MARK: - Properties
@@ -230,57 +236,69 @@ final class ProfileSettingViewController: UIViewController {
     private func updateStatusCompleteButton() {
         guard let text = nicknameTextField.text else {return}
         
-        if checkNicknameCondition(target: text) {
-            switch viewType {
-            case .profileSetting:
-                completeButton.isEnabled = true
-                completeButton.backgroundColor = Constant.Color.primaryOrange
-            case .editProfile:
-                navigationItem.rightBarButtonItem?.isEnabled = true
-            }
-        } else {
-            switch viewType {
-            case .profileSetting:
-                completeButton.isEnabled = false
-                completeButton.backgroundColor = Constant.Color.primaryGray
-            case .editProfile:
-                navigationItem.rightBarButtonItem?.isEnabled = false
-            }
-        }
-    }
-    
-    private func checkNicknameCondition(target text: String) -> Bool {
-        if text.count >= 2 && text.count < 10 && !text.contains("@") && !text.contains("#") && !text.contains("$") && !text.contains("%") && !text.contains("1") && !text.contains("2") && !text.contains("3") && !text.contains("4") && !text.contains("5") && !text.contains("6") && !text.contains("7") && !text.contains("8") && !text.contains("9") && !text.contains("0") {
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    private func updateStatusNicknameConditionLabel() {
-        guard let text = nicknameTextField.text else {return}
-        
-        if text.trimmingCharacters(in: .whitespaces).isEmpty {
-            self.nicknameConditionLabel.text = nil
-            return
-        }
-        
-        if text.contains("@") || text.contains("#") || text.contains("$") || text.contains("%") {
-            self.nicknameConditionLabel.text = "닉네임에 @, #, $, % 는 포함할 수 없어요."
-            return
-        }
-        
-        if text.count < 2 || text.count >= 10 {
-            self.nicknameConditionLabel.text = "2글자 이상 10글자 미만으로 설정해주세요."
-            return
-        } else {
-            if text.contains("1") || text.contains("2") || text.contains("3") || text.contains("4") || text.contains("5") || text.contains("6") || text.contains("7") || text.contains("8") || text.contains("9") || text.contains("0") {
-                self.nicknameConditionLabel.text = "닉네임에 숫자는 포함할 수 없어요."
-                return
-            } else {
+        do {
+            let result = try checkNicknameCondition(target: text)
+            if result {
                 self.nicknameConditionLabel.text = "사용 가능한 닉네임입니다 :D"
+                switch viewType {
+                case .profileSetting:
+                    completeButton.isEnabled = true
+                    completeButton.backgroundColor = Constant.Color.primaryOrange
+                case .editProfile:
+                    navigationItem.rightBarButtonItem?.isEnabled = true
+                }
+            }
+        } catch {
+            switch error {
+            case NicknameConditionError.dissatisfactionCount:
+                self.nicknameConditionLabel.text = "2글자 이상 10글자 미만으로 설정해주세요."
+                switch viewType {
+                case .profileSetting:
+                    completeButton.isEnabled = false
+                    completeButton.backgroundColor = Constant.Color.primaryGray
+                case .editProfile:
+                    navigationItem.rightBarButtonItem?.isEnabled = false
+                }
+                
+            case NicknameConditionError.dissatisfactionNumber:
+                self.nicknameConditionLabel.text = "닉네임에 숫자는 포함할 수 없어요."
+                switch viewType {
+                case .profileSetting:
+                    completeButton.isEnabled = false
+                    completeButton.backgroundColor = Constant.Color.primaryGray
+                case .editProfile:
+                    navigationItem.rightBarButtonItem?.isEnabled = false
+                }
+            case NicknameConditionError.dissatisfactionSpecialSymbol:
+                self.nicknameConditionLabel.text = "닉네임에 @, #, $, % 는 포함할 수 없어요."
+                switch viewType {
+                case .profileSetting:
+                    completeButton.isEnabled = false
+                    completeButton.backgroundColor = Constant.Color.primaryGray
+                case .editProfile:
+                    navigationItem.rightBarButtonItem?.isEnabled = false
+                }
+            default:
+                print(error)
             }
         }
+    }
+    
+    private func checkNicknameCondition(target text: String) throws -> Bool {
+        
+        guard text.count >= 2 && text.count < 10 else {
+            throw NicknameConditionError.dissatisfactionCount
+        }
+        
+        guard !text.contains("@") && !text.contains("#") && !text.contains("$") && !text.contains("%") else {
+            throw NicknameConditionError.dissatisfactionSpecialSymbol
+        }
+        
+        guard !text.contains("1") && !text.contains("2") && !text.contains("3") && !text.contains("4") && !text.contains("5") && !text.contains("6") && !text.contains("7") && !text.contains("8") && !text.contains("9") && !text.contains("0") else {
+            throw NicknameConditionError.dissatisfactionNumber
+        }
+        
+        return true
     }
 }
 
@@ -288,7 +306,6 @@ final class ProfileSettingViewController: UIViewController {
 
 extension ProfileSettingViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        self.updateStatusNicknameConditionLabel()
         self.updateStatusCompleteButton()
     }
     
