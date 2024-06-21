@@ -78,7 +78,6 @@ final class ProfileSettingViewController: UIViewController {
         btn.setTitle("완료", for: .normal)
         btn.backgroundColor = Constant.Color.primaryGray
         btn.isEnabled = false
-        btn.layer.cornerRadius = 24
         btn.tintColor = Constant.Color.primaryWhite
         btn.titleLabel?.font = .boldSystemFont(ofSize: 17)
         btn.addTarget(self, action: #selector(completeButtonTapped), for: .touchUpInside)
@@ -165,6 +164,9 @@ final class ProfileSettingViewController: UIViewController {
     
     private func configureUI() {
         view.backgroundColor = Constant.Color.primaryWhite
+        DispatchQueue.main.async {
+            self.completeButton.layer.cornerRadius = self.completeButton.frame.height / 2
+        }
         
         switch viewType {
         case .profileSetting:
