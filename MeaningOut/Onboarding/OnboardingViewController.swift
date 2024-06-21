@@ -18,7 +18,7 @@ final class OnboardingViewController: UIViewController {
         label.text = "MeaningOut"
         label.textAlignment = .center
         label.font = UIFont(name: "AlfaSlabOne-Regular", size: 40)
-        label.textColor = Constant.Color.primaryOrange
+        label.textColor = Constant.Color.signatureColor
         return label
     }()
     
@@ -32,7 +32,7 @@ final class OnboardingViewController: UIViewController {
     private lazy var startButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.setTitle("시작하기", for: .normal)
-        btn.backgroundColor = Constant.Color.primaryOrange
+        btn.backgroundColor = Constant.Color.signatureColor
         btn.layer.cornerRadius = 24
         btn.tintColor = Constant.Color.primaryWhite
         btn.titleLabel?.font = .boldSystemFont(ofSize: 17)

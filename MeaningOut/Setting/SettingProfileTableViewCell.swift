@@ -15,7 +15,7 @@ final class SettingProfileTableViewCell: UITableViewCell {
     
     let profileImageView: UIImageView = {
         let iv = ProfileCircle(radius: 35, imageName: UserDefaultsManager.shared.profile ?? "")
-        iv.layer.borderColor = Constant.Color.primaryOrange.cgColor
+        iv.layer.borderColor = Constant.Color.signatureColor.cgColor
         iv.layer.borderWidth = 3
         iv.alpha = 1
         return iv

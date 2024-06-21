@@ -39,7 +39,7 @@ final class SearchResultViewController: UIViewController {
     private let resultCountLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 15, weight: .heavy)
-        label.textColor = Constant.Color.primaryOrange
+        label.textColor = Constant.Color.signatureColor
         return label
     }()
     

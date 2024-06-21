@@ -69,7 +69,7 @@ final class ProfileSettingViewController: UIViewController {
     private let nicknameConditionLabel: UILabel = {
         let label = UILabel()
         label.font = Constant.Font.system13
-        label.textColor = Constant.Color.primaryOrange
+        label.textColor = Constant.Color.signatureColor
         return label
     }()
     
@@ -173,7 +173,7 @@ final class ProfileSettingViewController: UIViewController {
             self.profileImage = UIImage(named: Constant.ProfileImage.allCases.randomElement()?.rawValue ?? "profile_0")
             completeButton.isHidden = false
             separatorView.backgroundColor = Constant.Color.primaryLightGray
-            nicknameConditionLabel.textColor = Constant.Color.primaryOrange
+            nicknameConditionLabel.textColor = Constant.Color.signatureColor
             profileCircleWithCameraIconView.profileImageView.image = self.profileImage
             
         case .editProfile:
@@ -252,7 +252,7 @@ final class ProfileSettingViewController: UIViewController {
             switch self.viewType {
             case .profileSetting:
                 completeButton.isEnabled = true
-                completeButton.backgroundColor = Constant.Color.primaryOrange
+                completeButton.backgroundColor = Constant.Color.signatureColor
             case .editProfile:
                 navigationItem.rightBarButtonItem?.isEnabled = true
             }

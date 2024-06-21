@@ -63,7 +63,7 @@ final class MainViewController: UIViewController {
         let btn = UIButton(type: .system)
         btn.setTitle("전체 삭제", for: .normal)
         btn.titleLabel?.font = Constant.Font.system14
-        btn.setTitleColor(Constant.Color.primaryOrange, for: .normal)
+        btn.setTitleColor(Constant.Color.signatureColor, for: .normal)
         btn.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
         return btn
     }()

@@ -26,7 +26,7 @@ final class ProfileImageCollectionViewCell: UICollectionViewCell {
             
             switch type {
             case .selected:
-                self.profileImageView.layer.borderColor = Constant.Color.primaryOrange.cgColor
+                self.profileImageView.layer.borderColor = Constant.Color.signatureColor.cgColor
                 self.profileImageView.layer.borderWidth = 3
                 self.profileImageView.alpha = 1
             case .unselected:

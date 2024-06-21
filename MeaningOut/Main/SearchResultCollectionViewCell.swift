@@ -179,7 +179,7 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
         
         let attributed = NSMutableAttributedString(string: title, attributes: [.font: Constant.Font.system14, .foregroundColor: Constant.Color.primaryBlack])
         let range = NSString(string: title).range(of: keyword.trimmingCharacters(in: .whitespaces))
-        attributed.addAttributes([.foregroundColor: Constant.Color.primaryOrange, .font: Constant.Font.system14], range: range)
+        attributed.addAttributes([.foregroundColor: Constant.Color.signatureColor, .font: Constant.Font.system14], range: range)
         
         self.productTitle.attributedText = attributed
     }

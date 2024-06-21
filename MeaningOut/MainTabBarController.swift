@@ -24,7 +24,7 @@ final class MainTabBarController: UITabBarController {
         settingVC.tabBarItem = UITabBarItem(title: "설정", image: UIImage(systemName: "person"), tag: 1)
         
         self.tabBar.unselectedItemTintColor = Constant.Color.primaryGray
-        self.tabBar.tintColor = Constant.Color.primaryOrange
+        self.tabBar.tintColor = Constant.Color.signatureColor
         
         let appearance = UITabBarAppearance()
         appearance.backgroundColor = Constant.Color.primaryWhite

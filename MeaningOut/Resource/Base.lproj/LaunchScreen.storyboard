@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -17,35 +16,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="titleLaunch" translatesAutoresizingMaskIntoConstraints="NO" id="DNi-YG-UVg">
-                                <rect key="frame" x="16" y="159" width="356" height="72"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="72" id="QN4-z2-Xdr"/>
-                                </constraints>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="meaningOut" translatesAutoresizingMaskIntoConstraints="NO" id="boa-B2-NFk">
+                                <rect key="frame" x="45" y="338" width="303" height="177"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch" translatesAutoresizingMaskIntoConstraints="NO" id="PAd-b2-HZe">
-                                <rect key="frame" x="21.666666666666657" y="294.33333333333337" width="350" height="263.33333333333337"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="권대윤" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pja-Sq-QOa">
-                                <rect key="frame" x="164" y="565" width="65" height="34.666666666666629"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="34.670000000000002" id="JiD-lv-aWi"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                                <color key="textColor" red="0.93725490199999995" green="0.53725490200000003" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.42745098469999998" green="0.7019608021" blue="0.78823530669999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="pja-Sq-QOa" firstAttribute="top" secondItem="PAd-b2-HZe" secondAttribute="bottom" constant="7.3300000000000001" id="2bu-TJ-6sx"/>
-                            <constraint firstItem="PAd-b2-HZe" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="9KO-NV-Jka"/>
-                            <constraint firstItem="DNi-YG-UVg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="Bhc-hT-qS9"/>
-                            <constraint firstItem="DNi-YG-UVg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="VKj-7e-Q6o"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DNi-YG-UVg" secondAttribute="trailing" constant="21" id="Wlq-kp-xe2"/>
-                            <constraint firstItem="pja-Sq-QOa" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="eSg-TJ-qzs"/>
-                            <constraint firstItem="PAd-b2-HZe" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="nVj-Ow-OXU"/>
+                            <constraint firstItem="boa-B2-NFk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="45" id="Gm9-lj-67Y"/>
+                            <constraint firstItem="boa-B2-NFk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="279" id="JfA-Oz-1FR"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="boa-B2-NFk" secondAttribute="trailing" constant="45" id="azx-j1-965"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="boa-B2-NFk" secondAttribute="bottom" constant="303" id="rvx-Js-uwS"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -55,10 +36,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="launch" width="350" height="263.33334350585938"/>
-        <image name="titleLaunch" width="198" height="46"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <image name="meaningOut" width="209.33332824707031" height="67.333335876464844"/>
     </resources>
 </document>

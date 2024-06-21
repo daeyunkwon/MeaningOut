@@ -15,7 +15,7 @@ final class ProfileCircleWithCameraIcon: UIView {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.layer.borderWidth = 5
-        iv.layer.borderColor = Constant.Color.primaryOrange.cgColor
+        iv.layer.borderColor = Constant.Color.signatureColor.cgColor
         iv.layer.cornerRadius = 60
         iv.alpha = 1
         iv.clipsToBounds = true
@@ -27,7 +27,7 @@ final class ProfileCircleWithCameraIcon: UIView {
         btn.setImage(Constant.SymbolSize.smallSize(systemName: "camera.fill"), for: .normal)
         btn.setTitle("", for: .normal)
         btn.tintColor = Constant.Color.primaryWhite
-        btn.backgroundColor = Constant.Color.primaryOrange
+        btn.backgroundColor = Constant.Color.signatureColor
         btn.layer.cornerRadius = 20
         btn.clipsToBounds = true
         return btn
