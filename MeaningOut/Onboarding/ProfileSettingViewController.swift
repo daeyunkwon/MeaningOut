@@ -9,10 +9,21 @@ import UIKit
 
 import SnapKit
 
-enum NicknameConditionError: Error {
+enum NicknameConditionError: LocalizedError {
     case dissatisfactionCount
     case dissatisfactionNumber
     case dissatisfactionSpecialSymbol
+    
+    var errorDescription: String? {
+        switch self {
+        case NicknameConditionError.dissatisfactionCount:
+            "2글자 이상 10글자 미만으로 설정해주세요."
+        case NicknameConditionError.dissatisfactionNumber:
+            "닉네임에 숫자는 포함할 수 없어요."
+        case NicknameConditionError.dissatisfactionSpecialSymbol:
+            "닉네임에 @, #, $, % 는 포함할 수 없어요."
+        }
+    }
 }
 
 final class ProfileSettingViewController: UIViewController {
@@ -264,20 +275,10 @@ final class ProfileSettingViewController: UIViewController {
                 changeDisplayCompleteButton(conditionsSatisfied: true)
             }
         } catch {
-            switch error {
-            case NicknameConditionError.dissatisfactionCount:
-                self.nicknameConditionLabel.text = "2글자 이상 10글자 미만으로 설정해주세요."
-                changeDisplayCompleteButton(conditionsSatisfied: false)
-                
-            case NicknameConditionError.dissatisfactionNumber:
-                self.nicknameConditionLabel.text = "닉네임에 숫자는 포함할 수 없어요."
-                changeDisplayCompleteButton(conditionsSatisfied: false)
-            case NicknameConditionError.dissatisfactionSpecialSymbol:
-                self.nicknameConditionLabel.text = "닉네임에 @, #, $, % 는 포함할 수 없어요."
-                changeDisplayCompleteButton(conditionsSatisfied: false)
-            default:
-                print(error)
-            }
+            print("Error:", error, error.localizedDescription)
+
+            self.nicknameConditionLabel.text = error.localizedDescription
+            changeDisplayCompleteButton(conditionsSatisfied: false)
         }
     }
     
