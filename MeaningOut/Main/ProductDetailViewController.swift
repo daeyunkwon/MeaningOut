@@ -27,7 +27,9 @@ final class ProductDetailViewController: UIViewController {
     override func viewIsAppearing(_ animated: Bool) {
         super.viewIsAppearing(animated)
         if !NetworkCheckManager.shared.isConnected {
-            self.showNetworkConnectFailAlert(type: .networkConnectFail)
+            self.showNetworkConnectFailAlert(type: .networkConnectFail) { _ in
+                self.navigationController?.popViewController(animated: true)
+            }
         }
         
         configureUI()
@@ -57,7 +59,9 @@ final class ProductDetailViewController: UIViewController {
     private func configureUI() {
         guard let productURL = self.shoppingItem?.linkURL else {return}
         guard let url = URL(string: productURL) else {
-            self.showNetworkConnectFailAlert(type: .urlInvalid)
+            self.showNetworkConnectFailAlert(type: .urlInvalid) { _ in
+                self.navigationController?.popViewController(animated: true)
+            }
             return
         }
         
