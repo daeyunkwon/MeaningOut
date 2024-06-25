@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-final class SettingProfileTableViewCell: UITableViewCell {
+final class SettingProfileTableViewCell: BaseTableViewCell {
     
     //MARK: - UI Components
     
@@ -54,16 +54,7 @@ final class SettingProfileTableViewCell: UITableViewCell {
     
     //MARK: - Init
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        configureLayout()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func configureLayout() {
+    override func configureLayout() {
         contentView.addSubview(profileImageView)
         profileImageView.snp.makeConstraints { make in
             make.centerY.equalTo(contentView.snp.centerY)

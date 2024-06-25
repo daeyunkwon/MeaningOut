@@ -11,7 +11,7 @@ import Kingfisher
 import SkeletonView
 import SnapKit
 
-final class SearchResultCollectionViewCell: UICollectionViewCell {
+final class SearchResultCollectionViewCell: BaseCollectionViewCell {
     
     //MARK: - Properties
     
@@ -25,8 +25,8 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
                 switch result {
                 case .success(_):
                     self.productImage.hideSkeleton()
-                case .failure(_):
-                    //print(error)
+                case .failure(let error):
+                    print(error)
                     break
                 }
             })
@@ -105,16 +105,7 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
 
     //MARK: - Init
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        configureLayout()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func configureLayout() {
+    override func configureLayout() {
         contentView.addSubview(productImage)
         productImage.snp.makeConstraints { make in
             make.top.leading.trailing.equalTo(contentView.safeAreaLayoutGuide)
