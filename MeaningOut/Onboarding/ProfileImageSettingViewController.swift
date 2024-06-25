@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-final class ProfileImageSettingViewController: UIViewController {
+final class ProfileImageSettingViewController: BaseViewController {
     
     //MARK: - Properties
     
@@ -38,8 +38,6 @@ final class ProfileImageSettingViewController: UIViewController {
         super.viewDidLoad()
         setupNavi()
         setupCollectionView()
-        configureLayout()
-        configureUI()
     }
     
     private func setupNavi() {
@@ -57,7 +55,7 @@ final class ProfileImageSettingViewController: UIViewController {
         self.collectionView.register(ProfileImageCollectionViewCell.self, forCellWithReuseIdentifier: ProfileImageCollectionViewCell.identifier)
     }
     
-    private func configureLayout() {
+    override func configureLayout() {
         view.addSubview(mainProfileImageView)
         mainProfileImageView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(30)
@@ -72,8 +70,8 @@ final class ProfileImageSettingViewController: UIViewController {
         }
     }
     
-    private func configureUI() {
-        view.backgroundColor = Constant.Color.primaryWhite
+    override func configureUI() {
+        super.configureUI()
         mainProfileImageView.profileImageView.image = self.selectedProfileImage
     }
     

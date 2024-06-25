@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-final class MainViewController: UIViewController {
+final class MainViewController: BaseViewController {
     
     //MARK: - Properties
     
@@ -85,8 +85,6 @@ final class MainViewController: UIViewController {
         setupTableView()
         setupNavi()
         setupSearchController()
-        configureLayout()
-        configureUI()
         fetchRecentSearchData()
     }
     
@@ -124,7 +122,7 @@ final class MainViewController: UIViewController {
         searchController.searchBar.setValue("취소", forKey: "cancelButtonText")
     }
     
-    private func configureLayout() {
+    override func configureLayout() {
         view.addSubview(emptyRecentSearchImageView)
         emptyRecentSearchImageView.snp.makeConstraints { make in
             make.centerX.equalTo(view.safeAreaLayoutGuide)
@@ -160,8 +158,8 @@ final class MainViewController: UIViewController {
         }
     }
     
-    private func configureUI() {
-        view.backgroundColor = Constant.Color.primaryWhite
+    override func configureUI() {
+        super.configureUI()
     }
     
     //MARK: - Functions

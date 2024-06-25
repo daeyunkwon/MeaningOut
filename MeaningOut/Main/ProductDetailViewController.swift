@@ -10,7 +10,7 @@ import WebKit
 
 import SnapKit
 
-final class ProductDetailViewController: UIViewController {
+final class ProductDetailViewController: BaseViewController {
     
     //MARK: - Properties
     
@@ -38,8 +38,6 @@ final class ProductDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavi()
-        configureLayout()
-        view.backgroundColor = Constant.Color.primaryWhite
     }
     
     private func setupNavi() {
@@ -49,14 +47,15 @@ final class ProductDetailViewController: UIViewController {
         navigationItem.rightBarButtonItem = rightBarButton
     }
     
-    private func configureLayout() {
+    override func configureLayout() {
         view.addSubview(webView)
         webView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
-    private func configureUI() {
+    override func configureUI() {
+        super.configureUI()
         guard let productURL = self.shoppingItem?.linkURL else {return}
         guard let url = URL(string: productURL) else {
             self.showNetworkConnectFailAlert(type: .urlInvalid) { _ in

@@ -26,7 +26,7 @@ enum NicknameConditionError: LocalizedError {
     }
 }
 
-final class ProfileSettingViewController: UIViewController {
+final class ProfileSettingViewController: BaseViewController {
     
     //MARK: - Properties
     
@@ -104,8 +104,6 @@ final class ProfileSettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavi()
-        configureLayout()
-        configureUI()
     }
     
     private func setupNavi() {
@@ -120,7 +118,7 @@ final class ProfileSettingViewController: UIViewController {
         }
     }
     
-    private func configureLayout() {
+    override func configureLayout() {
         view.addSubview(profileCircleWithCameraIconView)
         profileCircleWithCameraIconView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(30)
@@ -162,8 +160,8 @@ final class ProfileSettingViewController: UIViewController {
         }
     }
     
-    private func configureUI() {
-        view.backgroundColor = Constant.Color.primaryWhite
+    override func configureUI() {
+        super.configureUI()
         DispatchQueue.main.async {
             self.completeButton.layer.cornerRadius = self.completeButton.frame.height / 2
         }

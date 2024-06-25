@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-final class SearchResultViewController: UIViewController {
+final class SearchResultViewController: BaseViewController {
     
     //MARK: - Properties
     
@@ -71,8 +71,6 @@ final class SearchResultViewController: UIViewController {
             }
         }
         setupCollectionView()
-        configureLayout()
-        configureUI()
         NetworkManager.shared.fetchShopping(query: searchKeyword ?? "", sort: self.sortType.rawValue, start: self.start) { data in
             self.totalCount = data.total ?? 0
             self.resultCountLabel.text = "\(self.totalCount.formatted())개의 검색 결과"
@@ -92,7 +90,7 @@ final class SearchResultViewController: UIViewController {
         collectionView.prefetchDataSource = self
     }
     
-    private func configureLayout() {
+    override func configureLayout() {
         view.addSubview(resultCountLabel)
         resultCountLabel.snp.makeConstraints { make in
             make.top.leading.equalTo(view.safeAreaLayoutGuide).inset(20)
@@ -138,8 +136,8 @@ final class SearchResultViewController: UIViewController {
         }
     }
     
-    private func configureUI() {
-        view.backgroundColor = Constant.Color.primaryWhite
+    override func configureUI() {
+        super.configureUI()
         [capsuleAccuracyButton, capsuleDateButton, capsuleHighPriceButton, capsuleRowPriceButton].forEach {
             $0.layoutIfNeeded()
             $0.addTarget(self, action: #selector(capsuleOptionButtonTapped), for: .touchUpInside)

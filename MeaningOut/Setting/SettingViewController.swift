@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-final class SettingViewController: UIViewController {
+final class SettingViewController: BaseViewController {
     
     //MARK: - Properties
     
@@ -42,8 +42,6 @@ final class SettingViewController: UIViewController {
         super.viewDidLoad()
         setupTableView()
         setupNavi()
-        configureLayout()
-        configureUI()
     }
     
     private func setupTableView() {
@@ -61,16 +59,12 @@ final class SettingViewController: UIViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
     
-    private func configureLayout() {
+    override func configureLayout() {
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.verticalEdges.equalTo(view.safeAreaLayoutGuide)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
         }
-    }
-    
-    private func configureUI() {
-        view.backgroundColor = Constant.Color.primaryWhite
     }
     
     //MARK: - Functions
