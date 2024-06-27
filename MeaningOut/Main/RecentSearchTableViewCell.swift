@@ -83,7 +83,7 @@ final class RecentSearchTableViewCell: BaseTableViewCell {
     
     //MARK: - Functions
     
-    @objc func removeButtonTapped() {
+    @objc private func removeButtonTapped() {
         self.delegate?.removeButtonTapped(cell: self)
     }
 }

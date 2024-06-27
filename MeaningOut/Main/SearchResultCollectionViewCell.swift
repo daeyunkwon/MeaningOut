@@ -146,7 +146,7 @@ final class SearchResultCollectionViewCell: BaseCollectionViewCell {
     
     //MARK: - Fuctions
     
-    @objc func likeButtonTapped() {
+    @objc private func likeButtonTapped() {
         self.delegate?.likeButtonTapped(cell: self)
     }
     

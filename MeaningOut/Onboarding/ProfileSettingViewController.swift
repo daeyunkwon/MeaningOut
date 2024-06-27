@@ -186,7 +186,7 @@ final class ProfileSettingViewController: BaseViewController {
     
     //MARK: - Functions
     
-    @objc func profileImageViewTapped() {
+    @objc private func profileImageViewTapped() {
         let vc = ProfileImageSettingViewController()
         
         switch self.viewType {
@@ -205,7 +205,7 @@ final class ProfileSettingViewController: BaseViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    @objc func completeButtonTapped() {
+    @objc private func completeButtonTapped() {
         self.createUserData()
         switch viewType {
         case .profileSetting:

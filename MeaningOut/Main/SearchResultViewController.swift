@@ -188,7 +188,7 @@ final class SearchResultViewController: BaseViewController {
         }
     }
     
-    @objc func capsuleOptionButtonTapped(sender: UIButton) {
+    @objc private func capsuleOptionButtonTapped(sender: UIButton) {
         switch sender.tag {
         case 0: self.sortType = .sim
         case 1: self.sortType = .date

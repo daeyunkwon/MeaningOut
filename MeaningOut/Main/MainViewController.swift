@@ -189,7 +189,7 @@ final class MainViewController: BaseViewController {
         }
     }
     
-    @objc func resetButtonTapped() {
+    @objc private func resetButtonTapped() {
         UserDefaultsManager.shared.removeRecentSearchData()
         fetchRecentSearchData()
     }

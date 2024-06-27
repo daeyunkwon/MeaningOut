@@ -96,7 +96,7 @@ final class OnboardingViewController: BaseViewController {
     
     //MARK: - Functions
     
-    @objc func startButtonTapped() {
+    @objc private func startButtonTapped() {
         let vc = ProfileSettingViewController()
         navigationController?.pushViewController(vc, animated: true)
     }

@@ -81,7 +81,7 @@ final class ProductDetailViewController: BaseViewController {
         }
     }
     
-    @objc func rightBarButtonTapped() {
+    @objc private func rightBarButtonTapped() {
         guard let productId = shoppingItem?.productId else {return}
         
         if UserDefaultsManager.shared.like != nil {
