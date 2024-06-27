@@ -12,8 +12,8 @@ final class NetworkCheckManager {
     static let shared = NetworkCheckManager()
     private let queue = DispatchQueue.global()
     private let monitor: NWPathMonitor
-    public private(set) var isConnected: Bool = false
-    public private(set) var connectionType: ConnectionType = .unknown
+    private(set) var isConnected: Bool = false
+    private(set) var connectionType: ConnectionType = .unknown
     
     //연결 타입
     enum ConnectionType{
@@ -28,7 +28,7 @@ final class NetworkCheckManager {
     }
     
     // Network Monitoring 시작
-    public func startMonitoring() {
+    func startMonitoring() {
         monitor.start(queue: queue)
         monitor.pathUpdateHandler = {[weak self] path in
             self?.isConnected = path.status == .satisfied
@@ -43,7 +43,7 @@ final class NetworkCheckManager {
     }
     
     // Network Monitoring 종료
-    public func stopMonitoring() {
+    func stopMonitoring() {
         monitor.cancel()
     }
     
