@@ -7,6 +7,22 @@
 
 import UIKit
 
+@propertyWrapper
+struct UserDefaultsPropertyWrapper<T> {
+    let key: String
+    let defaultValue: T
+    var storage: UserDefaults
+    
+    var wrappedValue: T {
+        get {
+            return self.storage.object(forKey: self.key) as? T ?? self.defaultValue
+        }
+        set {
+            return self.storage.set(newValue, forKey: self.key)
+        }
+    }
+}
+
 final class UserDefaultsManager {
     
     static let shared = UserDefaultsManager()
@@ -22,50 +38,20 @@ final class UserDefaultsManager {
         case like
     }
     
-    var nickname: String? {
-        get {
-            return userDefaults.string(forKey: Key.nickname.rawValue)
-        }
-        set {
-            userDefaults.setValue(newValue, forKey: Key.nickname.rawValue)
-        }
-    }
+    @UserDefaultsPropertyWrapper(key: Key.nickname.rawValue, defaultValue: nil, storage: UserDefaults(suiteName: "MyUserDefaults") ?? UserDefaults.standard)
+    var nickname: String?
     
-    var profile: String? {
-        get {
-            return userDefaults.string(forKey: Key.profile.rawValue)
-        }
-        set {
-            userDefaults.setValue(newValue, forKey: Key.profile.rawValue)
-        }
-    }
+    @UserDefaultsPropertyWrapper(key: Key.profile.rawValue, defaultValue: nil, storage: UserDefaults(suiteName: "MyUserDefaults") ?? UserDefaults.standard)
+    var profile: String?
     
-    var recentSearch: [String]? {
-        get {
-            return userDefaults.stringArray(forKey: Key.recentSearch.rawValue)
-        }
-        set {
-            userDefaults.setValue(newValue, forKey: Key.recentSearch.rawValue)
-        }
-    }
+    @UserDefaultsPropertyWrapper(key: Key.recentSearch.rawValue, defaultValue: nil, storage: UserDefaults(suiteName: "MyUserDefaults") ?? UserDefaults.standard)
+    var recentSearch: [String]?
     
-    var joinDate: String? {
-        get {
-            return userDefaults.string(forKey: Key.joinDate.rawValue)
-        }
-        set {
-            userDefaults.setValue(newValue, forKey: Key.joinDate.rawValue)
-        }
-    }
+    @UserDefaultsPropertyWrapper(key: Key.joinDate.rawValue, defaultValue: nil, storage: UserDefaults(suiteName: "MyUserDefaults") ?? UserDefaults.standard)
+    var joinDate: String?
     
-    var like: [String: Bool]? {
-        get {
-            return userDefaults.dictionary(forKey: Key.like.rawValue) as? [String: Bool]
-        }
-        set {
-            userDefaults.setValue(newValue, forKey: Key.like.rawValue)
-        }
-    }
+    @UserDefaultsPropertyWrapper(key: Key.like.rawValue, defaultValue: nil, storage: UserDefaults(suiteName: "MyUserDefaults") ?? UserDefaults.standard)
+    var like: [String: Bool]?
     
     func removeRecentSearchData() {
         userDefaults.removeObject(forKey: Key.recentSearch.rawValue)
@@ -76,7 +62,7 @@ final class UserDefaultsManager {
         if UserDefaults.standard.persistentDomain(forName: "MyUserDefaults") != nil {
             UserDefaults.standard.removePersistentDomain(forName: "MyUserDefaults")
             
-        } else {
+        } else { //UserDefaults(suiteName: "MyUserDefaults")으로 인스턴스 생성 실패에 대비
             if let bundleID = Bundle.main.bundleIdentifier {
                 print(bundleID)
                 UserDefaults.standard.removePersistentDomain(forName: bundleID)
