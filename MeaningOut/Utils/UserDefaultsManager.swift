@@ -58,9 +58,9 @@ final class UserDefaultsManager {
         }
     }
     
-    var like: [String: Any]? {
+    var like: [String: Bool]? {
         get {
-            return userDefaults.dictionary(forKey: Key.like.rawValue)
+            return userDefaults.dictionary(forKey: Key.like.rawValue) as? [String: Bool]
         }
         set {
             userDefaults.setValue(newValue, forKey: Key.like.rawValue)

@@ -91,7 +91,7 @@ final class ProductDetailViewController: BaseViewController {
                 UserDefaultsManager.shared.like?[productId] = true
             }
         } else {
-            let dict: [String: Any] = [productId: true]
+            let dict: [String: Bool] = [productId: true]
             UserDefaultsManager.shared.like = dict
         }
         
