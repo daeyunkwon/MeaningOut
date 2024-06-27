@@ -12,7 +12,7 @@ final class UserDefaultsManager {
     static let shared = UserDefaultsManager()
     private init() {}
     
-    private let userDefaults = UserDefaults.standard
+    private var userDefaults = UserDefaults(suiteName: "MyUserDefaults") ?? UserDefaults.standard
     
     enum Key: String, CaseIterable {
         case nickname
@@ -72,9 +72,17 @@ final class UserDefaultsManager {
     }
     
     func removeUserData(completion: @escaping () -> Void) {
-        for element in Key.allCases {
-            userDefaults.removeObject(forKey: element.rawValue)
+        
+        if UserDefaults.standard.persistentDomain(forName: "MyUserDefaults") != nil {
+            UserDefaults.standard.removePersistentDomain(forName: "MyUserDefaults")
+            
+        } else {
+            if let bundleID = Bundle.main.bundleIdentifier {
+                print(bundleID)
+                UserDefaults.standard.removePersistentDomain(forName: bundleID)
+            }
         }
+        
         completion()
     }
 }
