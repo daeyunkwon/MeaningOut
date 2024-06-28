@@ -147,7 +147,6 @@ final class SearchResultViewController: BaseViewController {
     override func configureUI() {
         super.configureUI()
         [capsuleAccuracyButton, capsuleDateButton, capsuleHighPriceButton, capsuleRowPriceButton].forEach {
-            $0.layoutIfNeeded()
             $0.addTarget(self, action: #selector(capsuleOptionButtonTapped), for: .touchUpInside)
         }
         self.checkStatusCapsuleOptionButton()

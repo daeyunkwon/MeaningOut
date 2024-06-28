@@ -22,7 +22,6 @@ final class ProfileImageCollectionViewCell: BaseCollectionViewCell {
     var profile: UIImage? {
         didSet {
             self.profileImageView.image = profile
-            layoutIfNeeded()
             
             switch type {
             case .selected:
