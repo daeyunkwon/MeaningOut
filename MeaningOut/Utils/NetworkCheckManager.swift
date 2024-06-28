@@ -16,14 +16,14 @@ final class NetworkCheckManager {
     private(set) var connectionType: ConnectionType = .unknown
     
     //연결 타입
-    enum ConnectionType{
+    enum ConnectionType {
         case wifi
         case cellular
         case ethernet
         case unknown
     }
     
-    private init(){
+    private init() {
         monitor = NWPathMonitor()
     }
     
@@ -48,12 +48,12 @@ final class NetworkCheckManager {
     }
     
     // Network 연결 타입가져오기.
-    private func getConnectionType(_ path: NWPath){
+    private func getConnectionType(_ path: NWPath) {
         if path.usesInterfaceType(.wifi){
             connectionType = .wifi
-        } else if path.usesInterfaceType(.cellular){
+        } else if path.usesInterfaceType(.cellular) {
             connectionType = .cellular
-        } else if path.usesInterfaceType(.wiredEthernet){
+        } else if path.usesInterfaceType(.wiredEthernet) {
             connectionType = .ethernet
         } else {
             connectionType = .unknown

@@ -169,6 +169,56 @@ final class SearchResultViewController: BaseViewController {
     
     //MARK: - Functions
     
+    private func fetchData(sender: UIButton) {
+        if NetworkCheckManager.shared.isConnected {
+            NetworkManager.shared.fetchShopping(query: searchKeyword ?? "", sort: self.sortType.rawValue, start: self.start) { result in
+                switch result {
+                case .success(let data):
+                    self.totalCount = data.total ?? 0
+                    self.resultCountLabel.text = "\(self.totalCount.formatted())개의 검색 결과"
+                    if self.page == 1 {
+                        self.list = data.items
+                    } else {
+                        self.list.append(contentsOf: data.items)
+                    }
+                    self.collectionView.reloadData()
+                    sender.isUserInteractionEnabled = true
+                    self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .bottom, animated: true)
+                case .failure(let error):
+                    self.showNetworkConnectFailAlert(type: .networkConnectFail) { _ in
+                        print(error)
+                    }
+                }
+                
+            }
+        } else {
+            self.showNetworkConnectFailAlert(type: .networkConnectFail) { _ in
+                sender.isUserInteractionEnabled = true
+                if NetworkCheckManager.shared.isConnected {
+                    NetworkManager.shared.fetchShopping(query: self.searchKeyword ?? "", sort: self.sortType.rawValue, start: self.start) { result in
+                        switch result {
+                        case .success(let data):
+                            self.totalCount = data.total ?? 0
+                            self.resultCountLabel.text = "\(self.totalCount.formatted())개의 검색 결과"
+                            if self.page == 1 {
+                                self.list = data.items
+                            } else {
+                                self.list.append(contentsOf: data.items)
+                            }
+                            self.collectionView.reloadData()
+                            sender.isUserInteractionEnabled = true
+                            self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .bottom, animated: true)
+                        case .failure(let error):
+                            self.showNetworkConnectFailAlert(type: .networkConnectFail) { _ in
+                                print(error)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     private func checkStatusCapsuleOptionButton() {
         switch sortType {
         case .sim:
@@ -229,26 +279,7 @@ final class SearchResultViewController: BaseViewController {
         
         self.page = 1
         
-        NetworkManager.shared.fetchShopping(query: searchKeyword ?? "", sort: self.sortType.rawValue, start: self.start) { result in
-            switch result {
-            case .success(let data):
-                self.totalCount = data.total ?? 0
-                self.resultCountLabel.text = "\(self.totalCount.formatted())개의 검색 결과"
-                if self.page == 1 {
-                    self.list = data.items
-                } else {
-                    self.list.append(contentsOf: data.items)
-                }
-                self.collectionView.reloadData()
-                sender.isUserInteractionEnabled = true
-                self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .bottom, animated: true)
-            case .failure(let error):
-                self.showNetworkConnectFailAlert(type: .networkConnectFail) { _ in
-                    print(error)
-                }
-            }
-            
-        }
+        fetchData(sender: sender)
     }
 }
 
@@ -287,7 +318,35 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
             if item.row >= self.list.count - 1 {
                 if item.row < self.totalCount && list.count < totalCount {
                     self.page += 1
-                    NetworkManager.shared.fetchShopping(query: searchKeyword ?? "", sort: self.sortType.rawValue, start: self.start) { result in
+                    fetchData()
+                }
+            }
+        }
+    }
+    
+    private func fetchData() {
+        if NetworkCheckManager.shared.isConnected {
+            NetworkManager.shared.fetchShopping(query: searchKeyword ?? "", sort: self.sortType.rawValue, start: self.start) { result in
+                switch result {
+                case .success(let data):
+                    self.totalCount = data.total ?? 0
+                    self.resultCountLabel.text = "\(self.totalCount.formatted())개의 검색 결과"
+                    if self.page == 1 {
+                        self.list = data.items
+                    } else {
+                        self.list.append(contentsOf: data.items)
+                    }
+                    self.collectionView.reloadData()
+                case .failure(let error):
+                    self.showNetworkConnectFailAlert(type: .networkConnectFail) { _ in
+                        print(error)
+                    }
+                }
+            }
+        } else {
+            self.showNetworkConnectFailAlert(type: .networkConnectFail) { _ in
+                if NetworkCheckManager.shared.isConnected {
+                    NetworkManager.shared.fetchShopping(query: self.searchKeyword ?? "", sort: self.sortType.rawValue, start: self.start) { result in
                         switch result {
                         case .success(let data):
                             self.totalCount = data.total ?? 0
