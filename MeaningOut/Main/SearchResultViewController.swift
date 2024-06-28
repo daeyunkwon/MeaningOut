@@ -231,8 +231,8 @@ final class SearchResultViewController: BaseViewController {
             }
             self.collectionView.reloadData()
             sender.isUserInteractionEnabled = true
+            self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .bottom, animated: true)
         }
-        collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .bottom, animated: true)
     }
 }
 
