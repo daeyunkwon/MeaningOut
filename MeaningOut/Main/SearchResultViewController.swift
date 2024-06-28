@@ -208,6 +208,8 @@ final class SearchResultViewController: BaseViewController {
             return
         }
         
+        sender.isUserInteractionEnabled = false
+        
         switch sender.tag {
         case 0: self.sortType = .sim
         case 1: self.sortType = .date
@@ -220,7 +222,6 @@ final class SearchResultViewController: BaseViewController {
         self.page = 1
         
         NetworkManager.shared.fetchShopping(query: searchKeyword ?? "", sort: self.sortType.rawValue, start: self.start) { data in
-            print("네트워크 통신 실행됨")
             self.totalCount = data.total ?? 0
             self.resultCountLabel.text = "\(self.totalCount.formatted())개의 검색 결과"
             if self.page == 1 {
