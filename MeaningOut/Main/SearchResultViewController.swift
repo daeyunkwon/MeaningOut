@@ -189,6 +189,25 @@ final class SearchResultViewController: BaseViewController {
     }
     
     @objc private func capsuleOptionButtonTapped(sender: UIButton) {
+        
+        var currtenType: Int //현재 선택된 옵션 버튼
+        
+        switch self.sortType {
+        case .sim:
+            currtenType = 0
+        case .date:
+            currtenType = 1
+        case .asc:
+            currtenType = 2
+        case .dsc:
+            currtenType = 3
+        }
+        
+        if sender.tag == currtenType { //이미 선택되어 있는 옵션 버튼을 재선택한 경우
+            collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .bottom, animated: true)
+            return
+        }
+        
         switch sender.tag {
         case 0: self.sortType = .sim
         case 1: self.sortType = .date
@@ -201,6 +220,7 @@ final class SearchResultViewController: BaseViewController {
         self.page = 1
         
         NetworkManager.shared.fetchShopping(query: searchKeyword ?? "", sort: self.sortType.rawValue, start: self.start) { data in
+            print("네트워크 통신 실행됨")
             self.totalCount = data.total ?? 0
             self.resultCountLabel.text = "\(self.totalCount.formatted())개의 검색 결과"
             if self.page == 1 {
@@ -209,6 +229,7 @@ final class SearchResultViewController: BaseViewController {
                 self.list.append(contentsOf: data.items)
             }
             self.collectionView.reloadData()
+            sender.isUserInteractionEnabled = true
         }
         collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .bottom, animated: true)
     }
