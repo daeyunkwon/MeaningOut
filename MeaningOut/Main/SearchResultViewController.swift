@@ -67,7 +67,7 @@ final class SearchResultViewController: BaseViewController {
         super.viewDidLoad()
         if !NetworkCheckManager.shared.isConnected { //네트워크 미연결 상태일 경우
             self.showNetworkConnectFailAlert(type: .networkConnectFail) { _ in
-                self.navigationController?.popViewController(animated: true)
+                self.popViewController()
             }
         }
         setupCollectionView()
@@ -234,7 +234,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = ProductDetailViewController()
         vc.shoppingItem = self.list[indexPath.row]
-        navigationController?.pushViewController(vc, animated: true)
+        pushViewController(vc)
     }
 }
 

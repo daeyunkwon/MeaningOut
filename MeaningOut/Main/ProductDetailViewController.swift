@@ -28,7 +28,7 @@ final class ProductDetailViewController: BaseViewController {
         super.viewIsAppearing(animated)
         if !NetworkCheckManager.shared.isConnected {
             self.showNetworkConnectFailAlert(type: .networkConnectFail) { _ in
-                self.navigationController?.popViewController(animated: true)
+                self.popViewController()
             }
         }
         
@@ -59,7 +59,7 @@ final class ProductDetailViewController: BaseViewController {
         guard let productURL = self.shoppingItem?.linkURL else {return}
         guard let url = URL(string: productURL) else {
             self.showNetworkConnectFailAlert(type: .urlInvalid) { _ in
-                self.navigationController?.popViewController(animated: true)
+                self.popViewController()
             }
             return
         }

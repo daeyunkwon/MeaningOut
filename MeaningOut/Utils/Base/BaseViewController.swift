@@ -23,4 +23,12 @@ class BaseViewController: UIViewController {
     func configureUI() {
         view.backgroundColor = Constant.Color.primaryWhite
     }
+    
+    func pushViewController(_ viewController: UIViewController, animated: Bool = true) {
+        navigationController?.pushViewController(viewController, animated: animated)
+    }
+    
+    func popViewController(_ animated: Bool = true) {
+        navigationController?.popViewController(animated: animated)
+    }
 }

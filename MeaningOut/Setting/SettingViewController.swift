@@ -125,7 +125,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.row == 0 {
             let vc = ProfileSettingViewController()
             vc.viewType = .editProfile
-            navigationController?.pushViewController(vc, animated: true)
+            pushViewController(vc)
         } else if indexPath.row == 5 {
             self.showWithdrawalAlert()
         }

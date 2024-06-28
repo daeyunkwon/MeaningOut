@@ -232,7 +232,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         let vc = SearchResultViewController()
         vc.searchKeyword = list[indexPath.row]
         tableView.reloadRows(at: [IndexPath(row: indexPath.row, section: 0)], with: .automatic)
-        navigationController?.pushViewController(vc, animated: true)
+        pushViewController(vc)
     }
 }
 
@@ -253,7 +253,7 @@ extension MainViewController: UISearchBarDelegate {
         
         let vc = SearchResultViewController()
         vc.searchKeyword = text
-        navigationController?.pushViewController(vc, animated: true)
+        pushViewController(vc)
         searchBar.text = nil
         searchController.isActive = false
     }

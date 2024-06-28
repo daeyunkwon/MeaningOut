@@ -202,7 +202,7 @@ final class ProfileSettingViewController: BaseViewController {
             self.profileCircleWithCameraIconView.profileImageView.image = sender
             self.profileImage = sender
         }
-        navigationController?.pushViewController(vc, animated: true)
+        pushViewController(vc)
     }
     
     @objc private func completeButtonTapped() {
@@ -211,7 +211,7 @@ final class ProfileSettingViewController: BaseViewController {
         case .profileSetting:
             self.changeWindowRootViewController()
         case .editProfile:
-            navigationController?.popViewController(animated: true)
+            popViewController()
         }
     }
     
