@@ -11,9 +11,34 @@ import SnapKit
 
 final class SettingOptionTableViewCell: BaseTableViewCell {
     
+    //MARK: - Properties
+    
+    enum CellType: Int {
+        case myLikeList = 1
+        case commonQuestion
+        case inquiry
+        case notificationSetting
+        case withdrawal
+        
+        var titleText: String {
+            switch self {
+            case .myLikeList:
+                return "나의 장바구니 목록"
+            case .commonQuestion:
+                return "자주 묻는 질문"
+            case .inquiry:
+                return "1:1 문의"
+            case .notificationSetting:
+                return "알림 설정"
+            case .withdrawal:
+                return "탈퇴하기"
+            }
+        }
+    }
+    
     //MARK: - UI Components
     
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = Constant.Font.system14
         label.textColor = Constant.Color.primaryBlack
@@ -21,7 +46,7 @@ final class SettingOptionTableViewCell: BaseTableViewCell {
         return label
     }()
     
-    let likeCountButton: UIButton = {
+    private let likeCountButton: UIButton = {
         let btn = UIButton(type: .system)
         btn.setImage(UIImage(named: "like_selected")?.withRenderingMode(.alwaysOriginal), for: .normal)
         return btn
@@ -58,11 +83,31 @@ final class SettingOptionTableViewCell: BaseTableViewCell {
     
     //MARK: - Functions
     
-    func configureAttributedStringForLikeCountButton() {
+    private func configureAttributedStringForLikeCountButton() {
         let likeCount = UserDefaultsManager.shared.like?.count ?? 0
         let attributeString = NSMutableAttributedString(string: "\(likeCount)개", attributes: [.font: UIFont.boldSystemFont(ofSize: 14), .foregroundColor: Constant.Color.primaryBlack])
         let addAttri = NSAttributedString(string: "의 상품", attributes: [.font: Constant.Font.system14, .foregroundColor: Constant.Color.primaryBlack])
         attributeString.append(addAttri)
         likeCountButton.setAttributedTitle(attributeString, for: .normal)
+    }
+    
+    func cellConfig(type: CellType) {
+        switch type {
+        case .myLikeList:
+            self.likeCountButton.isHidden = false
+            self.titleLabel.text = type.titleText
+            self.configureAttributedStringForLikeCountButton()
+            self.selectionStyle = .default
+        
+        case .commonQuestion, .inquiry, .notificationSetting, .withdrawal:
+            self.likeCountButton.isHidden = true
+            self.titleLabel.text = type.titleText
+            
+            if type == .withdrawal {
+                self.selectionStyle = .default
+            } else {
+                self.selectionStyle = .none
+            }
+        }
     }
 }

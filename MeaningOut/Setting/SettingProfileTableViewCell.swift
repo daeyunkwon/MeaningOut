@@ -13,7 +13,7 @@ final class SettingProfileTableViewCell: BaseTableViewCell {
     
     //MARK: - UI Components
     
-    let profileImageView: UIImageView = {
+    private let profileImageView: UIImageView = {
         let iv = ProfileCircle(radius: 35, imageName: UserDefaultsManager.shared.profile ?? "")
         iv.layer.borderColor = Constant.Color.signatureColor.cgColor
         iv.layer.borderWidth = 3
@@ -21,7 +21,7 @@ final class SettingProfileTableViewCell: BaseTableViewCell {
         return iv
     }()
     
-    let usernameLabel: UILabel = {
+    private let usernameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20, weight: .heavy)
         label.textColor = Constant.Color.primaryBlack
@@ -86,5 +86,11 @@ final class SettingProfileTableViewCell: BaseTableViewCell {
             make.bottom.equalTo(contentView.snp.bottom)
             make.height.equalTo(1)
         }
+    }
+    
+    override func configureUI() {
+        self.profileImageView.image = UIImage(named: UserDefaultsManager.shared.profile ?? "")
+        self.usernameLabel.text = UserDefaultsManager.shared.nickname
+        self.selectionStyle = .default
     }
 }

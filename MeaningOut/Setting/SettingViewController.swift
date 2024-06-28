@@ -13,12 +13,12 @@ final class SettingViewController: BaseViewController {
     
     //MARK: - Properties
     
-    private enum SettingOptions: String, CaseIterable {
-        case myLikeList = "나의 장바구니 목록"
-        case commonQuestion = "자주 묻는 질문"
-        case inquiry = "1:1 문의"
-        case notificationSetting = "알림 설정"
-        case withdrawal = "탈퇴하기"
+    private enum SettingOptions: Int, CaseIterable {
+        case myLikeList = 1
+        case commonQuestion
+        case inquiry
+        case notificationSetting
+        case withdrawal
     }
     
     //MARK: - UI Components
@@ -101,35 +101,23 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row == 0 {
+        switch indexPath.row {
+        case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingProfileTableViewCell.identifier, for: indexPath) as? SettingProfileTableViewCell else {
                 return UITableViewCell()
             }
-            cell.profileImageView.image = UIImage(named: UserDefaultsManager.shared.profile ?? "")
-            cell.usernameLabel.text = UserDefaultsManager.shared.nickname
-            cell.selectionStyle = .default
+            cell.configureUI()
             return cell
-        } else {
+            
+        case SettingOptions.allCases[indexPath.row-1].rawValue:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingOptionTableViewCell.identifier, for: indexPath) as? SettingOptionTableViewCell else {
                 return UITableViewCell()
             }
-            
-            if indexPath.row == 1 {
-                cell.likeCountButton.isHidden = false
-                cell.titleLabel.text = SettingOptions.allCases[indexPath.row-1].rawValue
-                cell.configureAttributedStringForLikeCountButton()
-                cell.selectionStyle = .none
-            } else {
-                if indexPath.row == 5 {
-                    cell.selectionStyle = .default
-                } else  {
-                    cell.selectionStyle = .none
-                }
-                
-                cell.likeCountButton.isHidden = true
-                cell.titleLabel.text = SettingOptions.allCases[indexPath.row-1].rawValue
-            }
+            cell.cellConfig(type: SettingOptionTableViewCell.CellType(rawValue: SettingOptions.allCases[indexPath.row-1].rawValue) ?? .myLikeList)
             return cell
+        
+        default:
+            return UITableViewCell()
         }
     }
     
