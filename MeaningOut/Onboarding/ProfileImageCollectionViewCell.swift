@@ -41,17 +41,18 @@ final class ProfileImageCollectionViewCell: BaseCollectionViewCell {
     
     private let profileImageView = ProfileCircle()
     
-    //MARK: - Life Cycle
-    
-    override func layoutIfNeeded() {
-        super.layoutIfNeeded()
-        profileImageView.layer.cornerRadius = profileImageView.bounds.size.width / 2
-    }
+    //MARK: - Init
     
     override func configureLayout() {
         contentView.addSubview(profileImageView)
         profileImageView.snp.makeConstraints { make in
             make.top.bottom.leading.trailing.equalTo(contentView.safeAreaLayoutGuide)
+        }
+    }
+    
+    override func configureUI() {
+        DispatchQueue.main.async {
+            self.profileImageView.layer.cornerRadius = self.profileImageView.bounds.size.width / 2
         }
     }
 }
