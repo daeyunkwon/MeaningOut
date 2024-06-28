@@ -104,6 +104,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
         switch indexPath.row {
         case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingProfileTableViewCell.identifier, for: indexPath) as? SettingProfileTableViewCell else {
+                print("Failed to dequeue a SettingProfileTableViewCell. Using default UITableViewCell.")
                 return UITableViewCell()
             }
             cell.configureUI()
@@ -111,12 +112,14 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
             
         case SettingOptions.allCases[indexPath.row-1].rawValue:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingOptionTableViewCell.identifier, for: indexPath) as? SettingOptionTableViewCell else {
+                print("Failed to dequeue a SettingOptionTableViewCell. Using default UITableViewCell.")
                 return UITableViewCell()
             }
             cell.cellConfig(type: SettingOptionTableViewCell.CellType(rawValue: SettingOptions.allCases[indexPath.row-1].rawValue) ?? .myLikeList)
             return cell
         
         default:
+            print("Failed to dequeue a CustomTableViewCell. Using default UITableViewCell.")
             return UITableViewCell()
         }
     }

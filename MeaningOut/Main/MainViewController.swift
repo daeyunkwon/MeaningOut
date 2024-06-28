@@ -221,6 +221,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RecentSearchTableViewCell.identifier, for: indexPath) as? RecentSearchTableViewCell else {
+            print("Failed to dequeue a RecentSearchTableViewCell. Using default UITableViewCell.")
             return UITableViewCell()
         }
         cell.delegate = self

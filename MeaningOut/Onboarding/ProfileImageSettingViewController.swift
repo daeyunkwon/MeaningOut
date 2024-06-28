@@ -85,6 +85,7 @@ extension ProfileImageSettingViewController: UICollectionViewDataSource, UIColle
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileImageCollectionViewCell.identifier, for: indexPath) as? ProfileImageCollectionViewCell else {
+            print("Failed to dequeue a ProfileImageCollectionViewCell. Using default UICollectionViewCell.")
             return UICollectionViewCell()
         }
         

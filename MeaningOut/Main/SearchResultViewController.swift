@@ -223,6 +223,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.identifier, for: indexPath) as? SearchResultCollectionViewCell else {
+            print("Failed to dequeue a SearchResultCollectionViewCell. Using default UICollectionViewCell.")
             return UICollectionViewCell()
         }
         cell.delegate = self
