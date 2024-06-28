@@ -17,7 +17,7 @@ final class OnboardingViewController: BaseViewController {
         let label = UILabel()
         label.text = "MeaningOut"
         label.textAlignment = .center
-        label.font = UIFont(name: "AlfaSlabOne-Regular", size: 40)
+        label.font = Constant.Font.alfaSlabOne40
         label.textColor = Constant.Color.signatureColor
         return label
     }()
@@ -25,7 +25,7 @@ final class OnboardingViewController: BaseViewController {
     private let mainImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
-        iv.image = UIImage(named: "launch")
+        iv.image = Constant.Image.launch
         return iv
     }()
     
