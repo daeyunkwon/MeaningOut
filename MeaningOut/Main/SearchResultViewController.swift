@@ -222,7 +222,9 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.identifier, for: indexPath) as! SearchResultCollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.identifier, for: indexPath) as? SearchResultCollectionViewCell else {
+            return UICollectionViewCell()
+        }
         cell.delegate = self
         cell.searchKeyword = self.searchKeyword
         cell.shoppingItem = list[indexPath.item]

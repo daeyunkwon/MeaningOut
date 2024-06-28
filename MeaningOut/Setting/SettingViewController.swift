@@ -102,13 +102,17 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: SettingProfileTableViewCell.identifier, for: indexPath) as! SettingProfileTableViewCell
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingProfileTableViewCell.identifier, for: indexPath) as? SettingProfileTableViewCell else {
+                return UITableViewCell()
+            }
             cell.profileImageView.image = UIImage(named: UserDefaultsManager.shared.profile ?? "")
             cell.usernameLabel.text = UserDefaultsManager.shared.nickname
             cell.selectionStyle = .default
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: SettingOptionTableViewCell.identifier, for: indexPath) as! SettingOptionTableViewCell
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingOptionTableViewCell.identifier, for: indexPath) as? SettingOptionTableViewCell else {
+                return UITableViewCell()
+            }
             
             if indexPath.row == 1 {
                 cell.likeCountButton.isHidden = false
