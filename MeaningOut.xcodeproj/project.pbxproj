@@ -19,6 +19,7 @@
 		442BA5112C2AAE08005185B4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442BA5102C2AAE08005185B4 /* BaseViewController.swift */; };
 		442BA5142C2AB0B2005185B4 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442BA5132C2AB0B2005185B4 /* BaseCollectionViewCell.swift */; };
 		442BA5162C2AB575005185B4 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442BA5152C2AB575005185B4 /* BaseTableViewCell.swift */; };
+		442F19792C2D920900E9C396 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442F19782C2D920900E9C396 /* UICollectionView+Extension.swift */; };
 		443A3D962C1B1CEF00C426FD /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3D952C1B1CEF00C426FD /* OnboardingViewController.swift */; };
 		443A3D9D2C1B225600C426FD /* AlfaSlabOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 443A3D9A2C1B219400C426FD /* AlfaSlabOne-Regular.ttf */; };
 		443A3D9F2C1B3C7D00C426FD /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3D9E2C1B3C7D00C426FD /* Constant.swift */; };
@@ -60,6 +61,7 @@
 		442BA5102C2AAE08005185B4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		442BA5132C2AB0B2005185B4 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		442BA5152C2AB575005185B4 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		442F19782C2D920900E9C396 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 		443A3D952C1B1CEF00C426FD /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		443A3D9A2C1B219400C426FD /* AlfaSlabOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AlfaSlabOne-Regular.ttf"; sourceTree = "<group>"; };
 		443A3D9E2C1B3C7D00C426FD /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 			children = (
 				443A3DB72C1C1F1300C426FD /* Date+Extension.swift */,
 				443A3E082C216B4700C426FD /* UIViewController+Extension.swift */,
+				442F19782C2D920900E9C396 /* UICollectionView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 				443A3DAE2C1BF07E00C426FD /* ProfileCircle.swift in Sources */,
 				4411F1AA2C1B003200878AFE /* AppDelegate.swift in Sources */,
 				443A3DC52C1D847300C426FD /* Shopping.swift in Sources */,
+				442F19792C2D920900E9C396 /* UICollectionView+Extension.swift in Sources */,
 				443A3D9F2C1B3C7D00C426FD /* Constant.swift in Sources */,
 				443A3DB22C1C06AE00C426FD /* Reuseable.swift in Sources */,
 				443A3DD52C1EE45F00C426FD /* NetworkCheckManager.swift in Sources */,

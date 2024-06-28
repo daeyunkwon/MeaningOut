@@ -30,7 +30,7 @@ final class ProfileImageSettingViewController: BaseViewController {
         return view
     }()
     
-    private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout())
+    private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionView.layoutSquareType(sectionSpacing: 20, minimumInteritemSpacing: 10, minimumLineSpacing: 10, cellCount: 4))
     
     //MARK: - Life Cycle
     
@@ -73,20 +73,6 @@ final class ProfileImageSettingViewController: BaseViewController {
     override func configureUI() {
         super.configureUI()
         mainProfileImageView.profileImageView.image = self.selectedProfileImage
-    }
-    
-    private static func layout() -> UICollectionViewLayout {
-        let layout = UICollectionViewFlowLayout()
-        let sectionSpacing: CGFloat = 20 //컬렉션뷰와 셀의 간격
-        let cellSpacing: CGFloat = 10 //셀과 셀 사이 간격
-        let cellCount: CGFloat = 4 //한 행에 셀 걋수
-        let width = UIScreen.main.bounds.width - ((cellSpacing * (cellCount - 1)) + (sectionSpacing * 2))
-        layout.itemSize = CGSize(width: width / cellCount, height: width / cellCount)
-        layout.scrollDirection = .vertical
-        layout.minimumInteritemSpacing = cellSpacing
-        layout.minimumLineSpacing = cellSpacing
-        layout.sectionInset = UIEdgeInsets(top: sectionSpacing, left: sectionSpacing, bottom: sectionSpacing, right: sectionSpacing)
-        return layout
     }
 }
 
