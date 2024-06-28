@@ -22,7 +22,7 @@ extension UIViewController {
         }
     }
     
-    func showNetworkConnectFailAlert(type: AlertType, completion: @escaping (UIAlertAction) -> Void) {
+    func showNetworkConnectFailAlert(type: AlertType, completion: @escaping ((UIAlertAction) -> Void)) {
         var alert: UIAlertController
         
         switch type {
