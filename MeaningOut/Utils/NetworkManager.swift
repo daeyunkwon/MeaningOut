@@ -64,6 +64,7 @@ final class NetworkManager {
             request.setValue(value, forHTTPHeaderField: key)
         }
         
+        //task
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard error == nil else {
                 completion(.failure(.failedRequest))

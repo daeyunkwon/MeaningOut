@@ -251,7 +251,7 @@ final class SearchResultViewController: BaseViewController {
             return
         }
         
-        sender.isUserInteractionEnabled = false
+        sender.isUserInteractionEnabled = false //네트워크 통신 작업이 끝나기 전까지 버튼 동작 비활성화
         
         switch sender.tag {
         case 0: self.sortType = .sim

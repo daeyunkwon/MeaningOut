@@ -20,16 +20,15 @@ final class CapsuleButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutIfNeeded() {
-        super.layoutIfNeeded()
-        self.layer.cornerRadius = self.bounds.height / 2
-    }
-    
     private func configureUI() {
         self.layer.borderColor = Constant.Color.primaryLightGray.cgColor
         self.layer.borderWidth = 1
         self.backgroundColor = Constant.Color.primaryWhite
         self.setTitleColor(Constant.Color.primaryBlack, for: .normal)
         self.titleLabel?.font = Constant.Font.system13
+        
+        DispatchQueue.main.async {
+            self.layer.cornerRadius = self.bounds.height / 2
+        }
     }
 }
