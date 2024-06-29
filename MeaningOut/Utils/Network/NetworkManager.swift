@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ShoppingNetwrokError: Error {
+enum NaverNetwrokError: Error {
     case failedCreateURL
     case failedRequest
     case noData
@@ -25,28 +25,16 @@ final class NetworkManager {
         case GET
     }
     
-    func fetchShopping(query: String, sort: String, start: Int, completion: @escaping (Result<Shopping, ShoppingNetwrokError>) -> Void) {
-        
-        let parameters = [
-            "query": query,
-            "display": String(30),
-            "sort": sort,
-            "start": String(start),
-        ]
-        
-        let headers = [
-            "X-Naver-Client-Id": APIKey.clientId,
-            "X-Naver-Client-Secret": APIKey.clientSecret
-        ]
+    func fetchData<T: Decodable>(api: NAVERAPI, model: T.Type , completion: @escaping (Result<T, NaverNetwrokError>) -> Void) {
         
         var component = URLComponents()
-        component.scheme = "https"
-        component.host = APIURL.naverShoppingHost
-        component.path = APIURL.naverShoppingPath
+        component.scheme = api.schmem
+        component.host = api.host
+        component.path = api.path
         
         //queryString setting
         var queryItems = [URLQueryItem]()
-        for (key, value) in parameters {
+        for (key, value) in api.parameter {
             queryItems.append(URLQueryItem(name: key, value: value))
         }
         component.queryItems = queryItems
@@ -59,8 +47,8 @@ final class NetworkManager {
         var request = URLRequest(url: url, timeoutInterval: 10)
         
         //header setting
-        request.httpMethod = HTTPMethodType.GET.rawValue
-        for (key, value) in headers {
+        request.httpMethod = NAVERAPI.Method.get.rawValue
+        for (key, value) in api.header {
             request.setValue(value, forHTTPHeaderField: key)
         }
         
@@ -88,7 +76,7 @@ final class NetworkManager {
             }
             
             do {
-                let result = try JSONDecoder().decode(Shopping.self, from: data)
+                let result = try JSONDecoder().decode(T.self, from: data)
                 DispatchQueue.main.async {
                     completion(.success(result))
                 }

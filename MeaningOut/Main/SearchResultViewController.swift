@@ -70,8 +70,10 @@ final class SearchResultViewController: BaseViewController {
                 self.popViewController()
             }
         }
+        
         setupCollectionView()
-        NetworkManager.shared.fetchShopping(query: searchKeyword ?? "", sort: self.sortType.rawValue, start: self.start) { result in
+        
+        NetworkManager.shared.fetchData(api: .shopping(query: self.searchKeyword ?? "", sort: self.sortType.rawValue, start: self.start), model: Shopping.self) { result in
             switch result {
             case .success(let data):
                 self.totalCount = data.total ?? 0
@@ -183,7 +185,7 @@ final class SearchResultViewController: BaseViewController {
     }
     
     private func executeFetchShopping(sender: UIButton) {
-        NetworkManager.shared.fetchShopping(query: searchKeyword ?? "", sort: self.sortType.rawValue, start: self.start) { result in
+        NetworkManager.shared.fetchData(api: .shopping(query: searchKeyword ?? "", sort: self.sortType.rawValue, start: self.start), model: Shopping.self) { result in
             switch result {
             case .success(let data):
                 self.totalCount = data.total ?? 0
@@ -323,7 +325,7 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
     }
     
     private func executeFetchShopping() {
-        NetworkManager.shared.fetchShopping(query: self.searchKeyword ?? "", sort: self.sortType.rawValue, start: self.start) { result in
+        NetworkManager.shared.fetchData(api: .shopping(query: self.searchKeyword ?? "", sort: self.sortType.rawValue, start: self.start), model: Shopping.self) { result in
             switch result {
             case .success(let data):
                 self.totalCount = data.total ?? 0

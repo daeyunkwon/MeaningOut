@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct Shopping: Codable {
+struct Shopping: Decodable {
     let total: Int?
     let items: [ShoppingItem]
 }
 
-struct ShoppingItem: Codable {
+struct ShoppingItem: Decodable {
     let title: String?
     let link: String?
     let image: String?
