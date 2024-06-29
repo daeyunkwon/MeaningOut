@@ -111,6 +111,7 @@ final class ProfileSettingViewController: BaseViewController {
         switch viewType {
         case .profileSetting:
             navigationItem.title = "PROFILE SETTING"
+        
         case .editProfile:
             navigationItem.title = "EDIT PROFILE"
             let save = UIBarButtonItem(title: "저장", style: .done, target: self, action: #selector(completeButtonTapped))
@@ -198,7 +199,7 @@ final class ProfileSettingViewController: BaseViewController {
         
         vc.selectedProfileImage = self.profileCircleWithCameraIconView.profileImageView.image
         vc.selectedProfileImageSend = {[weak self] sender in
-            guard let self = self else {return}
+            guard let self = self else { return }
             self.profileCircleWithCameraIconView.profileImageView.image = sender
             self.profileImage = sender
         }
@@ -216,7 +217,7 @@ final class ProfileSettingViewController: BaseViewController {
     }
     
     private func createUserData() {
-        guard let nickname = self.nicknameTextField.text else {return}
+        guard let nickname = self.nicknameTextField.text else { return }
         
         var profileImageName: String?
         for item in Constant.ProfileImage.allCases {
@@ -251,6 +252,7 @@ final class ProfileSettingViewController: BaseViewController {
             case .profileSetting:
                 completeButton.isEnabled = true
                 completeButton.backgroundColor = Constant.Color.signatureColor
+            
             case .editProfile:
                 navigationItem.rightBarButtonItem?.isEnabled = true
             }
@@ -259,6 +261,7 @@ final class ProfileSettingViewController: BaseViewController {
             case .profileSetting:
                 completeButton.isEnabled = false
                 completeButton.backgroundColor = Constant.Color.primaryGray
+            
             case .editProfile:
                 navigationItem.rightBarButtonItem?.isEnabled = false
             }
@@ -266,7 +269,7 @@ final class ProfileSettingViewController: BaseViewController {
     }
     
     private func updateStatusCompleteButton() {
-        guard let text = nicknameTextField.text else {return}
+        guard let text = nicknameTextField.text else { return }
         
         do {
             let result = try checkNicknameCondition(target: text)

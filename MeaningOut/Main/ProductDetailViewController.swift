@@ -41,7 +41,7 @@ final class ProductDetailViewController: BaseViewController {
     }
     
     private func setupNavi() {
-        guard let title = self.shoppingItem?.titleString else {return}
+        guard let title = self.shoppingItem?.titleString else { return }
         navigationItem.title = title
         
         navigationItem.rightBarButtonItem = rightBarButton
@@ -56,7 +56,7 @@ final class ProductDetailViewController: BaseViewController {
     
     override func configureUI() {
         super.configureUI()
-        guard let productURL = self.shoppingItem?.linkURL else {return}
+        guard let productURL = self.shoppingItem?.linkURL else { return }
         guard let url = URL(string: productURL) else {
             self.showNetworkConnectFailAlert(type: .urlInvalid) { _ in
                 self.popViewController()
@@ -71,8 +71,8 @@ final class ProductDetailViewController: BaseViewController {
     //MARK: - Functions
     
     private func checkLikeButton() {
-        guard let dictionary = UserDefaultsManager.shared.like else {return}
-        guard let productId = shoppingItem?.productId else {return}
+        guard let dictionary = UserDefaultsManager.shared.like else { return }
+        guard let productId = shoppingItem?.productId else { return }
         
         if dictionary[productId] != nil {
             self.rightBarButton.image = UIImage(named: "like_selected")?.withRenderingMode(.alwaysOriginal)
@@ -82,7 +82,7 @@ final class ProductDetailViewController: BaseViewController {
     }
     
     @objc private func rightBarButtonTapped() {
-        guard let productId = shoppingItem?.productId else {return}
+        guard let productId = shoppingItem?.productId else { return }
         
         if UserDefaultsManager.shared.like != nil {
             if UserDefaultsManager.shared.like?[productId] != nil {

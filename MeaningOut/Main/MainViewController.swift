@@ -195,7 +195,7 @@ final class MainViewController: BaseViewController {
     }
     
     private func findAndRemoveRecentSearchKeyword(target keyword: String) {
-        guard var array = UserDefaultsManager.shared.recentSearch, !array.isEmpty else {return}
+        guard var array = UserDefaultsManager.shared.recentSearch, !array.isEmpty else { return }
         
         for i in 0...array.count - 1 {
             if array[i].trimmingCharacters(in: .whitespaces) == keyword.trimmingCharacters(in: .whitespaces) {
@@ -241,7 +241,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension MainViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let text = searchBar.text, !text.trimmingCharacters(in: .whitespaces).isEmpty else {return}
+        guard let text = searchBar.text, !text.trimmingCharacters(in: .whitespaces).isEmpty else { return }
         
         if UserDefaultsManager.shared.recentSearch != nil {
             self.findAndRemoveRecentSearchKeyword(target: text)

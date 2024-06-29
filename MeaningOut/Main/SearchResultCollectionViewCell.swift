@@ -19,12 +19,13 @@ final class SearchResultCollectionViewCell: BaseCollectionViewCell {
     
     var shoppingItem: ShoppingItem? {
         didSet {
-            guard let data = shoppingItem else {return}
+            guard let data = shoppingItem else { return }
             productImage.showAnimatedGradientSkeleton()
             productImage.kf.setImage(with: URL(string: data.imageURL), completionHandler: { result in
                 switch result {
                 case .success(_):
                     self.productImage.hideSkeleton()
+                
                 case .failure(let error):
                     print(error)
                     break
@@ -151,8 +152,8 @@ final class SearchResultCollectionViewCell: BaseCollectionViewCell {
     }
     
     func checkLikeButton() {
-        guard let dictionary = UserDefaultsManager.shared.like else {return}
-        guard let productId = shoppingItem?.productId else {return}
+        guard let dictionary = UserDefaultsManager.shared.like else { return }
+        guard let productId = shoppingItem?.productId else { return }
         if dictionary[productId] != nil {
             backView.backgroundColor = Constant.Color.primaryWhite
             backView.alpha = 1
@@ -165,8 +166,8 @@ final class SearchResultCollectionViewCell: BaseCollectionViewCell {
     }
     
     private func highlightSearchKeyword(keyword: String?, title: String?) {
-        guard let keyword = keyword else {return}
-        guard let title = title else {return}
+        guard let keyword = keyword else { return }
+        guard let title = title else { return }
         
         let attributed = NSMutableAttributedString(string: title, attributes: [.font: Constant.Font.system14, .foregroundColor: Constant.Color.primaryBlack])
         let range = NSString(string: title).range(of: keyword.trimmingCharacters(in: .whitespaces))

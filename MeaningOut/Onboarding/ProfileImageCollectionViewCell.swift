@@ -28,6 +28,7 @@ final class ProfileImageCollectionViewCell: BaseCollectionViewCell {
                 self.profileImageView.layer.borderColor = Constant.Color.signatureColor.cgColor
                 self.profileImageView.layer.borderWidth = 3
                 self.profileImageView.alpha = 1
+            
             case .unselected:
                 self.profileImageView.layer.borderColor = Constant.Color.primaryLightGray.cgColor
                 self.profileImageView.layer.borderWidth = 1

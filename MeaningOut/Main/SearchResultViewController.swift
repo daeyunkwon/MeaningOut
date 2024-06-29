@@ -82,6 +82,7 @@ final class SearchResultViewController: BaseViewController {
                     self.list.append(contentsOf: data.items)
                 }
                 self.collectionView.reloadData()
+            
             case .failure(let error):
                 self.showNetworkConnectFailAlert(type: .networkConnectFail) { _ in
                     print(error)
@@ -195,6 +196,7 @@ final class SearchResultViewController: BaseViewController {
                 self.collectionView.reloadData()
                 sender.isUserInteractionEnabled = true
                 self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .bottom, animated: true)
+            
             case .failure(let error):
                 self.showNetworkConnectFailAlert(type: .networkConnectFail) { _ in
                     print(error)
@@ -332,6 +334,7 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
                     self.list.append(contentsOf: data.items)
                 }
                 self.collectionView.reloadData()
+            
             case .failure(let error):
                 self.showNetworkConnectFailAlert(type: .networkConnectFail) { _ in
                     print(error)
@@ -345,7 +348,7 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
 
 extension SearchResultViewController: SearchResultCollectionViewCellDelegate {
     func likeButtonTapped(cell: SearchResultCollectionViewCell) {
-        guard let productId = cell.shoppingItem?.productId else {return}
+        guard let productId = cell.shoppingItem?.productId else { return }
         
         if UserDefaultsManager.shared.like != nil {
             if UserDefaultsManager.shared.like?[productId] != nil {

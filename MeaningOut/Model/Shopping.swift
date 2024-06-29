@@ -22,12 +22,12 @@ struct ShoppingItem: Codable {
     let productId: String?
     
     var linkURL: String {
-        guard let link = self.link, !link.isEmpty else {return ""}
+        guard let link = self.link, !link.isEmpty else { return "" }
         return link.replacingOccurrences(of: #"\"#, with: "")
     }
     
     var imageURL: String {
-        guard let image = self.image else {return ""}
+        guard let image = self.image else { return "" }
         return image.replacingOccurrences(of: #"\"#, with: "")
     }
     
@@ -44,7 +44,7 @@ struct ShoppingItem: Codable {
     }
     
     var titleString: String {
-        guard let title = self.title else {return ""}
+        guard let title = self.title else { return "" }
         return title.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
     }
 }
