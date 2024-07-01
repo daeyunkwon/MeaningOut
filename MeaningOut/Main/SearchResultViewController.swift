@@ -34,6 +34,21 @@ final class SearchResultViewController: BaseViewController {
     }
     private var sortType: SortType = .sim
     
+    var total: Double = 0
+    var buffer = Data() {
+        didSet {
+            let result = Double(buffer.count) / total
+            
+            let percentage = result * 100
+            
+            if result * 100 >= 100 {
+                progressLabel.text = "\(total)/\(total) 100%"
+            } else {
+                progressLabel.text = "\(percentage)/\(total) \(percentage.rounded())%"
+            }
+        }
+    }
+    
     //MARK: - UI Components
     
     private let resultCountLabel: UILabel = {
@@ -49,6 +64,14 @@ final class SearchResultViewController: BaseViewController {
     private let capsuleHighPriceButton = CapsuleButton(title: "가격높은순", tag: 3)
     
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout())
+    
+    private let progressLabel: UILabel = {
+        let label = UILabel()
+        
+        label.font = .systemFont(ofSize: 20, weight: .heavy)
+        label.textAlignment = .center
+        return label
+    }()
     
     //MARK: - Life Cycle
     
@@ -73,25 +96,27 @@ final class SearchResultViewController: BaseViewController {
         
         setupCollectionView()
         
-        NetworkManager.shared.fetchData(api: .shopping(query: self.searchKeyword ?? "", sort: self.sortType.rawValue, start: self.start), model: Shopping.self) { result in
-            switch result {
-            case .success(let data):
-                self.totalCount = data.total ?? 0
-                self.resultCountLabel.text = "\(self.totalCount.formatted())개의 검색 결과"
-                if self.page == 1 {
-                    self.list = data.items
-                } else {
-                    self.list.append(contentsOf: data.items)
-                }
-                self.collectionView.reloadData()
-            
-            case .failure(let error):
-                self.showNetworkConnectFailAlert(type: .networkConnectFail) { _ in
-                    print(error)
-                    self.popViewController()
-                }
-            }
-        }
+//        NetworkManager.shared.fetchData(api: .shopping(query: self.searchKeyword ?? "", sort: self.sortType.rawValue, start: self.start), model: Shopping.self) { result in
+//            switch result {
+//            case .success(let data):
+//                self.totalCount = data.total ?? 0
+//                self.resultCountLabel.text = "\(self.totalCount.formatted())개의 검색 결과"
+//                if self.page == 1 {
+//                    self.list = data.items
+//                } else {
+//                    self.list.append(contentsOf: data.items)
+//                }
+//                self.collectionView.reloadData()
+//            
+//            case .failure(let error):
+//                self.showNetworkConnectFailAlert(type: .networkConnectFail) { _ in
+//                    print(error)
+//                    self.popViewController()
+//                }
+//            }
+//        }
+        
+        NetworkManager.shared.fetchDataUsingURLSessionDelegate(api: .shopping(query: self.searchKeyword ?? "", sort: self.sortType.rawValue, start: self.start), delegate: self)
     }
     
     private func setupCollectionView() {
@@ -145,6 +170,11 @@ final class SearchResultViewController: BaseViewController {
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
+        
+        view.addSubview(progressLabel)
+        progressLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
     }
     
     override func configureUI() {
@@ -153,6 +183,7 @@ final class SearchResultViewController: BaseViewController {
             $0.addTarget(self, action: #selector(capsuleOptionButtonTapped), for: .touchUpInside)
         }
         self.checkStatusCapsuleOptionButton()
+        self.progressLabel.isHidden = true
     }
     
     static func layout() -> UICollectionViewLayout {
@@ -185,26 +216,28 @@ final class SearchResultViewController: BaseViewController {
     }
     
     private func executeFetchShopping(sender: UIButton) {
-        NetworkManager.shared.fetchData(api: .shopping(query: searchKeyword ?? "", sort: self.sortType.rawValue, start: self.start), model: Shopping.self) { result in
-            switch result {
-            case .success(let data):
-                self.totalCount = data.total ?? 0
-                self.resultCountLabel.text = "\(self.totalCount.formatted())개의 검색 결과"
-                if self.page == 1 {
-                    self.list = data.items
-                } else {
-                    self.list.append(contentsOf: data.items)
-                }
-                self.collectionView.reloadData()
-                sender.isUserInteractionEnabled = true
-                self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .bottom, animated: true)
-            
-            case .failure(let error):
-                self.showNetworkConnectFailAlert(type: .networkConnectFail) { _ in
-                    print(error)
-                }
-            }
-        }
+//        NetworkManager.shared.fetchData(api: .shopping(query: searchKeyword ?? "", sort: self.sortType.rawValue, start: self.start), model: Shopping.self) { result in
+//            switch result {
+//            case .success(let data):
+//                self.totalCount = data.total ?? 0
+//                self.resultCountLabel.text = "\(self.totalCount.formatted())개의 검색 결과"
+//                if self.page == 1 {
+//                    self.list = data.items
+//                } else {
+//                    self.list.append(contentsOf: data.items)
+//                }
+//                self.collectionView.reloadData()
+//                sender.isUserInteractionEnabled = true
+//                self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .bottom, animated: true)
+//            
+//            case .failure(let error):
+//                self.showNetworkConnectFailAlert(type: .networkConnectFail) { _ in
+//                    print(error)
+//                }
+//            }
+//        }
+        
+        NetworkManager.shared.fetchDataUsingURLSessionDelegate(api: .shopping(query: self.searchKeyword ?? "", sort: self.sortType.rawValue, start: self.start), delegate: self)
     }
     
     private func checkStatusCapsuleOptionButton() {
@@ -325,24 +358,25 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
     }
     
     private func executeFetchShopping() {
-        NetworkManager.shared.fetchData(api: .shopping(query: self.searchKeyword ?? "", sort: self.sortType.rawValue, start: self.start), model: Shopping.self) { result in
-            switch result {
-            case .success(let data):
-                self.totalCount = data.total ?? 0
-                self.resultCountLabel.text = "\(self.totalCount.formatted())개의 검색 결과"
-                if self.page == 1 {
-                    self.list = data.items
-                } else {
-                    self.list.append(contentsOf: data.items)
-                }
-                self.collectionView.reloadData()
-            
-            case .failure(let error):
-                self.showNetworkConnectFailAlert(type: .networkConnectFail) { _ in
-                    print(error)
-                }
-            }
-        }
+//        NetworkManager.shared.fetchData(api: .shopping(query: self.searchKeyword ?? "", sort: self.sortType.rawValue, start: self.start), model: Shopping.self) { result in
+//            switch result {
+//            case .success(let data):
+//                self.totalCount = data.total ?? 0
+//                self.resultCountLabel.text = "\(self.totalCount.formatted())개의 검색 결과"
+//                if self.page == 1 {
+//                    self.list = data.items
+//                } else {
+//                    self.list.append(contentsOf: data.items)
+//                }
+//                self.collectionView.reloadData()
+//            
+//            case .failure(let error):
+//                self.showNetworkConnectFailAlert(type: .networkConnectFail) { _ in
+//                    print(error)
+//                }
+//            }
+//        }
+        NetworkManager.shared.fetchDataUsingURLSessionDelegate(api: .shopping(query: self.searchKeyword ?? "", sort: self.sortType.rawValue, start: self.start), delegate: self)
     }
 }
 
@@ -364,5 +398,65 @@ extension SearchResultViewController: SearchResultCollectionViewCellDelegate {
         }
         
         cell.checkLikeButton()
+    }
+}
+
+//MARK: - URLSessionDataDelegate
+
+extension SearchResultViewController: URLSessionDataDelegate {
+    
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse) async -> URLSession.ResponseDisposition {
+        if let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) {
+            let contentLength = response.value(forHTTPHeaderField: "Content-Length") ?? ""
+            [capsuleDateButton, capsuleAccuracyButton, capsuleRowPriceButton, capsuleHighPriceButton].forEach {
+                $0.isUserInteractionEnabled = false
+            }
+            self.progressLabel.isHidden = false
+            self.total = Double(contentLength) ?? 0
+            self.buffer = Data()
+            
+            return .allow
+        } else {
+            return .cancel
+        }
+    }
+    
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+        self.buffer.append(data)
+    }
+    
+    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: (any Error)?) {
+        if let error = error {
+            self.showNetworkConnectFailAlert(type: .networkConnectFail) { _ in
+                print(error)
+                if self.page == 1 {
+                    self.popViewController()
+                }
+            }
+            return
+        }
+        
+        do {
+            let data = try JSONDecoder().decode(Shopping.self, from: buffer)
+            self.totalCount = data.total ?? 0
+            self.resultCountLabel.text = "\(self.totalCount.formatted())개의 검색 결과"
+            if self.page == 1 {
+                self.list = data.items
+            } else {
+                self.list.append(contentsOf: data.items)
+            }
+            self.collectionView.reloadData()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.progressLabel.isHidden = true
+                [self.capsuleDateButton, self.capsuleAccuracyButton, self.capsuleRowPriceButton, self.capsuleHighPriceButton].forEach {
+                    $0.isUserInteractionEnabled = true
+                }
+            }
+        } catch {
+            self.showNetworkConnectFailAlert(type: .networkConnectFail) { _ in
+                
+            }
+        }
     }
 }
