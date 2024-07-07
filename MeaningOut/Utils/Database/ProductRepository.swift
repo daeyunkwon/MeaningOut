@@ -28,6 +28,10 @@ class ProductRepository {
         return realm.objects(Product.self).sorted(byKeyPath: Product.Key.registrationDate.rawValue, ascending: false)
     }
     
+    func fetchAllItemSorted(key: Product.Key, ascending: Bool) -> Results<Product> {
+        return realm.objects(Product.self).sorted(byKeyPath: key.rawValue, ascending: ascending)
+    }
+    
     func isItemSaved(productID: String) -> Bool {
         let result = realm.objects(Product.self).where {
             $0.productID == productID

@@ -15,12 +15,12 @@ final class LikeViewController: BaseViewController {
     //MARK: - Properties
     
     private enum SortType: String {
-        case sim
         case date
+        case name
         case asc
         case dsc
     }
-    private var sortType: SortType = .sim
+    private var sortType: SortType = .date
     
     var products: [Product] = [] {
         didSet {
@@ -54,8 +54,8 @@ final class LikeViewController: BaseViewController {
         return label
     }()
     
-    private let capsuleAccuracyButton = CapsuleButton(title: "정확도", tag: 0)
-    private let capsuleDateButton = CapsuleButton(title: "날짜순", tag: 1)
+    private let capsuleDateButton = CapsuleButton(title: "담은순", tag: 0)
+    private let capsuleNameButton = CapsuleButton(title: "이름순", tag: 1)
     private let capsuleRowPriceButton = CapsuleButton(title: "가격낮은순", tag: 2)
     private let capsuleHighPriceButton = CapsuleButton(title: "가격높은순", tag: 3)
     
@@ -121,26 +121,26 @@ final class LikeViewController: BaseViewController {
             make.top.leading.equalTo(view.safeAreaLayoutGuide).inset(20)
         }
         
-        view.addSubview(capsuleAccuracyButton)
-        capsuleAccuracyButton.snp.makeConstraints { make in
+        view.addSubview(capsuleDateButton)
+        capsuleDateButton.snp.makeConstraints { make in
             make.top.equalTo(resultCountLabel.snp.bottom).offset(15)
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
             make.width.equalTo(60)
             make.height.equalTo(35)
         }
         
-        view.addSubview(capsuleDateButton)
-        capsuleDateButton.snp.makeConstraints { make in
-            make.top.equalTo(capsuleAccuracyButton.snp.top)
-            make.leading.equalTo(capsuleAccuracyButton.snp.trailing).offset(5)
+        view.addSubview(capsuleNameButton)
+        capsuleNameButton.snp.makeConstraints { make in
+            make.top.equalTo(capsuleDateButton.snp.top)
+            make.leading.equalTo(capsuleDateButton.snp.trailing).offset(5)
             make.width.equalTo(60)
             make.height.equalTo(35)
         }
         
         view.addSubview(capsuleHighPriceButton)
         capsuleHighPriceButton.snp.makeConstraints { make in
-            make.top.equalTo(capsuleDateButton.snp.top)
-            make.leading.equalTo(capsuleDateButton.snp.trailing).offset(5)
+            make.top.equalTo(capsuleNameButton.snp.top)
+            make.leading.equalTo(capsuleNameButton.snp.trailing).offset(5)
             make.width.equalTo(80)
             make.height.equalTo(35)
         }
@@ -155,7 +155,7 @@ final class LikeViewController: BaseViewController {
                                 
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(capsuleAccuracyButton.snp.bottom).offset(10)
+            make.top.equalTo(capsuleDateButton.snp.bottom).offset(10)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
@@ -164,7 +164,7 @@ final class LikeViewController: BaseViewController {
     override func configureUI() {
         super.configureUI()
         
-        [self.capsuleAccuracyButton, self.capsuleDateButton, self.capsuleHighPriceButton, self.capsuleRowPriceButton].forEach {
+        [self.capsuleDateButton, self.capsuleNameButton, self.capsuleHighPriceButton, self.capsuleRowPriceButton].forEach {
             $0.addTarget(self, action: #selector(self.capsuleOptionButtonTapped), for: .touchUpInside)
             $0.layer.cornerRadius = 10
         }
@@ -189,10 +189,10 @@ final class LikeViewController: BaseViewController {
     
     private func checkStatusCapsuleOptionButton() {
         switch sortType {
-        case .sim:
-            updateUICapsuleOptionButton(selected: capsuleAccuracyButton)
         case .date:
             updateUICapsuleOptionButton(selected: capsuleDateButton)
+        case .name:
+            updateUICapsuleOptionButton(selected: capsuleNameButton)
         case .asc:
             updateUICapsuleOptionButton(selected: capsuleRowPriceButton)
         case .dsc:
@@ -201,7 +201,7 @@ final class LikeViewController: BaseViewController {
     }
     
     private func updateUICapsuleOptionButton(selected button: UIButton) {
-        [capsuleAccuracyButton, capsuleDateButton, capsuleHighPriceButton, capsuleRowPriceButton].forEach {
+        [capsuleDateButton, capsuleNameButton, capsuleHighPriceButton, capsuleRowPriceButton].forEach {
             if $0 == button {
                 $0.backgroundColor = Constant.Color.primaryDarkGray
                 $0.setTitleColor(Constant.Color.primaryWhite, for: .normal)
@@ -219,9 +219,9 @@ final class LikeViewController: BaseViewController {
         var currtenType: Int //현재 선택된 옵션 버튼
         
         switch self.sortType {
-        case .sim:
-            currtenType = 0
         case .date:
+            currtenType = 0
+        case .name:
             currtenType = 1
         case .asc:
             currtenType = 2
@@ -235,10 +235,21 @@ final class LikeViewController: BaseViewController {
         }
         
         switch sender.tag {
-        case 0: self.sortType = .sim
-        case 1: self.sortType = .date
-        case 2: self.sortType = .asc
-        case 3: self.sortType = .dsc
+        case 0: 
+            self.sortType = .date
+            products = Array(repository.fetchAllItemSorted(key: .registrationDate, ascending: false))
+        
+        case 1: 
+            self.sortType = .name
+            products = Array(repository.fetchAllItemSorted(key: .title, ascending: true))
+        
+        case 2: 
+            self.sortType = .asc
+            products = Array(repository.fetchAllItemSorted(key: .lprice, ascending: true))
+        
+        case 3: 
+            self.sortType = .dsc
+            products = Array(repository.fetchAllItemSorted(key: .lprice, ascending: false))
         default: break
         }
         self.checkStatusCapsuleOptionButton()
