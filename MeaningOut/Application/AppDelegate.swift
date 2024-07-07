@@ -7,15 +7,18 @@
 
 import UIKit
 
+import RealmSwift
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
         sleep(2)
         NetworkCheckManager.shared.startMonitoring() //네트워크 연결 상태 모니터링 시작하기
+        print(Realm.Configuration.defaultConfiguration.fileURL ?? "Realm fileURL None")
         return true
     }
 
