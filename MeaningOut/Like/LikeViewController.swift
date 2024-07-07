@@ -215,8 +215,7 @@ final class LikeViewController: BaseViewController {
     }
     
     @objc private func capsuleOptionButtonTapped(sender: UIButton) {
-        
-        var currtenType: Int //현재 선택된 옵션 버튼
+        var currtenType: Int //현재 선택된 옵션 버튼 판별용
         
         switch self.sortType {
         case .date:
@@ -235,23 +234,24 @@ final class LikeViewController: BaseViewController {
         }
         
         switch sender.tag {
-        case 0: 
+        case 0:
             self.sortType = .date
             products = Array(repository.fetchAllItemSorted(key: .registrationDate, ascending: false))
         
-        case 1: 
+        case 1:
             self.sortType = .name
             products = Array(repository.fetchAllItemSorted(key: .title, ascending: true))
         
-        case 2: 
+        case 2:
             self.sortType = .asc
             products = Array(repository.fetchAllItemSorted(key: .lprice, ascending: true))
         
-        case 3: 
+        case 3:
             self.sortType = .dsc
             products = Array(repository.fetchAllItemSorted(key: .lprice, ascending: false))
         default: break
         }
+        
         self.checkStatusCapsuleOptionButton()
     }
     
@@ -315,7 +315,20 @@ extension LikeViewController: SearchResultCollectionViewCellDelegate {
             if let product = repository.fetchItem(productID: productId) {
                 ImageFileManager.shared.removeImageFromDocument(filename: product.imageID)
                 repository.deleteItem(data: product)
-                self.products = Array(repository.fetchAllItem())
+                
+                switch sortType {
+                case .date:
+                    products = Array(repository.fetchAllItemSorted(key: .registrationDate, ascending: false))
+                
+                case .name:
+                    products = Array(repository.fetchAllItemSorted(key: .title, ascending: true))
+                
+                case .asc:
+                    products = Array(repository.fetchAllItemSorted(key: .lprice, ascending: true))
+                
+                case .dsc:
+                    products = Array(repository.fetchAllItemSorted(key: .lprice, ascending: false))
+                }
             }
             
         } else {
