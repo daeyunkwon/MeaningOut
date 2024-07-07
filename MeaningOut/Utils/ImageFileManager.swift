@@ -35,7 +35,7 @@ final class ImageFileManager {
         }
     }
     
-    func saveImageToDocument(image: UIImage, filename: String, completion: @escaping () -> Void) {
+    func saveImageToDocument(image: UIImage, filename: String) {
         guard let documentDirectory = FileManager.default.urls(
             for: .documentDirectory,
             in: .userDomainMask).first else { return }
@@ -46,7 +46,7 @@ final class ImageFileManager {
         
         do {
             try data.write(to: fileURL) //덮어쓰기 방식으로 동작함
-            completion()
+            
         } catch {
             print("file save error", error)
         }

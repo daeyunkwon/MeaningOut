@@ -18,17 +18,21 @@ class Product: Object {
     @Persisted var hprice: Int?
     @Persisted var imageID: String
     @Persisted var registrationDate: Date
+    @Persisted var isLike: Bool
+    @Persisted var productID: String?
     
     
-    convenience init(title: String, mallName: String, link: String, lprice: Int?, hprice: Int?, imageID: String) {
+    convenience init(title: String, mallName: String, link: String, lprice: Int?, hprice: Int?, productID: String?) {
         self.init()
         self.title = title
         self.mallName = mallName
         self.link = link
         self.lprice = lprice
         self.hprice = hprice
-        self.imageID = imageID
+        self.imageID = "\(self.id)"
         self.registrationDate = Date()
+        self.isLike = true
+        self.productID = productID
     }
     
     enum Key: String {

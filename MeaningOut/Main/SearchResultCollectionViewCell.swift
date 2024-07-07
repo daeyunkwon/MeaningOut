@@ -15,6 +15,14 @@ final class SearchResultCollectionViewCell: BaseCollectionViewCell {
     
     //MARK: - Properties
     
+    enum ViewType {
+        case searchResult
+        case like
+    }
+    var viewType: ViewType = .searchResult
+    
+    let repository = ProductRepository()
+    
     var searchKeyword: String?
     
     var shoppingItem: ShoppingItem? {
@@ -40,14 +48,36 @@ final class SearchResultCollectionViewCell: BaseCollectionViewCell {
         }
     }
     
+    var product: Product? {
+        didSet {
+            guard let data = product else { return }
+            productImage.showAnimatedGradientSkeleton()
+            
+            productImage.image = ImageFileManager.shared.loadImageToDocument(filename: data.imageID)
+            if productImage.image == UIImage(systemName: "photo") {
+                productImage.contentMode = .scaleAspectFit
+            } else {
+                productImage.contentMode = .scaleAspectFill
+            }
+            
+            productTitle.text = data.title
+            mallName.text = data.mallName
+            price.text = (data.lprice?.formatted() ?? "") + "원"
+            
+            checkLikeButton()
+            productImage.hideSkeleton()
+        }
+    }
+    
     weak var delegate: SearchResultCollectionViewCellDelegate?
     
     //MARK: - UI Components
     
-    private let productImage: UIImageView = {
+    let productImage: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.layer.cornerRadius = 10
+        iv.tintColor = .white.withAlphaComponent(0.9)
         iv.backgroundColor = Constant.Color.primaryLightGray
         iv.clipsToBounds = true
         iv.isSkeletonable = true
@@ -152,16 +182,30 @@ final class SearchResultCollectionViewCell: BaseCollectionViewCell {
     }
     
     func checkLikeButton() {
-        guard let dictionary = UserDefaultsManager.shared.like else { return }
-        guard let productId = shoppingItem?.productId else { return }
-        if dictionary[productId] != nil {
-            backView.backgroundColor = Constant.Color.primaryWhite
-            backView.alpha = 1
-            likeButton.setImage(UIImage(named: "like_selected")?.withRenderingMode(.alwaysOriginal), for: .normal)
-        } else {
-            backView.backgroundColor = Constant.Color.primaryGray
-            backView.alpha = 0.5
-            likeButton.setImage(UIImage(named: "like_unselected")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        switch viewType {
+        case .searchResult:
+            guard let productId = shoppingItem?.productId else { return }
+            if repository.isItemSaved(productID: productId) {
+                backView.backgroundColor = Constant.Color.primaryWhite
+                backView.alpha = 1
+                likeButton.setImage(UIImage(named: "like_selected")?.withRenderingMode(.alwaysOriginal), for: .normal)
+            } else {
+                backView.backgroundColor = Constant.Color.primaryGray
+                backView.alpha = 0.5
+                likeButton.setImage(UIImage(named: "like_unselected")?.withRenderingMode(.alwaysOriginal), for: .normal)
+            }
+        
+        case .like:
+            guard let productId = product?.productID else { return }
+            if repository.isItemSaved(productID: productId) {
+                backView.backgroundColor = Constant.Color.primaryWhite
+                backView.alpha = 1
+                likeButton.setImage(UIImage(named: "like_selected")?.withRenderingMode(.alwaysOriginal), for: .normal)
+            } else {
+                backView.backgroundColor = Constant.Color.primaryGray
+                backView.alpha = 0.5
+                likeButton.setImage(UIImage(named: "like_unselected")?.withRenderingMode(.alwaysOriginal), for: .normal)
+            }
         }
     }
     

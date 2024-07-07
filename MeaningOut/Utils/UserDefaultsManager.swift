@@ -35,7 +35,6 @@ final class UserDefaultsManager {
         case profile
         case recentSearch
         case joinDate
-        case like
     }
     
     @UserDefaultsPropertyWrapper(key: Key.nickname.rawValue, defaultValue: nil, storage: UserDefaults(suiteName: "MyUserDefaults") ?? UserDefaults.standard)
@@ -49,9 +48,6 @@ final class UserDefaultsManager {
     
     @UserDefaultsPropertyWrapper(key: Key.joinDate.rawValue, defaultValue: nil, storage: UserDefaults(suiteName: "MyUserDefaults") ?? UserDefaults.standard)
     var joinDate: String?
-    
-    @UserDefaultsPropertyWrapper(key: Key.like.rawValue, defaultValue: nil, storage: UserDefaults(suiteName: "MyUserDefaults") ?? UserDefaults.standard)
-    var like: [String: Bool]?
     
     func removeRecentSearchData() {
         userDefaults.removeObject(forKey: Key.recentSearch.rawValue)

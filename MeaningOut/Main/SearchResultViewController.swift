@@ -49,6 +49,8 @@ final class SearchResultViewController: BaseViewController {
         }
     }
     
+    let repository = ProductRepository()
+    
     //MARK: - UI Components
     
     private let resultCountLabel: UILabel = {
@@ -318,6 +320,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         }
         cell.delegate = self
         cell.searchKeyword = self.searchKeyword
+        cell.viewType = .searchResult
         cell.shoppingItem = list[indexPath.item]
         return cell
     }
@@ -386,15 +389,25 @@ extension SearchResultViewController: SearchResultCollectionViewCellDelegate {
     func likeButtonTapped(cell: SearchResultCollectionViewCell) {
         guard let productId = cell.shoppingItem?.productId else { return }
         
-        if UserDefaultsManager.shared.like != nil {
-            if UserDefaultsManager.shared.like?[productId] != nil {
-                UserDefaultsManager.shared.like?.removeValue(forKey: productId)
-            } else {
-                UserDefaultsManager.shared.like?[productId] = true
+        if repository.isItemSaved(productID: productId) {
+            //저장되어 있는 경우
+            if let product = repository.fetchItem(productID: productId) {
+                ImageFileManager.shared.removeImageFromDocument(filename: product.imageID)
+                repository.deleteItem(data: product)
             }
+            
         } else {
-            let dict: [String: Bool] = [productId: true]
-            UserDefaultsManager.shared.like = dict
+            //저장 안된 경우
+            guard let item = cell.shoppingItem else { return }
+            guard let mallName = item.mallName else { return }
+            let lprice = Int(item.lprice ?? "")
+            let hprice = Int(item.hprice ?? "")
+            
+            let data = Product(title: item.titleString, mallName: mallName, link: item.linkURL, lprice: lprice, hprice: hprice, productID: productId)
+            repository.createItem(data: data)
+            if let image = cell.productImage.image {
+                ImageFileManager.shared.saveImageToDocument(image: image, filename: data.imageID)
+            }
         }
         
         cell.checkLikeButton()

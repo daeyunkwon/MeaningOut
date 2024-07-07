@@ -21,6 +21,8 @@ final class SettingViewController: BaseViewController {
         case withdrawal
     }
     
+    let repository = ProductRepository()
+    
     //MARK: - UI Components
     
     private let tableView = UITableView()
@@ -73,6 +75,7 @@ final class SettingViewController: BaseViewController {
         let alert = UIAlertController(title: "탈퇴하기", message: "탈퇴를 하면 데이터가 모두 초기화됩니다. 탈퇴 하시겠습니까?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "취소", style: .cancel))
         alert.addAction(UIAlertAction(title: "확인", style: .destructive, handler: { okAction in
+            self.repository.deleteAllItem()
             UserDefaultsManager.shared.removeUserData {
                 let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
                 let sceneDelegate = windowScene?.delegate as? SceneDelegate

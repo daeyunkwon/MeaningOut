@@ -36,6 +36,8 @@ final class SettingOptionTableViewCell: BaseTableViewCell {
         }
     }
     
+    let repository = ProductRepository()
+    
     //MARK: - UI Components
     
     private let titleLabel: UILabel = {
@@ -84,7 +86,7 @@ final class SettingOptionTableViewCell: BaseTableViewCell {
     //MARK: - Functions
     
     private func configureAttributedStringForLikeCountButton() {
-        let likeCount = UserDefaultsManager.shared.like?.count ?? 0
+        let likeCount = Array(repository.fetchAllItem()).count
         let attributeString = NSMutableAttributedString(string: "\(likeCount)개", attributes: [.font: UIFont.boldSystemFont(ofSize: 14), .foregroundColor: Constant.Color.primaryBlack])
         let addAttri = NSAttributedString(string: "의 상품", attributes: [.font: Constant.Font.system14, .foregroundColor: Constant.Color.primaryBlack])
         attributeString.append(addAttri)

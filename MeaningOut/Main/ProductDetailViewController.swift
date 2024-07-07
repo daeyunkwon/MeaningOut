@@ -8,6 +8,7 @@
 import UIKit
 import WebKit
 
+import Kingfisher
 import SnapKit
 
 final class ProductDetailViewController: BaseViewController {
@@ -15,6 +16,8 @@ final class ProductDetailViewController: BaseViewController {
     //MARK: - Properties
     
     var shoppingItem: ShoppingItem?
+    
+    let repository = ProductRepository()
     
     //MARK: - UI Components
     
@@ -71,10 +74,10 @@ final class ProductDetailViewController: BaseViewController {
     //MARK: - Functions
     
     private func checkLikeButton() {
-        guard let dictionary = UserDefaultsManager.shared.like else { return }
+        
         guard let productId = shoppingItem?.productId else { return }
         
-        if dictionary[productId] != nil {
+        if repository.isItemSaved(productID: productId) {
             self.rightBarButton.image = UIImage(named: "like_selected")?.withRenderingMode(.alwaysOriginal)
         } else {
             self.rightBarButton.image = UIImage(named: "like_unselected")?.withRenderingMode(.alwaysOriginal)
@@ -84,17 +87,38 @@ final class ProductDetailViewController: BaseViewController {
     @objc private func rightBarButtonTapped() {
         guard let productId = shoppingItem?.productId else { return }
         
-        if UserDefaultsManager.shared.like != nil {
-            if UserDefaultsManager.shared.like?[productId] != nil {
-                UserDefaultsManager.shared.like?.removeValue(forKey: productId)
-            } else {
-                UserDefaultsManager.shared.like?[productId] = true
+        if repository.isItemSaved(productID: productId) {
+            //저장되어 있는 경우
+            if let product = repository.fetchItem(productID: productId) {
+                ImageFileManager.shared.removeImageFromDocument(filename: product.imageID)
+                repository.deleteItem(data: product)
             }
+            
         } else {
-            let dict: [String: Bool] = [productId: true]
-            UserDefaultsManager.shared.like = dict
+            //저장 안된 경우
+            guard let item = shoppingItem else { return }
+            guard let mallName = item.mallName else { return }
+            let lprice = Int(item.lprice ?? "")
+            let hprice = Int(item.hprice ?? "")
+            
+            let data = Product(title: item.titleString, mallName: mallName, link: item.linkURL, lprice: lprice, hprice: hprice, productID: productId)
+            repository.createItem(data: data)
+            
+            
+            ImageDownloader.default.downloadImage(with: URL(string: item.imageURL) ?? URL(fileURLWithPath: ""), options: [.transition(.fade(1))]) { result in
+                switch result {
+                case .success(let imageResult):
+                    
+                    let image = imageResult.image
+                    ImageFileManager.shared.saveImageToDocument(image: image, filename: data.imageID)
+                    
+                case .failure(let error):
+                    print("Image download failed: \(error.localizedDescription)")
+                }
+            }
         }
         
         self.checkLikeButton()
     }
 }
+

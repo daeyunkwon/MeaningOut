@@ -28,6 +28,25 @@ class ProductRepository {
         return realm.objects(Product.self).sorted(byKeyPath: Product.Key.registrationDate.rawValue, ascending: false)
     }
     
+    func isItemSaved(productID: String) -> Bool {
+        let result = realm.objects(Product.self).where {
+            $0.productID == productID
+        }
+        
+        if result.isEmpty {
+            return false
+        } else {
+            return true
+        }
+    }
+    
+    func fetchItem(productID: String) -> Product? {
+        let result = realm.objects(Product.self).where {
+            $0.productID == productID
+        }
+        return result.first
+    }
+    
     func deleteItem(data: Product) {
         do {
             try realm.write {
@@ -39,4 +58,17 @@ class ProductRepository {
             print(error)
         }
     }
+    
+    func deleteAllItem() {
+        do {
+            try realm.write {
+                realm.deleteAll()
+                print("Realm All Data Delete Succeed")
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    
 }
