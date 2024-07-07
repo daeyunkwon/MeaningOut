@@ -30,6 +30,7 @@ final class LikeViewController: BaseViewController {
                 self.viewDisplayType = .nonEmpty
             }
             self.collectionView.reloadData()
+            resultCountLabel.text = "전체 \(self.products.count)개"
         }
     }
     
@@ -299,7 +300,11 @@ extension LikeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = ProductDetailViewController()
-        
+        vc.product = self.products[indexPath.row]
+        vc.linkURL = self.products[indexPath.row].link
+        vc.itemTitle = self.products[indexPath.row].title
+        vc.productID = self.products[indexPath.row].productID
+        vc.viewType = .fromLikeVC
         pushViewController(vc)
     }
 }
@@ -338,7 +343,7 @@ extension LikeViewController: SearchResultCollectionViewCellDelegate {
             let lprice = Int(item.lprice ?? "")
             let hprice = Int(item.hprice ?? "")
             
-            let data = Product(title: item.titleString, mallName: mallName, link: item.linkURL, lprice: lprice, hprice: hprice, productID: productId)
+            let data = Product(title: item.titleString, mallName: mallName, link: item.linkURL, lprice: lprice, hprice: hprice, productID: productId, imageURL: item.imageURL)
             repository.createItem(data: data)
             if let image = cell.productImage.image {
                 ImageFileManager.shared.saveImageToDocument(image: image, filename: data.imageID)

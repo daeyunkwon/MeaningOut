@@ -333,6 +333,10 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = ProductDetailViewController()
+        vc.viewType = .fromSearchResultVC
+        vc.itemTitle = self.list[indexPath.row].titleString
+        vc.linkURL = self.list[indexPath.row].linkURL
+        vc.productID = self.list[indexPath.row].productId
         vc.shoppingItem = self.list[indexPath.row]
         pushViewController(vc)
     }
@@ -409,7 +413,7 @@ extension SearchResultViewController: SearchResultCollectionViewCellDelegate {
             let lprice = Int(item.lprice ?? "")
             let hprice = Int(item.hprice ?? "")
             
-            let data = Product(title: item.titleString, mallName: mallName, link: item.linkURL, lprice: lprice, hprice: hprice, productID: productId)
+            let data = Product(title: item.titleString, mallName: mallName, link: item.linkURL, lprice: lprice, hprice: hprice, productID: productId, imageURL: item.imageURL)
             repository.createItem(data: data)
             if let image = cell.productImage.image {
                 ImageFileManager.shared.saveImageToDocument(image: image, filename: data.imageID)
