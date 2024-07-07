@@ -36,7 +36,7 @@ final class SettingOptionTableViewCell: BaseTableViewCell {
         }
     }
     
-    let repository = ProductRepository()
+    private let repository = ProductRepository()
     
     //MARK: - UI Components
     

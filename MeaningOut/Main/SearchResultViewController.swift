@@ -49,7 +49,7 @@ final class SearchResultViewController: BaseViewController {
         }
     }
     
-    let repository = ProductRepository()
+    private let repository = ProductRepository()
     
     //MARK: - UI Components
     

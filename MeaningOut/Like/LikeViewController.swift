@@ -22,7 +22,7 @@ final class LikeViewController: BaseViewController {
     }
     private var sortType: SortType = .date
     
-    var products: [Product] = [] {
+    private var products: [Product] = [] {
         didSet {
             if products.isEmpty {
                 self.viewDisplayType = .empty
@@ -34,7 +34,7 @@ final class LikeViewController: BaseViewController {
         }
     }
     
-    let repository = ProductRepository()
+    private let repository = ProductRepository()
     
     private enum ViewDisplayType {
         case empty

@@ -21,7 +21,7 @@ final class SearchResultCollectionViewCell: BaseCollectionViewCell {
     }
     var viewType: ViewType = .searchResult
     
-    let repository = ProductRepository()
+    private let repository = ProductRepository()
     
     var searchKeyword: String?
     

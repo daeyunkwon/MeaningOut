@@ -17,9 +17,9 @@ final class ProductDetailViewController: BaseViewController {
     
     var shoppingItem: ShoppingItem?
     var product: Product?
-    var backupProduct: Product?
+    private var backupProduct: Product?
     
-    let repository = ProductRepository()
+    private let repository = ProductRepository()
     
     var itemTitle: String?
     var linkURL: String?

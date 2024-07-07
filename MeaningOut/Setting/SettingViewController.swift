@@ -21,7 +21,7 @@ final class SettingViewController: BaseViewController {
         case withdrawal
     }
     
-    let repository = ProductRepository()
+    private let repository = ProductRepository()
     
     //MARK: - UI Components
     
