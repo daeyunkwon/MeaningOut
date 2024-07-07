@@ -186,6 +186,12 @@ final class SearchResultViewController: BaseViewController {
         }
         self.checkStatusCapsuleOptionButton()
         self.progressLabel.isHidden = true
+        
+        DispatchQueue.main.async {
+            [self.capsuleAccuracyButton, self.capsuleDateButton, self.capsuleHighPriceButton, self.capsuleRowPriceButton].forEach {
+                $0.layer.cornerRadius = $0.bounds.height / 2
+            }
+        }
     }
     
     static func layout() -> UICollectionViewLayout {

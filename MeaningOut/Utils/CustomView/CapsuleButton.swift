@@ -26,9 +26,5 @@ final class CapsuleButton: UIButton {
         self.backgroundColor = Constant.Color.primaryWhite
         self.setTitleColor(Constant.Color.primaryBlack, for: .normal)
         self.titleLabel?.font = Constant.Font.system13
-        
-        DispatchQueue.main.async {
-            self.layer.cornerRadius = self.bounds.height / 2
-        }
     }
 }
