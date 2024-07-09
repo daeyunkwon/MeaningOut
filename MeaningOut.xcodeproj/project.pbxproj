@@ -45,6 +45,7 @@
 		443A3DD32C1ECA4800C426FD /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 443A3DD22C1ECA4800C426FD /* SkeletonView */; };
 		443A3E092C216B4700C426FD /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3E082C216B4700C426FD /* UIViewController+Extension.swift */; };
 		44520B832C3D49790004685D /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44520B822C3D49790004685D /* Observable.swift */; };
+		44520B852C3D4B130004685D /* ProfileSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44520B842C3D4B130004685D /* ProfileSettingViewModel.swift */; };
 		449F27052C2FFB13005DEEE4 /* NAVERAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449F27012C2FFB13005DEEE4 /* NAVERAPI.swift */; };
 		449F27062C2FFB13005DEEE4 /* NetworkCheckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449F27022C2FFB13005DEEE4 /* NetworkCheckManager.swift */; };
 		449F27072C2FFB13005DEEE4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449F27032C2FFB13005DEEE4 /* NetworkManager.swift */; };
@@ -108,6 +109,7 @@
 		443A3DCF2C1DFF7C00C426FD /* SettingProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingProfileTableViewCell.swift; sourceTree = "<group>"; };
 		443A3E082C216B4700C426FD /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		44520B822C3D49790004685D /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		44520B842C3D4B130004685D /* ProfileSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewModel.swift; sourceTree = "<group>"; };
 		449F27012C2FFB13005DEEE4 /* NAVERAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NAVERAPI.swift; sourceTree = "<group>"; };
 		449F27022C2FFB13005DEEE4 /* NetworkCheckManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkCheckManager.swift; sourceTree = "<group>"; };
 		449F27032C2FFB13005DEEE4 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -216,7 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				443A3D952C1B1CEF00C426FD /* OnboardingViewController.swift */,
-				4411F1AD2C1B003200878AFE /* ProfileSettingViewController.swift */,
+				44520B862C3D6A5E0004685D /* ProfileSetting */,
 				443A3DA82C1BE1B600C426FD /* ProfileImageSettingViewController.swift */,
 				443A3DAF2C1C044900C426FD /* ProfileImageCollectionViewCell.swift */,
 			);
@@ -282,6 +284,31 @@
 				443A3D9A2C1B219400C426FD /* AlfaSlabOne-Regular.ttf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		44520B862C3D6A5E0004685D /* ProfileSetting */ = {
+			isa = PBXGroup;
+			children = (
+				44520B872C3D6A680004685D /* ViewModel */,
+				44520B882C3D6A740004685D /* View */,
+			);
+			path = ProfileSetting;
+			sourceTree = "<group>";
+		};
+		44520B872C3D6A680004685D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				44520B842C3D4B130004685D /* ProfileSettingViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		44520B882C3D6A740004685D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4411F1AD2C1B003200878AFE /* ProfileSettingViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		449F27002C2FFB02005DEEE4 /* Network */ = {
@@ -427,6 +454,7 @@
 				443A3DB22C1C06AE00C426FD /* Reuseable.swift in Sources */,
 				443A3DA62C1BE07C00C426FD /* MainViewController.swift in Sources */,
 				442BA5162C2AB575005185B4 /* BaseTableViewCell.swift in Sources */,
+				44520B852C3D4B130004685D /* ProfileSettingViewModel.swift in Sources */,
 				443A3DB42C1C108600C426FD /* MainTabBarController.swift in Sources */,
 				449F27062C2FFB13005DEEE4 /* NetworkCheckManager.swift in Sources */,
 				443A3DBB2C1C36C300C426FD /* RecentSearchTableViewCell.swift in Sources */,

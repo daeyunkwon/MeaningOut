@@ -9,26 +9,11 @@ import UIKit
 
 import SnapKit
 
-enum NicknameConditionError: LocalizedError {
-    case dissatisfactionCount
-    case dissatisfactionNumber
-    case dissatisfactionSpecialSymbol
-    
-    var errorDescription: String? {
-        switch self {
-        case NicknameConditionError.dissatisfactionCount:
-            "2글자 이상 10글자 미만으로 설정해주세요."
-        case NicknameConditionError.dissatisfactionNumber:
-            "닉네임에 숫자는 포함할 수 없어요."
-        case NicknameConditionError.dissatisfactionSpecialSymbol:
-            "닉네임에 @, #, $, % 는 포함할 수 없어요."
-        }
-    }
-}
-
 final class ProfileSettingViewController: BaseViewController {
     
     //MARK: - Properties
+    
+    let viewModel = ProfileSettingViewModel()
     
     var profileImage: UIImage?
     
@@ -104,6 +89,33 @@ final class ProfileSettingViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavi()
+        bind()
+    }
+    
+    //MARK: - Configurations
+    
+    private func bind() {
+        viewModel.outputValidationText.bind { [weak self] value in
+            guard let self else { return }
+            self.nicknameConditionLabel.text = value
+        }
+        
+        viewModel.outputIsValid.bind { [weak self] value in
+            guard let self else { return }
+            self.changeDisplayCompleteButton(conditionsSatisfied: value)
+        }
+        
+        viewModel.outputCreateUserDataSucceed.bind { [weak self] isSucceed in
+            guard let self else { return }
+            if isSucceed {
+                switch viewType {
+                case .profileSetting:
+                    self.changeWindowRootViewController()
+                case .editProfile:
+                    popViewController()
+                }
+            }
+        }
     }
     
     private func setupNavi() {
@@ -207,35 +219,8 @@ final class ProfileSettingViewController: BaseViewController {
     }
     
     @objc private func completeButtonTapped() {
-        self.createUserData()
-        switch viewType {
-        case .profileSetting:
-            self.changeWindowRootViewController()
-        case .editProfile:
-            popViewController()
-        }
-    }
-    
-    private func createUserData() {
-        guard let nickname = self.nicknameTextField.text else { return }
-        
-        var profileImageName: String?
-        for item in Constant.ProfileImage.allCases {
-            if UIImage(named: item.rawValue) == self.profileImage {
-                profileImageName = item.rawValue
-            }
-        }
-        UserDefaultsManager.shared.profile = profileImageName
-       
-        UserDefaultsManager.shared.nickname = nickname
-        
-        switch viewType {
-        case .profileSetting:
-            let now = Date.todayDate
-            UserDefaultsManager.shared.joinDate = now
-        default:
-            break
-        }
+        viewModel.inputProfileImage.value = self.profileImage
+        viewModel.inputCompleteButtonTapped.value = ()
     }
     
     private func changeWindowRootViewController() {
@@ -267,49 +252,13 @@ final class ProfileSettingViewController: BaseViewController {
             }
         }
     }
-    
-    private func updateStatusCompleteButton() {
-        guard let text = nicknameTextField.text else { return }
-        
-        do {
-            let result = try checkNicknameCondition(target: text)
-            if result {
-                self.nicknameConditionLabel.text = "사용 가능한 닉네임입니다 :D"
-                changeDisplayCompleteButton(conditionsSatisfied: true)
-            }
-        } catch {
-            print("Error:", error, error.localizedDescription)
-
-            self.nicknameConditionLabel.text = error.localizedDescription
-            changeDisplayCompleteButton(conditionsSatisfied: false)
-        }
-    }
-    
-    private func checkNicknameCondition(target text: String) throws -> Bool {
-        
-        let trimmedText = text.trimmingCharacters(in: .whitespaces)
-        
-        guard trimmedText.count >= 2 && trimmedText.count < 10 else {
-            throw NicknameConditionError.dissatisfactionCount
-        }
-        
-        guard !trimmedText.contains("@") && !trimmedText.contains("#") && !trimmedText.contains("$") && !trimmedText.contains("%") else {
-            throw NicknameConditionError.dissatisfactionSpecialSymbol
-        }
-        
-        guard !trimmedText.contains("1") && !trimmedText.contains("2") && !trimmedText.contains("3") && !trimmedText.contains("4") && !trimmedText.contains("5") && !trimmedText.contains("6") && !trimmedText.contains("7") && !trimmedText.contains("8") && !trimmedText.contains("9") && !trimmedText.contains("0") else {
-            throw NicknameConditionError.dissatisfactionNumber
-        }
-        
-        return true
-    }
 }
 
 //MARK: - UITextFieldDelegate
 
 extension ProfileSettingViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        self.updateStatusCompleteButton()
+        viewModel.inputText.value = textField.text
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
