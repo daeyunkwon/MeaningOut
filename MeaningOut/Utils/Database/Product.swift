@@ -18,7 +18,7 @@ class Product: Object {
     @Persisted var hprice: Int?
     @Persisted var imageID: String
     @Persisted var registrationDate: Date
-    @Persisted var isLike: Bool
+    @Persisted var isLike: Bool //불필요한 컬럼이겠다!
     @Persisted var productID: String?
     @Persisted var imageURL: String
     

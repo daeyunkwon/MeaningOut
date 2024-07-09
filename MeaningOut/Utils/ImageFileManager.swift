@@ -27,7 +27,7 @@ final class ImageFileManager {
             }
         } else {
             // Fallback on earlier versions
-            if FileManager.default.fileExists(atPath: fileURL.absoluteString) {
+            if FileManager.default.fileExists(atPath: fileURL.path) {
                 return UIImage(contentsOfFile: fileURL.absoluteString)
             } else {
                 return UIImage(systemName: "photo")
@@ -42,7 +42,7 @@ final class ImageFileManager {
         
         let fileURL = documentDirectory.appendingPathComponent("\(filename).jpg")
         
-        guard let data = image.jpegData(compressionQuality: 0.5) else { return } //png 형식으로도 가능: image.pngData()
+        guard let data = image.jpegData(compressionQuality: 0.5) else { return }
         
         do {
             try data.write(to: fileURL) //덮어쓰기 방식으로 동작함
@@ -67,20 +67,18 @@ final class ImageFileManager {
                 } catch {
                     print("file remove error", error)
                 }
-                
             } else {
                 print("file no exist")
             }
         } else {
             // Fallback on earlier versions
-            if FileManager.default.fileExists(atPath: fileURL.absoluteString) {
+            if FileManager.default.fileExists(atPath: fileURL.path) {
                 
                 do {
                     try FileManager.default.removeItem(atPath: fileURL.absoluteString)
                 } catch {
                     print("file remove error", error)
                 }
-                
             } else {
                 print("file no exist")
             }
