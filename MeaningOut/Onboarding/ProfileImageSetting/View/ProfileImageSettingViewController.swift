@@ -13,6 +13,8 @@ final class ProfileImageSettingViewController: BaseViewController {
     
     //MARK: - Properties
     
+    let viewModel = ProfileImageSettingViewModel()
+    
     var selectedProfileImage: UIImage?
     
     var selectedProfileImageSend: ((UIImage?) -> Void) = {sender in}
@@ -38,6 +40,23 @@ final class ProfileImageSettingViewController: BaseViewController {
         super.viewDidLoad()
         setupNavi()
         setupCollectionView()
+        bind()
+    }
+    
+    //MARK: - Configurations
+    
+    private func bind() {
+        viewModel.outputProfileImageNameList.bind { [weak self] _ in
+            self?.collectionView.reloadData()
+        }
+        
+        viewModel.outputSelectedProfileImageName.bind { [weak self] name in
+            if let name = name, !name.isEmpty {
+                self?.selectedProfileImage = UIImage(named: name)
+                self?.mainProfileImageView.profileImageView.image = UIImage(named: name)
+                self?.collectionView.reloadData()
+            }
+        }
     }
     
     private func setupNavi() {
@@ -80,7 +99,7 @@ final class ProfileImageSettingViewController: BaseViewController {
 
 extension ProfileImageSettingViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Constant.ProfileImage.allCases.count
+        return viewModel.outputProfileImageNameList.value.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -89,7 +108,7 @@ extension ProfileImageSettingViewController: UICollectionViewDataSource, UIColle
             return UICollectionViewCell()
         }
         
-        let image = UIImage(named: Constant.ProfileImage.allCases[indexPath.row].rawValue)
+        let image = UIImage(named: viewModel.outputProfileImageNameList.value[indexPath.row])
         
         
         if self.selectedProfileImage == image {
@@ -104,9 +123,7 @@ extension ProfileImageSettingViewController: UICollectionViewDataSource, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.selectedProfileImage = UIImage(named: Constant.ProfileImage.allCases[indexPath.row].rawValue)
-        mainProfileImageView.profileImageView.image = selectedProfileImage
-        collectionView.reloadData()
+        viewModel.inputSelectedRow.value = indexPath.row
         
         self.selectedProfileImageSend(selectedProfileImage) //이전 화면에 선택된 이미지 데이터 전달
     }

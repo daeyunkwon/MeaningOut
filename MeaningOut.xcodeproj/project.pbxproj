@@ -46,6 +46,7 @@
 		443A3E092C216B4700C426FD /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443A3E082C216B4700C426FD /* UIViewController+Extension.swift */; };
 		44520B832C3D49790004685D /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44520B822C3D49790004685D /* Observable.swift */; };
 		44520B852C3D4B130004685D /* ProfileSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44520B842C3D4B130004685D /* ProfileSettingViewModel.swift */; };
+		44520B8D2C3D6B7E0004685D /* ProfileImageSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44520B8C2C3D6B7E0004685D /* ProfileImageSettingViewModel.swift */; };
 		449F27052C2FFB13005DEEE4 /* NAVERAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449F27012C2FFB13005DEEE4 /* NAVERAPI.swift */; };
 		449F27062C2FFB13005DEEE4 /* NetworkCheckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449F27022C2FFB13005DEEE4 /* NetworkCheckManager.swift */; };
 		449F27072C2FFB13005DEEE4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449F27032C2FFB13005DEEE4 /* NetworkManager.swift */; };
@@ -110,6 +111,7 @@
 		443A3E082C216B4700C426FD /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		44520B822C3D49790004685D /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		44520B842C3D4B130004685D /* ProfileSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewModel.swift; sourceTree = "<group>"; };
+		44520B8C2C3D6B7E0004685D /* ProfileImageSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageSettingViewModel.swift; sourceTree = "<group>"; };
 		449F27012C2FFB13005DEEE4 /* NAVERAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NAVERAPI.swift; sourceTree = "<group>"; };
 		449F27022C2FFB13005DEEE4 /* NetworkCheckManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkCheckManager.swift; sourceTree = "<group>"; };
 		449F27032C2FFB13005DEEE4 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -219,8 +221,7 @@
 			children = (
 				443A3D952C1B1CEF00C426FD /* OnboardingViewController.swift */,
 				44520B862C3D6A5E0004685D /* ProfileSetting */,
-				443A3DA82C1BE1B600C426FD /* ProfileImageSettingViewController.swift */,
-				443A3DAF2C1C044900C426FD /* ProfileImageCollectionViewCell.swift */,
+				44520B892C3D6B4F0004685D /* ProfileImageSetting */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -309,6 +310,32 @@
 				4411F1AD2C1B003200878AFE /* ProfileSettingViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		44520B892C3D6B4F0004685D /* ProfileImageSetting */ = {
+			isa = PBXGroup;
+			children = (
+				44520B8B2C3D6B6A0004685D /* ViewModel */,
+				44520B8A2C3D6B600004685D /* View */,
+			);
+			path = ProfileImageSetting;
+			sourceTree = "<group>";
+		};
+		44520B8A2C3D6B600004685D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				443A3DA82C1BE1B600C426FD /* ProfileImageSettingViewController.swift */,
+				443A3DAF2C1C044900C426FD /* ProfileImageCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		44520B8B2C3D6B6A0004685D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				44520B8C2C3D6B7E0004685D /* ProfileImageSettingViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		449F27002C2FFB02005DEEE4 /* Network */ = {
@@ -449,6 +476,7 @@
 				449F27082C2FFB13005DEEE4 /* APIKey.swift in Sources */,
 				4411F1AA2C1B003200878AFE /* AppDelegate.swift in Sources */,
 				443A3DC52C1D847300C426FD /* Shopping.swift in Sources */,
+				44520B8D2C3D6B7E0004685D /* ProfileImageSettingViewModel.swift in Sources */,
 				442F19792C2D920900E9C396 /* UICollectionView+Extension.swift in Sources */,
 				443A3D9F2C1B3C7D00C426FD /* Constant.swift in Sources */,
 				443A3DB22C1C06AE00C426FD /* Reuseable.swift in Sources */,
