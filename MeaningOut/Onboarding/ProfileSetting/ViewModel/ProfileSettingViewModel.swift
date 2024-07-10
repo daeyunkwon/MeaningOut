@@ -34,7 +34,7 @@ final class ProfileSettingViewModel {
     }
     var viewType: ViewType = .profileSetting
     
-    //MARK: - Input
+    //MARK: - Inputs
     
     var inputText: Observable<String?> = Observable<String?>(UserDefaultsManager.shared.nickname)
     
@@ -42,13 +42,13 @@ final class ProfileSettingViewModel {
     
     var inputCompleteButtonTapped: Observable<Void?> = Observable<Void?>(nil)
     
-    //MARK: - Ouput
+    //MARK: - Ouputs
     
-    var outputValidationText: Observable<String> = Observable("")
+    private(set) var outputValidationText: Observable<String> = Observable("")
     
-    var outputIsValid: Observable<Bool> = Observable(false)
+    private(set) var outputIsValid: Observable<Bool> = Observable(false)
     
-    var outputCreateUserDataSucceed: Observable<Bool> = Observable(false)
+    private(set) var outputCreateUserDataSucceed: Observable<Bool> = Observable(false)
     
     //MARK: - Init
     

@@ -25,9 +25,9 @@ final class ProfileImageSettingViewModel {
     
     //MARK: - Ouput
     
-    var outputProfileImageNameList: Observable<[String]> = Observable([])
+    private(set) var outputProfileImageNameList: Observable<[String]> = Observable([])
     
-    var outputSelectedProfileImageName = Observable<String?>("")
+    private(set) var outputSelectedProfileImageName = Observable<String?>("")
     
     //MARK: - Init
     
@@ -44,8 +44,4 @@ final class ProfileImageSettingViewModel {
             self.outputSelectedProfileImageName.value = self.outputProfileImageNameList.value[row]
         }
     }
-    
-    
-    //MARK: - Functions
-
 }
