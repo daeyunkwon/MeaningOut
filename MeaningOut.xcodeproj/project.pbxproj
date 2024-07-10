@@ -159,7 +159,8 @@
 			isa = PBXGroup;
 			children = (
 				4411F1BF2C1B016500878AFE /* Application */,
-				4411F1C12C1B018200878AFE /* Utils */,
+				4411F1C12C1B018200878AFE /* Utility */,
+				44520BAC2C3E57FF0004685D /* Service */,
 				4411F1C02C1B017400878AFE /* Model */,
 				443A3D942C1B1CE100C426FD /* Onboarding */,
 				443A3DA72C1BE08000C426FD /* Main */,
@@ -188,7 +189,7 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		4411F1C12C1B018200878AFE /* Utils */ = {
+		4411F1C12C1B018200878AFE /* Utility */ = {
 			isa = PBXGroup;
 			children = (
 				443A3D9E2C1B3C7D00C426FD /* Constant.swift */,
@@ -197,13 +198,11 @@
 				443A3DBC2C1D587B00C426FD /* Protocols.swift */,
 				44E915642C3A28AC00E6E4C9 /* ImageFileManager.swift */,
 				44520B822C3D49790004685D /* Observable.swift */,
-				44E9155F2C3A222A00E6E4C9 /* Database */,
-				449F27002C2FFB02005DEEE4 /* Network */,
 				443A3DAA2C1BE3D000C426FD /* CustomView */,
 				443A3DB92C1C20CC00C426FD /* Extension */,
 				442BA5122C2AAE0F005185B4 /* Base */,
 			);
-			path = Utils;
+			path = Utility;
 			sourceTree = "<group>";
 		};
 		442BA5122C2AAE0F005185B4 /* Base */ = {
@@ -336,6 +335,15 @@
 				44520B8C2C3D6B7E0004685D /* ProfileImageSettingViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		44520BAC2C3E57FF0004685D /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				44E9155F2C3A222A00E6E4C9 /* Database */,
+				449F27002C2FFB02005DEEE4 /* Network */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		449F27002C2FFB02005DEEE4 /* Network */ = {

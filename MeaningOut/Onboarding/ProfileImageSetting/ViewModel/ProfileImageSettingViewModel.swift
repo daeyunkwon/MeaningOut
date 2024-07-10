@@ -17,13 +17,13 @@ final class ProfileImageSettingViewModel {
     }
     var viewType: ViewType = .profileSetting
     
-    //MARK: - Input
+    //MARK: - Inputs
     
     var inputViewModelInitTrigger = Observable<Void?>(nil)
     
     var inputSelectedRow = Observable<Int?>(nil)
     
-    //MARK: - Ouput
+    //MARK: - Ouputs
     
     private(set) var outputProfileImageNameList: Observable<[String]> = Observable([])
     
